@@ -1,0 +1,313 @@
+{
+  "_comment": "AeroAIP fixture \u2014 the STRUCTURE a vision LLM returns for the KLAX DOTSS2 SID chart. Identifiers + terminators + constraints ONLY; NO coordinates (those come from the NASR CIFP waypoint index). Derived from the authentic CIFP PD records.",
+  "record_type": "SID",
+  "airport_icao": "KLAX",
+  "procedure_name": "DOTSS2",
+  "pbn_nav_spec": "D1",
+  "transitions": [
+    {
+      "kind": "runway",
+      "designator": "RW24L",
+      "transition_id": "DOTSS2.RW24L",
+      "legs": [
+        {
+          "sequence_number": 10,
+          "path_terminator": "VA",
+          "alt_constraint": {
+            "type": "AT_OR_ABOVE",
+            "lower_ft": 640
+          },
+          "course_magnetic": 251.0
+        },
+        {
+          "sequence_number": 20,
+          "path_terminator": "DF",
+          "waypoint_id": "DLREY",
+          "waypoint_flag": "FLY_BY",
+          "alt_constraint": {
+            "type": "AT_OR_BELOW",
+            "lower_ft": 3000
+          }
+        },
+        {
+          "sequence_number": 30,
+          "path_terminator": "TF",
+          "waypoint_id": "ENNEY",
+          "waypoint_flag": "FLY_BY",
+          "alt_constraint": {
+            "type": "AT_OR_BELOW",
+            "lower_ft": 5000
+          }
+        },
+        {
+          "sequence_number": 40,
+          "path_terminator": "TF",
+          "waypoint_id": "NAANC",
+          "waypoint_flag": "FLY_BY"
+        },
+        {
+          "sequence_number": 50,
+          "path_terminator": "TF",
+          "waypoint_id": "HAYNK",
+          "waypoint_flag": "FLY_BY"
+        },
+        {
+          "sequence_number": 60,
+          "path_terminator": "TF",
+          "waypoint_id": "PEVEE",
+          "waypoint_flag": "FLY_BY"
+        }
+      ]
+    },
+    {
+      "kind": "runway",
+      "designator": "RW24R",
+      "transition_id": "DOTSS2.RW24R",
+      "legs": [
+        {
+          "sequence_number": 10,
+          "path_terminator": "VA",
+          "alt_constraint": {
+            "type": "AT_OR_ABOVE",
+            "lower_ft": 640
+          },
+          "course_magnetic": 251.0
+        },
+        {
+          "sequence_number": 20,
+          "path_terminator": "DF",
+          "waypoint_id": "FABRA",
+          "waypoint_flag": "FLY_BY",
+          "alt_constraint": {
+            "type": "AT_OR_BELOW",
+            "lower_ft": 3000
+          }
+        },
+        {
+          "sequence_number": 30,
+          "path_terminator": "TF",
+          "waypoint_id": "ENNEY",
+          "waypoint_flag": "FLY_BY",
+          "alt_constraint": {
+            "type": "AT_OR_BELOW",
+            "lower_ft": 5000
+          }
+        },
+        {
+          "sequence_number": 40,
+          "path_terminator": "TF",
+          "waypoint_id": "NAANC",
+          "waypoint_flag": "FLY_BY"
+        },
+        {
+          "sequence_number": 50,
+          "path_terminator": "TF",
+          "waypoint_id": "HAYNK",
+          "waypoint_flag": "FLY_BY"
+        },
+        {
+          "sequence_number": 60,
+          "path_terminator": "TF",
+          "waypoint_id": "PEVEE",
+          "waypoint_flag": "FLY_BY"
+        }
+      ]
+    },
+    {
+      "kind": "runway",
+      "designator": "RW25L",
+      "transition_id": "DOTSS2.RW25L",
+      "legs": [
+        {
+          "sequence_number": 10,
+          "path_terminator": "VA",
+          "alt_constraint": {
+            "type": "AT_OR_ABOVE",
+            "lower_ft": 640
+          },
+          "course_magnetic": 251.0
+        },
+        {
+          "sequence_number": 20,
+          "path_terminator": "DF",
+          "waypoint_id": "HIIPR",
+          "waypoint_flag": "FLY_BY",
+          "alt_constraint": {
+            "type": "AT_OR_BELOW",
+            "lower_ft": 3000
+          }
+        },
+        {
+          "sequence_number": 30,
+          "path_terminator": "TF",
+          "waypoint_id": "ADORE",
+          "waypoint_flag": "FLY_BY",
+          "alt_constraint": {
+            "type": "AT_OR_BELOW",
+            "lower_ft": 5000
+          }
+        },
+        {
+          "sequence_number": 40,
+          "path_terminator": "TF",
+          "waypoint_id": "SHAEF",
+          "waypoint_flag": "FLY_BY"
+        },
+        {
+          "sequence_number": 50,
+          "path_terminator": "TF",
+          "waypoint_id": "PEVEE",
+          "waypoint_flag": "FLY_BY"
+        }
+      ]
+    },
+    {
+      "kind": "runway",
+      "designator": "RW25R",
+      "transition_id": "DOTSS2.RW25R",
+      "legs": [
+        {
+          "sequence_number": 10,
+          "path_terminator": "VA",
+          "alt_constraint": {
+            "type": "AT_OR_ABOVE",
+            "lower_ft": 640
+          },
+          "course_magnetic": 251.0
+        },
+        {
+          "sequence_number": 20,
+          "path_terminator": "DF",
+          "waypoint_id": "DOCKR",
+          "waypoint_flag": "FLY_BY",
+          "alt_constraint": {
+            "type": "AT_OR_BELOW",
+            "lower_ft": 3000
+          }
+        },
+        {
+          "sequence_number": 30,
+          "path_terminator": "TF",
+          "waypoint_id": "WEILR",
+          "waypoint_flag": "FLY_BY",
+          "alt_constraint": {
+            "type": "AT_OR_BELOW",
+            "lower_ft": 5000
+          }
+        },
+        {
+          "sequence_number": 40,
+          "path_terminator": "TF",
+          "waypoint_id": "SHAEF",
+          "waypoint_flag": "FLY_BY"
+        },
+        {
+          "sequence_number": 50,
+          "path_terminator": "TF",
+          "waypoint_id": "PEVEE",
+          "waypoint_flag": "FLY_BY"
+        }
+      ]
+    },
+    {
+      "kind": "enroute",
+      "designator": "CLEEE",
+      "transition_id": "DOTSS2.CLEEE",
+      "legs": [
+        {
+          "sequence_number": 10,
+          "path_terminator": "IF",
+          "waypoint_id": "DOTSS",
+          "waypoint_flag": "FLY_BY",
+          "alt_constraint": {
+            "type": "AT_OR_ABOVE",
+            "lower_ft": 15000
+          }
+        },
+        {
+          "sequence_number": 20,
+          "path_terminator": "TF",
+          "waypoint_id": "EYEDL",
+          "waypoint_flag": "FLY_BY"
+        },
+        {
+          "sequence_number": 30,
+          "path_terminator": "TF",
+          "waypoint_id": "HOMER",
+          "waypoint_flag": "FLY_BY"
+        },
+        {
+          "sequence_number": 40,
+          "path_terminator": "TF",
+          "waypoint_id": "CLEEE",
+          "waypoint_flag": "FLY_BY"
+        }
+      ]
+    },
+    {
+      "kind": "enroute",
+      "designator": "CNERY",
+      "transition_id": "DOTSS2.CNERY",
+      "legs": [
+        {
+          "sequence_number": 10,
+          "path_terminator": "IF",
+          "waypoint_id": "DOTSS",
+          "waypoint_flag": "FLY_BY",
+          "alt_constraint": {
+            "type": "AT_OR_ABOVE",
+            "lower_ft": 15000
+          }
+        },
+        {
+          "sequence_number": 20,
+          "path_terminator": "TF",
+          "waypoint_id": "WIILD",
+          "waypoint_flag": "FLY_BY"
+        },
+        {
+          "sequence_number": 30,
+          "path_terminator": "TF",
+          "waypoint_id": "BLCKD",
+          "waypoint_flag": "FLY_BY"
+        },
+        {
+          "sequence_number": 40,
+          "path_terminator": "TF",
+          "waypoint_id": "CSTWY",
+          "waypoint_flag": "FLY_BY"
+        },
+        {
+          "sequence_number": 50,
+          "path_terminator": "TF",
+          "waypoint_id": "CNERY",
+          "waypoint_flag": "FLY_BY"
+        }
+      ]
+    }
+  ],
+  "common_route": [
+    {
+      "sequence_number": 10,
+      "path_terminator": "IF",
+      "waypoint_id": "PEVEE",
+      "waypoint_flag": "FLY_BY"
+    },
+    {
+      "sequence_number": 20,
+      "path_terminator": "TF",
+      "waypoint_id": "HOLTZ",
+      "waypoint_flag": "FLY_BY"
+    },
+    {
+      "sequence_number": 30,
+      "path_terminator": "TF",
+      "waypoint_id": "DOTSS",
+      "waypoint_flag": "FLY_BY",
+      "alt_constraint": {
+        "type": "AT_OR_ABOVE",
+        "lower_ft": 15000
+      }
+    }
+  ]
+}

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AeroAIP Subnet — Plan &amp; Progress</title>
+<style>
+  :root{
+    --bg:#0b1220; --panel:#121c2e; --panel2:#0e1626; --line:#1e2c44;
+    --text:#e6edf6; --muted:#8294b0; --accent:#38bdf8;
+    --done:#34d399; --todo:#3b82f6; --inprogress:#f59e0b; --blocked:#5b6b86;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#0a1018,#0b1220 40%);color:var(--text);
+       font:14px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  a{color:var(--accent)}
+  header{padding:22px 26px 14px;border-bottom:1px solid var(--line);
+         background:radial-gradient(1200px 200px at 20% -40%,rgba(56,189,248,.10),transparent)}
+  h1{margin:0;font-size:20px;letter-spacing:.3px;display:flex;align-items:center;gap:10px}
+  h1 .badge{font-size:11px;color:#04121e;background:var(--accent);padding:2px 8px;border-radius:999px;font-weight:700}
+  .sub{color:var(--muted);font-size:12.5px;margin-top:4px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 26px}
+  .topgrid{display:flex;gap:26px;align-items:center;flex-wrap:wrap;margin-top:16px}
+  .ring{display:flex;align-items:center;gap:14px}
+  .ring .num{font-size:26px;font-weight:700}
+  .ring .lbl{color:var(--muted);font-size:12px}
+  .phasebars{flex:1;min-width:280px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+  .pb{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 11px}
+  .pb .pt{font-size:11.5px;color:var(--muted);display:flex;justify-content:space-between}
+  .pb .track{height:7px;background:var(--panel2);border-radius:6px;margin-top:7px;overflow:hidden}
+  .pb .fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--done));border-radius:6px;transition:width .4s}
+  .tabs{display:flex;gap:8px;margin:18px 0 4px}
+  .tab{cursor:pointer;padding:7px 15px;border-radius:8px;border:1px solid var(--line);
+       background:var(--panel);color:var(--muted);font-weight:600;font-size:13px;user-select:none}
+  .tab.active{color:#04121e;background:var(--accent);border-color:var(--accent)}
+  .spacer{flex:1}
+  .btn{cursor:pointer;padding:7px 13px;border-radius:8px;border:1px solid var(--line);
+       background:var(--panel);color:var(--muted);font-size:12.5px}
+  .btn:hover{color:var(--text);border-color:var(--accent)}
+  .view{padding:14px 0 60px}
+
+  /* checklist */
+  .phase{margin-top:18px}
+  .phase h2{font-size:14px;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+  .phase h2 .wk{color:var(--muted);font-weight:500;font-size:12px}
+  .phase h2 .cnt{margin-left:auto;color:var(--muted);font-size:12px;font-weight:500}
+  .row{display:flex;align-items:center;gap:12px;padding:9px 12px;border:1px solid var(--line);
+       border-radius:10px;background:var(--panel);margin-bottom:7px;transition:.15s}
+  .row:hover{border-color:#2f4a6b}
+  .row.done{opacity:.62}
+  .row.blocked{opacity:.8}
+  .cb{width:20px;height:20px;border-radius:6px;border:2px solid var(--muted);flex:none;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;transition:.15s}
+  .cb:hover{border-color:var(--accent)}
+  .row.done .cb{background:var(--done);border-color:var(--done)}
+  .cb svg{width:13px;height:13px;opacity:0;transition:.15s}
+  .row.done .cb svg{opacity:1}
+  .title{flex:1;font-weight:500}
+  .row.done .title{text-decoration:line-through;text-decoration-color:var(--muted)}
+  .chip{font-size:10.5px;padding:2px 8px;border-radius:999px;border:1px solid var(--line);
+        color:var(--muted);white-space:nowrap}
+  .chip.comp{color:#cfe6ff;border-color:#26405f;background:#0f1d30}
+  .chip.block{color:#fca5a5;border-color:#5b2b2b;background:#241313}
+  .chip.dep{color:var(--muted)}
+  .status-dot{width:9px;height:9px;border-radius:50%;flex:none}
+
+  /* gantt */
+  #gantt{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--panel2);padding:0}
+  .gwrap{position:relative}
+  .grid-bg{position:absolute;top:0;left:0;height:100%;pointer-events:none}
+  .glabel{position:absolute;left:0;display:flex;align-items:center;padding-left:12px;
+          font-size:12.5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .gphase{position:absolute;left:0;font-size:12px;font-weight:700;color:var(--accent);
+          display:flex;align-items:center;padding-left:10px}
+  .gbar{position:absolute;height:18px;border-radius:5px;cursor:pointer;display:flex;align-items:center;
+        padding:0 6px;font-size:10.5px;color:#04121e;font-weight:600;overflow:hidden;white-space:nowrap}
+  .gbar.todo{background:var(--todo);color:#dbeafe}
+  .gbar.done{background:var(--done)}
+  .gbar.inprogress{background:var(--inprogress)}
+  .gbar.blocked{background:var(--blocked);color:#dde6f3}
+  .gaxis{position:absolute;top:0;font-size:10px;color:var(--muted);transform:translateX(-50%)}
+  .gnow{position:absolute;top:0;width:2px;background:repeating-linear-gradient(180deg,var(--accent),var(--accent) 4px,transparent 4px,transparent 8px)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin:12px 2px 0}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .sw{width:12px;height:12px;border-radius:3px}
+  footer{color:var(--muted);font-size:11.5px;padding:18px 0 40px;border-top:1px solid var(--line);margin-top:20px}
+  .tip{position:fixed;pointer-events:none;background:#04101e;border:1px solid var(--accent);color:var(--text);
+       font-size:11.5px;padding:6px 9px;border-radius:7px;opacity:0;transition:.1s;z-index:9;max-width:260px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>AeroAIP Subnet <span class="badge">PLAN &amp; PROGRESS</span></h1>
+    <div class="sub">Open, globally-complete AIP database in AIXM 5.2 · click any task to mark it complete · progress &amp; dependencies update live</div>
+    <div class="topgrid">
+      <div class="ring">
+        <svg width="74" height="74" viewBox="0 0 74 74">
+          <circle cx="37" cy="37" r="31" fill="none" stroke="#1e2c44" stroke-width="8"/>
+          <circle id="ringfill" cx="37" cy="37" r="31" fill="none" stroke="url(#g)" stroke-width="8"
+                  stroke-linecap="round" transform="rotate(-90 37 37)"/>
+          <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#38bdf8"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs>
+        </svg>
+        <div><div class="num"><span id="pct">0</span>%</div>
+             <div class="lbl"><span id="dn">0</span> / <span id="tot">0</span> tasks complete</div></div>
+      </div>
+      <div class="phasebars" id="phasebars"></div>
+    </div>
+    <div class="tabs">
+      <div class="tab active" data-view="checklist">☑ Checklist</div>
+      <div class="tab" data-view="gantt">▦ Gantt</div>
+      <div class="spacer"></div>
+      <div class="btn" id="reset">↺ Reset to build status</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="view" id="checklist"></div>
+  <div class="view" id="gantt" style="display:none"></div>
+  <div class="legend" id="legend" style="display:none">
+    <span><i class="sw" style="background:#34d399"></i>Done</span>
+    <span><i class="sw" style="background:#f59e0b"></i>In progress</span>
+    <span><i class="sw" style="background:#3b82f6"></i>To do</span>
+    <span><i class="sw" style="background:#5b6b86"></i>Blocked (deps unmet)</span>
+    <span style="color:#38bdf8">┊ now (build frontier)</span>
+  </div>
+  <footer>
+    Phase 0 PoC is complete and verified on authentic FAA CIFP data (KLAX DOTSS2, 100% coordinate match).
+    Task data: <code>dashboard/tasks.json</code>. Your ticks are saved locally in this browser.
+  </footer>
+</div>
+<div class="tip" id="tip"></div>
+
+<script>
+/* Embedded task data (authoritative for offline file:// use). When served over
+   http, tasks.json is fetched and used instead so the build can update status. */
+const EMBEDDED = {
+  "phases":[
+    {"id":"p0","name":"Phase 0 — Proof of Concept","weeks":"1–2"},
+    {"id":"p1","name":"Phase 1 — Pipeline Build","weeks":"3–6"},
+    {"id":"p2","name":"Phase 2 — Testnet","weeks":"7–10"},
+    {"id":"p3","name":"Phase 3 — Demo","weeks":"11–12"},
+    {"id":"p4","name":"Phase 4 — Mainnet","weeks":"13+"}
+  ],
+  "tasks":[
+    {"id":"spec","phase":"p0","title":"Master spec as CLAUDE.md context","component":"meta","start":0,"days":1,"deps":[],"status":"done"},
+    {"id":"sources","phase":"p0","title":"Validate AIP data sources (docs/SOURCES.md)","component":"data","start":0,"days":2,"deps":["spec"],"status":"done"},
+    {"id":"coords","phase":"p0","title":"ARINC 424 → decimal coordinate converter","component":"miner","start":1,"days":1,"deps":["spec"],"status":"done"},
+    {"id":"schemas","phase":"p0","title":"AIXM 5.2 Pydantic schemas","component":"miner","start":1,"days":2,"deps":["spec"],"status":"done"},
+    {"id":"cifp","phase":"p0","title":"NASR CIFP parser (real ARINC 424-18)","component":"validator","start":2,"days":2,"deps":["coords","sources"],"status":"done"},
+    {"id":"wpdb","phase":"p0","title":"Waypoint index (SQLite, lossless coords)","component":"miner","start":3,"days":1,"deps":["coords","schemas"],"status":"done"},
+    {"id":"gml","phase":"p0","title":"AIXM 5.2 GML exporter + XSD profile","component":"miner","start":3,"days":2,"deps":["schemas"],"status":"done"},
+    {"id":"aixmxsd","phase":"p0","title":"AIXM 5.2 XSD conformance check","component":"validator","start":4,"days":1,"deps":["gml"],"status":"done"},
+    {"id":"llm","phase":"p0","title":"LLM router (pluggable + fixture fallback)","component":"miner","start":4,"days":2,"deps":["schemas"],"status":"done"},
+    {"id":"dtpp","phase":"p0","title":"d-TPP chart fetch/render","component":"miner","start":5,"days":1,"deps":["llm","sources"],"status":"done"},
+    {"id":"assemble","phase":"p0","title":"Structure + DB-coords assembler","component":"miner","start":5,"days":1,"deps":["wpdb","llm"],"status":"done"},
+    {"id":"validate","phase":"p0","title":"Hard validation rules (§5)","component":"validator","start":6,"days":1,"deps":["schemas"],"status":"done"},
+    {"id":"scoring","phase":"p0","title":"Exact-match scoring, transition-aware (§6)","component":"validator","start":6,"days":2,"deps":["cifp","assemble"],"status":"done"},
+    {"id":"download","phase":"p0","title":"download_waypoint_dbs.sh (live FAA)","component":"scripts","start":2,"days":1,"deps":["sources"],"status":"done"},
+    {"id":"buildidx","phase":"p0","title":"build_waypoint_index.py","component":"scripts","start":7,"days":1,"deps":["wpdb","cifp"],"status":"done"},
+    {"id":"poc","phase":"p0","title":"poc_extraction.py — KLAX DOTSS2 end-to-end","component":"scripts","start":8,"days":2,"deps":["assemble","scoring","gml","buildidx","dtpp"],"status":"done"},
+    {"id":"tests","phase":"p0","title":"Test suite (43 tests, incl. live CIFP)","component":"tests","start":9,"days":2,"deps":["poc"],"status":"done"},
+    {"id":"dashboard","phase":"p0","title":"Project dashboard (checklist + Gantt)","component":"meta","start":10,"days":1,"deps":["poc"],"status":"done"},
+    {"id":"faa-all","phase":"p1","title":"Generalise FAA extractor to all SID/STAR/IAP","component":"miner","start":14,"days":6,"deps":["poc"],"status":"todo"},
+    {"id":"eaip","phase":"p1","title":"eAIP HTML parsers (EGLL, VHHH, CYVR)","component":"miner","start":16,"days":8,"deps":["faa-all"],"status":"todo"},
+    {"id":"aixm-full","phase":"p1","title":"Full AIXM 5.2 serializer (beyond profile)","component":"miner","start":18,"days":6,"deps":["gml"],"status":"todo"},
+    {"id":"postgis","phase":"p1","title":"PostGIS schema (AIRAC-versioned, spatial)","component":"aggregator","start":20,"days":5,"deps":["aixm-full"],"status":"todo"},
+    {"id":"ead","phase":"p1","title":"EAD AIXM 5.1 → 5.2 mapping","component":"validator","start":22,"days":5,"deps":["eaip","aixm-full"],"status":"todo"},
+    {"id":"scheduler","phase":"p1","title":"AIRAC 28-day scheduler","component":"scripts","start":24,"days":3,"deps":["faa-all"],"status":"todo"},
+    {"id":"bootstrap","phase":"p2","title":"bootstrap_testnet.sh (subnet, wallets, faucet)","component":"subnet","start":42,"days":4,"deps":["scheduler","postgis"],"status":"todo"},
+    {"id":"valnode","phase":"p2","title":"Run validator + sentinel on droplet","component":"subnet","start":46,"days":4,"deps":["bootstrap","ead"],"status":"todo"},
+    {"id":"uscycle","phase":"p2","title":"Process one full US AIRAC cycle","component":"subnet","start":50,"days":6,"deps":["valnode"],"status":"todo"},
+    {"id":"miners","phase":"p2","title":"Recruit 3–5 external testnet miners","component":"subnet","start":56,"days":6,"deps":["uscycle"],"status":"todo"},
+    {"id":"cesium","phase":"p3","title":"CesiumJS 3D SID/STAR globe","component":"viz","start":70,"days":6,"deps":["uscycle"],"status":"todo"},
+    {"id":"kml","phase":"p3","title":"KML export endpoint (Google Earth)","component":"viz","start":72,"days":3,"deps":["postgis"],"status":"todo"},
+    {"id":"demo","phase":"p3","title":"Demo video: chart → AIXM 5.2 → 3D globe","component":"viz","start":76,"days":4,"deps":["cesium","kml"],"status":"todo"},
+    {"id":"monitor","phase":"p4","title":"Monitor registration-cost trough","component":"ops","start":84,"days":4,"deps":["miners"],"status":"todo"},
+    {"id":"register","phase":"p4","title":"Register subnet on mainnet (HK entity)","component":"ops","start":88,"days":2,"deps":["monitor","demo"],"status":"todo"},
+    {"id":"ops","phase":"p4","title":"Global production AIRAC operations","component":"ops","start":90,"days":8,"deps":["register"],"status":"todo"}
+  ]
+};
+
+const LS_KEY="aeroaip-dash-v1";
+let DATA=EMBEDDED, T={}, overrides={};
+try{overrides=JSON.parse(localStorage.getItem(LS_KEY))||{}}catch(e){overrides={}}
+
+function effStatus(t){ return overrides[t.id] || t.status; }
+function isDone(id){ return effStatus(T[id])==="done"; }
+function isBlocked(t){ return effStatus(t)!=="done" && t.deps.some(d=>!isDone(d)); }
+function renderStatus(t){
+  const s=effStatus(t);
+  if(s==="done") return "done";
+  if(s==="inprogress") return "inprogress";
+  return isBlocked(t)?"blocked":"todo";
+}
+
+function save(){ localStorage.setItem(LS_KEY, JSON.stringify(overrides)); }
+function toggle(id){
+  overrides[id] = isDone(id) ? "todo" : "done";
+  if(overrides[id]===T[id].status) delete overrides[id];
+  save(); renderAll();
+}
+
+function computeProgress(){
+  const tasks=DATA.tasks, done=tasks.filter(t=>effStatus(t)==="done").length;
+  return {done, total:tasks.length, pct: Math.round(done/tasks.length*100)};
+}
+
+function renderHeader(){
+  const p=computeProgress();
+  document.getElementById("pct").textContent=p.pct;
+  document.getElementById("dn").textContent=p.done;
+  document.getElementById("tot").textContent=p.total;
+  const C=2*Math.PI*31;
+  const rf=document.getElementById("ringfill");
+  rf.style.strokeDasharray=C; rf.style.strokeDashoffset=C*(1-p.pct/100);
+  const pbWrap=document.getElementById("phasebars"); pbWrap.innerHTML="";
+  DATA.phases.forEach(ph=>{
+    const ts=DATA.tasks.filter(t=>t.phase===ph.id);
+    const d=ts.filter(t=>effStatus(t)==="done").length;
+    const pct=Math.round(d/ts.length*100);
+    const el=document.createElement("div"); el.className="pb";
+    el.innerHTML=`<div class="pt"><span>${ph.name.replace(/ —.*/,'')} · ${ph.weeks}</span><span>${d}/${ts.length}</span></div>
+      <div class="track"><div class="fill" style="width:${pct}%"></div></div>`;
+    pbWrap.appendChild(el);
+  });
+}
+
+const CHECK=`<svg viewBox="0 0 24 24" fill="none" stroke="#04121e" stroke-width="3.5"><path d="M5 12l5 5L20 6"/></svg>`;
+function renderChecklist(){
+  const root=document.getElementById("checklist"); root.innerHTML="";
+  DATA.phases.forEach(ph=>{
+    const ts=DATA.tasks.filter(t=>t.phase===ph.id);
+    const d=ts.filter(t=>effStatus(t)==="done").length;
+    const sec=document.createElement("div"); sec.className="phase";
+    sec.innerHTML=`<h2>${ph.name}<span class="wk">weeks ${ph.weeks}</span><span class="cnt">${d}/${ts.length} done</span></h2>`;
+    ts.forEach(t=>{
+      const st=renderStatus(t);
+      const row=document.createElement("div");
+      row.className="row "+(st==="done"?"done":st==="blocked"?"blocked":"");
+      const blk=(st==="blocked")?`<span class="chip block" title="waiting on dependencies">⛓ blocked by ${t.deps.filter(x=>!isDone(x)).join(", ")}</span>`:"";
+      const dot={done:"#34d399",inprogress:"#f59e0b",blocked:"#5b6b86",todo:"#3b82f6"}[st];
+      row.innerHTML=`<div class="cb">${CHECK}</div>
+        <span class="status-dot" style="background:${dot}"></span>
+        <span class="title">${t.title}</span>${blk}
+        <span class="chip comp">${t.component}</span>`;
+      row.querySelector(".cb").addEventListener("click",e=>{e.stopPropagation();toggle(t.id)});
+      row.addEventListener("click",()=>toggle(t.id));
+      sec.appendChild(row);
+    });
+    root.appendChild(sec);
+  });
+}
+
+/* ── Gantt (fixed-pixel timeline + dependency arrows) ── */
+const DAY_W=9, ROW_H=30, LABEL_W=270, PH_H=30, TOP=26;
+function renderGantt(){
+  const root=document.getElementById("gantt"); root.innerHTML="";
+  const maxDay=Math.max(...DATA.tasks.map(t=>t.start+t.days))+2;
+  const width=LABEL_W+maxDay*DAY_W+20;
+  // row layout
+  let y=TOP, pos={}, rows=[];
+  DATA.phases.forEach(ph=>{
+    rows.push({type:"phase",ph,y}); y+=PH_H;
+    DATA.tasks.filter(t=>t.phase===ph.id).forEach(t=>{ pos[t.id]={y}; rows.push({type:"task",t,y}); y+=ROW_H; });
+  });
+  const height=y+10;
+  const wrap=document.createElement("div"); wrap.className="gwrap";
+  wrap.style.width=width+"px"; wrap.style.height=height+"px";
+
+  // axis gridlines every 7 days (week)
+  let bg="";
+  for(let d=0;d<=maxDay;d+=7){
+    const x=LABEL_W+d*DAY_W;
+    bg+=`<div class="grid-bg" style="left:${x}px;width:1px;background:#16233a"></div>`;
+    wrap.insertAdjacentHTML("beforeend",`<div class="gaxis" style="left:${x}px">d${d}</div>`);
+  }
+  wrap.insertAdjacentHTML("afterbegin",bg);
+
+  // "now" frontier = max end of done tasks
+  const doneEnds=DATA.tasks.filter(t=>effStatus(t)==="done").map(t=>t.start+t.days);
+  if(doneEnds.length){
+    const nx=LABEL_W+Math.max(...doneEnds)*DAY_W;
+    wrap.insertAdjacentHTML("beforeend",`<div class="gnow" style="left:${nx}px;height:${height}px"></div>`);
+  }
+
+  // SVG arrows overlay
+  const svgNS="http://www.w3.org/2000/svg";
+  const svg=document.createElementNS(svgNS,"svg");
+  svg.setAttribute("width",width); svg.setAttribute("height",height);
+  svg.style.position="absolute"; svg.style.left=0; svg.style.top=0; svg.style.pointerEvents="none";
+  const defs=document.createElementNS(svgNS,"defs");
+  defs.innerHTML=`<marker id="ah" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto">
+    <path d="M0 0L6 3L0 6Z" fill="#3a516f"/></marker>`;
+  svg.appendChild(defs);
+
+  // rows
+  rows.forEach(r=>{
+    if(r.type==="phase"){
+      wrap.insertAdjacentHTML("beforeend",
+        `<div class="gphase" style="top:${r.y}px;height:${PH_H}px;width:${LABEL_W}px">${r.ph.name}</div>`);
+    }else{
+      const t=r.t, st=renderStatus(t);
+      const x=LABEL_W+t.start*DAY_W, w=Math.max(t.days*DAY_W,10);
+      wrap.insertAdjacentHTML("beforeend",
+        `<div class="glabel" style="top:${r.y}px;height:${ROW_H}px;width:${LABEL_W}px">${t.title}</div>`);
+      const bar=document.createElement("div");
+      bar.className="gbar "+st; bar.style.top=(r.y+(ROW_H-18)/2)+"px"; bar.style.left=x+"px"; bar.style.width=w+"px";
+      bar.dataset.id=t.id;
+      bar.textContent=w>46?t.component:"";
+      bar.addEventListener("click",()=>toggle(t.id));
+      bar.addEventListener("mousemove",e=>showTip(e,t,st));
+      bar.addEventListener("mouseleave",hideTip);
+      wrap.appendChild(bar);
+    }
+  });
+
+  // dependency arrows (from dep end → task start)
+  DATA.tasks.forEach(t=>{
+    if(!pos[t.id]) return;
+    const ty=pos[t.id].y+ROW_H/2, tx=LABEL_W+t.start*DAY_W;
+    t.deps.forEach(dep=>{
+      if(!pos[dep]) return;
+      const d=T[dep], dy=pos[dep].y+ROW_H/2, dx=LABEL_W+(d.start+d.days)*DAY_W;
+      const midx=Math.max(dx+6, tx-8);
+      const path=document.createElementNS(svgNS,"path");
+      path.setAttribute("d",`M${dx} ${dy} H${midx} V${ty} H${tx-2}`);
+      path.setAttribute("fill","none"); path.setAttribute("stroke","#3a516f");
+      path.setAttribute("stroke-width","1.3"); path.setAttribute("marker-end","url(#ah)");
+      path.setAttribute("opacity",".7");
+      svg.appendChild(path);
+    });
+  });
+  wrap.appendChild(svg);
+  root.appendChild(wrap);
+}
+
+const tip=document.getElementById("tip");
+function showTip(e,t,st){
+  tip.innerHTML=`<b>${t.title}</b><br>${t.component} · day ${t.start}–${t.start+t.days} · <b>${st}</b>`+
+    (t.deps.length?`<br><span style="color:#8294b0">deps: ${t.deps.join(", ")}</span>`:"");
+  tip.style.opacity=1; tip.style.left=(e.clientX+14)+"px"; tip.style.top=(e.clientY+14)+"px";
+}
+function hideTip(){ tip.style.opacity=0; }
+
+function renderAll(){
+  T={}; DATA.tasks.forEach(t=>T[t.id]=t);
+  renderHeader(); renderChecklist();
+  if(document.querySelector('.tab[data-view="gantt"]').classList.contains("active")) renderGantt();
+}
+
+document.querySelectorAll(".tab").forEach(tab=>{
+  tab.addEventListener("click",()=>{
+    document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+    tab.classList.add("active");
+    const v=tab.dataset.view;
+    document.getElementById("checklist").style.display = v==="checklist"?"block":"none";
+    document.getElementById("gantt").style.display = v==="gantt"?"block":"none";
+    document.getElementById("legend").style.display = v==="gantt"?"flex":"none";
+    if(v==="gantt") renderGantt();
+  });
+});
+document.getElementById("reset").addEventListener("click",()=>{
+  if(confirm("Clear your local ticks and reset to the build's recorded status?")){
+    overrides={}; save(); renderAll();
+  }
+});
+
+/* Prefer tasks.json when served over http(s); fall back to embedded offline. */
+(async()=>{
+  if(location.protocol.startsWith("http")){
+    try{ const r=await fetch("tasks.json",{cache:"no-store"}); if(r.ok){const j=await r.json(); if(j.tasks) DATA=j;} }catch(e){}
+  }
+  renderAll();
+})();
+</script>
+</body>
+</html>

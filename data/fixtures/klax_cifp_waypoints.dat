@@ -1,0 +1,23 @@
+# AeroAIP fixture — authentic FAA CIFP excerpt: waypoints referenced by KLAX DOTSS2.
+# Source: FAA NASR CIFP FAACIFP18 (US Government public-domain data).
+# Terminal (PC) + enroute (EA) waypoint records, real ARINC 424-18 layout.
+SUSAEAENRT   BLCKD K20    W     N33293177W116252814                       E0109     NAR           BLCKD                    291862504
+SUSAEAENRT   CLEEE K20    W     N33432418W116042392                       E0108     NAR           CLEEE                    316042605
+SUSAEAENRT   CNERY K20    W     N33370375W115345672                       E0107     NAR           CNERY                    316802605
+SUSAEAENRT   CSTWY K20    W     N33290977W116020305                       E0108     NAR           CSTWY                    322452605
+SUSAEAENRT   DOTSS K20    W     N33383878W117474302                       E0112     NAR           DOTSS                    333452605
+SUSAEAENRT   EYEDL K20    W     N33450494W117140110                       E0111     NAR           EYEDL                    345482605
+SUSAEAENRT   HOLTZ K20    W     N33384038W118203479                       E0113     NAR           HOLTZ                    380222605
+SUSAEAENRT   HOMER K20    W     N33444580W116582595                       E0110     NAR           HOMER                    380352605
+SUSAEAENRT   PEVEE K20    W     N33415000W118311500                       E0114     NAR           PEVEE                    469502504
+SUSAEAENRT   WIILD K20    W     N33301734W117135988                       E0111     NAR           WIILD                    536232403
+SUSAP KLAXK2CADORE K20    W     N33542830W118292809                       E0114     NAR           ADORE                    356322605
+SUSAP KLAXK2CDLREY K20    W     N33563725W118275453                       E0114     NAR           DLREY                    356802605
+SUSAP KLAXK2CDOCKR K20    W     N33555464W118272917                       E0114     NAR           DOCKR                    356812605
+SUSAP KLAXK2CENNEY K20    W     N33563286W118302084                       E0114     NAR           ENNEY                    356922605
+SUSAP KLAXK2CFABRA K20    W     N33564430W118275385                       E0114     NAR           FABRA                    356982605
+SUSAP KLAXK2CHAYNK K20    W     N33502607W118381425                       E0114     NAR           HAYNK                    357172605
+SUSAP KLAXK2CHIIPR K20    W     N33554745W118272159                       E0114     NAR           HIIPR                    357202605
+SUSAP KLAXK2CNAANC K20    W     N33555400W118383800                       E0114     NAR           NAANC                    357792605
+SUSAP KLAXK2CSHAEF K20    W     N33513224W118335217                       E0114     NAR           SHAEF                    358172605
+SUSAP KLAXK2CWEILR K20    W     N33543756W118292735                       E0114     NAR           WEILR                    358562605

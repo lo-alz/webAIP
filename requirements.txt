@@ -1,0 +1,17 @@
+# AeroAIP Subnet — Phase 0 PoC dependencies
+#
+# Core (required to run the PoC + tests):
+pydantic>=2.6,<3
+lxml>=5.0            # AIXM 5.2 GML serialization + XSD validation
+
+# Chart rendering (only needed if you point the pipeline at a live d-TPP PDF;
+# the PoC falls back to a committed extraction fixture when absent):
+pymupdf>=1.24
+
+# LLM router (optional — imported lazily by miner/extractor/llm_router.py).
+# Only needed when MINER_LLM points at a reachable model. The PoC runs fully
+# without it via the committed extraction fixture.
+# litellm>=1.40
+
+# Tests:
+pytest>=8.0

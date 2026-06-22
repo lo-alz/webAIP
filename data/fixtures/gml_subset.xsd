@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Minimal GML 3.2 subset used by the AeroAIP AIXM 5.2 profile schema.
+  Declares only the GML constructs the exporter emits: gml:id and gml:pos.
+  This is NOT the full OGC GML schema — it is a faithful subset for offline
+  validation of the AeroAIP profile (see docs/SOURCES.md §5).
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:gml="http://www.opengis.net/gml/3.2"
+           targetNamespace="http://www.opengis.net/gml/3.2"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+  <xs:attribute name="id" type="xs:ID"/>
+
+  <xs:complexType name="DirectPositionType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="srsName" type="xs:anyURI"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+
+  <xs:element name="pos" type="gml:DirectPositionType"/>
+</xs:schema>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AeroAIP AIXM 5.2 profile schema.
+
+  A faithful subset of AIXM 5.2 using the REAL AIXM feature/attribute names for
+  instrument procedures:
+     StandardInstrumentDeparture / StandardTerminalArrival /
+     InstrumentApproachProcedure, SegmentLeg subtypes (DepartureLeg / ArrivalLeg
+     / ApproachLeg) with @legTypeARINC, and DesignatedPoint with gml:pos.
+  The full official AIXM 5.2 multi-file schema is out of Phase 0 scope; this
+  profile lets the pipeline ASSERT structural AIXM-5.2 conformance offline.
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:aixm="http://www.aixm.aero/schema/5.2"
+           xmlns:gml="http://www.opengis.net/gml/3.2"
+           targetNamespace="http://www.aixm.aero/schema/5.2"
+           elementFormDefault="qualified">
+
+  <xs:import namespace="http://www.opengis.net/gml/3.2"
+             schemaLocation="gml_subset.xsd"/>
+
+  <!-- ── DesignatedPoint ──────────────────────────────────────────────── -->
+  <xs:element name="DesignatedPoint">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="designator" type="xs:string"/>
+        <xs:element ref="gml:pos"/>
+      </xs:sequence>
+      <xs:attribute ref="gml:id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="terminationPoint">
+    <xs:complexType>
+      <xs:sequence><xs:element ref="aixm:DesignatedPoint"/></xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="centerPoint">
+    <xs:complexType>
+      <xs:sequence><xs:element ref="aixm:DesignatedPoint"/></xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ── constraints ──────────────────────────────────────────────────── -->
+  <xs:element name="altitude">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="type" type="xs:string" use="required"/>
+          <xs:attribute name="uom" type="xs:string" use="required"/>
+          <xs:attribute name="upper" type="xs:string"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="speedLimit">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="type" type="xs:string" use="required"/>
+          <xs:attribute name="uom" type="xs:string" use="required"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ── SegmentLeg (shared by DepartureLeg / ArrivalLeg / ApproachLeg) ── -->
+  <xs:complexType name="SegmentLegType">
+    <xs:sequence>
+      <xs:element name="overfly" type="xs:string" minOccurs="0"/>
+      <xs:element name="courseMagnetic" type="xs:string" minOccurs="0"/>
+      <xs:element name="distanceNM" type="xs:string" minOccurs="0"/>
+      <xs:element ref="aixm:terminationPoint" minOccurs="0"/>
+      <xs:element ref="aixm:centerPoint" minOccurs="0"/>
+      <xs:element name="radiusNM" type="xs:string" minOccurs="0"/>
+      <xs:element ref="aixm:altitude" minOccurs="0"/>
+      <xs:element ref="aixm:speedLimit" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute ref="gml:id" use="required"/>
+    <xs:attribute name="sequenceNumber" type="xs:integer" use="required"/>
+    <xs:attribute name="legTypeARINC" type="xs:string" use="required"/>
+    <xs:attribute name="turnDirection" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:element name="DepartureLeg" type="aixm:SegmentLegType"/>
+  <xs:element name="ArrivalLeg" type="aixm:SegmentLegType"/>
+  <xs:element name="ApproachLeg" type="aixm:SegmentLegType"/>
+
+  <xs:element name="hasLeg">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="aixm:DepartureLeg"/>
+        <xs:element ref="aixm:ArrivalLeg"/>
+        <xs:element ref="aixm:ApproachLeg"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ── Procedure (shared by the three procedure features) ───────────── -->
+  <xs:complexType name="ProcedureType">
+    <xs:sequence>
+      <xs:element name="designator" type="xs:string"/>
+      <xs:element name="airportIcaoCode" type="xs:string"/>
+      <xs:element name="pbnNavSpec" type="xs:string" minOccurs="0"/>
+      <xs:element name="airacCycle" type="xs:string"/>
+      <xs:element ref="aixm:hasLeg" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute ref="gml:id" use="required"/>
+  </xs:complexType>
+
+  <xs:element name="StandardInstrumentDeparture" type="aixm:ProcedureType"/>
+  <xs:element name="StandardTerminalArrival" type="aixm:ProcedureType"/>
+  <xs:element name="InstrumentApproachProcedure" type="aixm:ProcedureType"/>
+
+  <xs:element name="hasMember">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element ref="aixm:StandardInstrumentDeparture"/>
+        <xs:element ref="aixm:StandardTerminalArrival"/>
+        <xs:element ref="aixm:InstrumentApproachProcedure"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ── Message root ─────────────────────────────────────────────────── -->
+  <xs:element name="AIXMBasicMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="aixm:hasMember" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute ref="gml:id" use="required"/>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

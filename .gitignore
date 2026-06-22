@@ -1,0 +1,29 @@
+# Downloaded authoritative data (large, regenerated per AIRAC cycle)
+data/nasr/*
+data/ead/*
+data/navcanada/*
+!data/nasr/.gitkeep
+!data/ead/.gitkeep
+!data/navcanada/.gitkeep
+
+# Generated SQLite waypoint index (built from sources / fixtures)
+data/waypoints/*.db
+
+# Committed fixtures are NOT ignored (data/fixtures/** is tracked)
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Secrets
+.env
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/

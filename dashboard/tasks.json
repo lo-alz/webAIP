@@ -1,0 +1,51 @@
+{
+  "project": "AeroAIP Subnet",
+  "updated": "2026-06-22",
+  "phases": [
+    {"id": "p0", "name": "Phase 0 — Proof of Concept", "weeks": "1–2"},
+    {"id": "p1", "name": "Phase 1 — Pipeline Build", "weeks": "3–6"},
+    {"id": "p2", "name": "Phase 2 — Testnet", "weeks": "7–10"},
+    {"id": "p3", "name": "Phase 3 — Demo", "weeks": "11–12"},
+    {"id": "p4", "name": "Phase 4 — Mainnet", "weeks": "13+"}
+  ],
+  "tasks": [
+    {"id": "spec",      "phase": "p0", "title": "Master spec as CLAUDE.md context", "component": "meta", "start": 0, "days": 1, "deps": [], "status": "done"},
+    {"id": "sources",   "phase": "p0", "title": "Validate AIP data sources (docs/SOURCES.md)", "component": "data", "start": 0, "days": 2, "deps": ["spec"], "status": "done"},
+    {"id": "coords",    "phase": "p0", "title": "ARINC 424 → decimal coordinate converter", "component": "miner", "start": 1, "days": 1, "deps": ["spec"], "status": "done"},
+    {"id": "schemas",   "phase": "p0", "title": "AIXM 5.2 Pydantic schemas", "component": "miner", "start": 1, "days": 2, "deps": ["spec"], "status": "done"},
+    {"id": "cifp",      "phase": "p0", "title": "NASR CIFP parser (real ARINC 424-18)", "component": "validator", "start": 2, "days": 2, "deps": ["coords", "sources"], "status": "done"},
+    {"id": "wpdb",      "phase": "p0", "title": "Waypoint index (SQLite, lossless coords)", "component": "miner", "start": 3, "days": 1, "deps": ["coords", "schemas"], "status": "done"},
+    {"id": "gml",       "phase": "p0", "title": "AIXM 5.2 GML exporter + XSD profile", "component": "miner", "start": 3, "days": 2, "deps": ["schemas"], "status": "done"},
+    {"id": "aixmxsd",   "phase": "p0", "title": "AIXM 5.2 XSD conformance check", "component": "validator", "start": 4, "days": 1, "deps": ["gml"], "status": "done"},
+    {"id": "llm",       "phase": "p0", "title": "LLM router (pluggable + fixture fallback)", "component": "miner", "start": 4, "days": 2, "deps": ["schemas"], "status": "done"},
+    {"id": "dtpp",      "phase": "p0", "title": "d-TPP chart fetch/render", "component": "miner", "start": 5, "days": 1, "deps": ["llm", "sources"], "status": "done"},
+    {"id": "assemble",  "phase": "p0", "title": "Structure + DB-coords assembler", "component": "miner", "start": 5, "days": 1, "deps": ["wpdb", "llm"], "status": "done"},
+    {"id": "validate",  "phase": "p0", "title": "Hard validation rules (§5)", "component": "validator", "start": 6, "days": 1, "deps": ["schemas"], "status": "done"},
+    {"id": "scoring",   "phase": "p0", "title": "Exact-match scoring, transition-aware (§6)", "component": "validator", "start": 6, "days": 2, "deps": ["cifp", "assemble"], "status": "done"},
+    {"id": "download",  "phase": "p0", "title": "download_waypoint_dbs.sh (live FAA)", "component": "scripts", "start": 2, "days": 1, "deps": ["sources"], "status": "done"},
+    {"id": "buildidx",  "phase": "p0", "title": "build_waypoint_index.py", "component": "scripts", "start": 7, "days": 1, "deps": ["wpdb", "cifp"], "status": "done"},
+    {"id": "poc",       "phase": "p0", "title": "poc_extraction.py — KLAX DOTSS2 end-to-end", "component": "scripts", "start": 8, "days": 2, "deps": ["assemble", "scoring", "gml", "buildidx", "dtpp"], "status": "done"},
+    {"id": "tests",     "phase": "p0", "title": "Test suite (43 tests, incl. live CIFP)", "component": "tests", "start": 9, "days": 2, "deps": ["poc"], "status": "done"},
+    {"id": "dashboard", "phase": "p0", "title": "Project dashboard (checklist + Gantt)", "component": "meta", "start": 10, "days": 1, "deps": ["poc"], "status": "done"},
+
+    {"id": "faa-all",   "phase": "p1", "title": "Generalise FAA extractor to all SID/STAR/IAP", "component": "miner", "start": 14, "days": 6, "deps": ["poc"], "status": "todo"},
+    {"id": "eaip",      "phase": "p1", "title": "eAIP HTML parsers (EGLL, VHHH, CYVR)", "component": "miner", "start": 16, "days": 8, "deps": ["faa-all"], "status": "todo"},
+    {"id": "aixm-full", "phase": "p1", "title": "Full AIXM 5.2 serializer (beyond profile)", "component": "miner", "start": 18, "days": 6, "deps": ["gml"], "status": "todo"},
+    {"id": "postgis",   "phase": "p1", "title": "PostGIS schema (AIRAC-versioned, spatial)", "component": "aggregator", "start": 20, "days": 5, "deps": ["aixm-full"], "status": "todo"},
+    {"id": "ead",       "phase": "p1", "title": "EAD AIXM 5.1 → 5.2 mapping", "component": "validator", "start": 22, "days": 5, "deps": ["eaip", "aixm-full"], "status": "todo"},
+    {"id": "scheduler", "phase": "p1", "title": "AIRAC 28-day scheduler", "component": "scripts", "start": 24, "days": 3, "deps": ["faa-all"], "status": "todo"},
+
+    {"id": "bootstrap", "phase": "p2", "title": "bootstrap_testnet.sh (subnet, wallets, faucet)", "component": "subnet", "start": 42, "days": 4, "deps": ["scheduler", "postgis"], "status": "todo"},
+    {"id": "valnode",   "phase": "p2", "title": "Run validator + sentinel on droplet", "component": "subnet", "start": 46, "days": 4, "deps": ["bootstrap", "ead"], "status": "todo"},
+    {"id": "uscycle",   "phase": "p2", "title": "Process one full US AIRAC cycle", "component": "subnet", "start": 50, "days": 6, "deps": ["valnode"], "status": "todo"},
+    {"id": "miners",    "phase": "p2", "title": "Recruit 3–5 external testnet miners", "component": "subnet", "start": 56, "days": 6, "deps": ["uscycle"], "status": "todo"},
+
+    {"id": "cesium",    "phase": "p3", "title": "CesiumJS 3D SID/STAR globe", "component": "viz", "start": 70, "days": 6, "deps": ["uscycle"], "status": "todo"},
+    {"id": "kml",       "phase": "p3", "title": "KML export endpoint (Google Earth)", "component": "viz", "start": 72, "days": 3, "deps": ["postgis"], "status": "todo"},
+    {"id": "demo",      "phase": "p3", "title": "Demo video: chart → AIXM 5.2 → 3D globe", "component": "viz", "start": 76, "days": 4, "deps": ["cesium", "kml"], "status": "todo"},
+
+    {"id": "monitor",   "phase": "p4", "title": "Monitor registration-cost trough", "component": "ops", "start": 84, "days": 4, "deps": ["miners"], "status": "todo"},
+    {"id": "register",  "phase": "p4", "title": "Register subnet on mainnet (HK entity)", "component": "ops", "start": 88, "days": 2, "deps": ["monitor", "demo"], "status": "todo"},
+    {"id": "ops",       "phase": "p4", "title": "Global production AIRAC operations", "component": "ops", "start": 90, "days": 8, "deps": ["register"], "status": "todo"}
+  ]
+}

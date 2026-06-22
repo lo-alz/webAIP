@@ -1,0 +1,37 @@
+# AeroAIP fixture — authentic FAA CIFP excerpt: KLAX DOTSS2 SID (PD records).
+# Source: FAA NASR CIFP FAACIFP18 (US Government public-domain data).
+# Real ARINC 424-18 fixed-width records; see validator/ground_truth/nasr_cifp.py.
+SUSAP KLAXK2DDOTSS24RW24L 010         0        VA                     2510        + 00640     18000                        359401709
+SUSAP KLAXK2DDOTSS24RW24L 020DLREYK2PC0E       DF                                 - 03000                                  359411709
+SUSAP KLAXK2DDOTSS24RW24L 030ENNEYK2PC0E       TF                                 - 05000                                  359421709
+SUSAP KLAXK2DDOTSS24RW24L 040NAANCK2PC0E       TF                                                                          359431709
+SUSAP KLAXK2DDOTSS24RW24L 050HAYNKK2PC0E       TF                                                                          359441709
+SUSAP KLAXK2DDOTSS24RW24L 060PEVEEK2EA0EE      TF                                                                          359451709
+SUSAP KLAXK2DDOTSS24RW24R 010         0        VA                     2510        + 00640     18000                        359461709
+SUSAP KLAXK2DDOTSS24RW24R 020FABRAK2PC0E       DF                                 - 03000                                  359471709
+SUSAP KLAXK2DDOTSS24RW24R 030ENNEYK2PC0E       TF                                 - 05000                                  359481709
+SUSAP KLAXK2DDOTSS24RW24R 040NAANCK2PC0E       TF                                                                          359491709
+SUSAP KLAXK2DDOTSS24RW24R 050HAYNKK2PC0E       TF                                                                          359501709
+SUSAP KLAXK2DDOTSS24RW24R 060PEVEEK2EA0EE      TF                                                                          359511709
+SUSAP KLAXK2DDOTSS24RW25L 010         0        VA                     2510        + 00640     18000                        359521709
+SUSAP KLAXK2DDOTSS24RW25L 020HIIPRK2PC0E       DF                                 - 03000                                  359531709
+SUSAP KLAXK2DDOTSS24RW25L 030ADOREK2PC0E       TF                                 - 05000                                  359541709
+SUSAP KLAXK2DDOTSS24RW25L 040SHAEFK2PC0E       TF                                                                          359551709
+SUSAP KLAXK2DDOTSS24RW25L 050PEVEEK2EA0EE      TF                                                                          359561709
+SUSAP KLAXK2DDOTSS24RW25R 010         0        VA                     2510        + 00640     18000                        359571709
+SUSAP KLAXK2DDOTSS24RW25R 020DOCKRK2PC0E       DF                                 - 03000                                  359581709
+SUSAP KLAXK2DDOTSS24RW25R 030WEILRK2PC0E       TF                                 - 05000                                  359591709
+SUSAP KLAXK2DDOTSS24RW25R 040SHAEFK2PC0E       TF                                                                          359601709
+SUSAP KLAXK2DDOTSS24RW25R 050PEVEEK2EA0EE      TF                                                                          359611709
+SUSAP KLAXK2DDOTSS25      010PEVEEK2EA0E       IF                                             18000                        359621709
+SUSAP KLAXK2DDOTSS25      020HOLTZK2EA0E       TF                                                                          359631709
+SUSAP KLAXK2DDOTSS25      030DOTSSK2EA0EE      TF                                 + 15000                                  359641709
+SUSAP KLAXK2DDOTSS26CLEEE 010DOTSSK2EA0E       IF                                 + 15000     18000                        359651709
+SUSAP KLAXK2DDOTSS26CLEEE 020EYEDLK2EA0E       TF                                                                          359661709
+SUSAP KLAXK2DDOTSS26CLEEE 030HOMERK2EA0E       TF                                                                          359671709
+SUSAP KLAXK2DDOTSS26CLEEE 040CLEEEK2EA0EE      TF                                                                          359681709
+SUSAP KLAXK2DDOTSS26CNERY 010DOTSSK2EA0E       IF                                 + 15000     18000                        359691709
+SUSAP KLAXK2DDOTSS26CNERY 020WIILDK2EA0E       TF                                                                          359701709
+SUSAP KLAXK2DDOTSS26CNERY 030BLCKDK2EA0E       TF                                                                          359711709
+SUSAP KLAXK2DDOTSS26CNERY 040CSTWYK2EA0E       TF                                                                          359721709
+SUSAP KLAXK2DDOTSS26CNERY 050CNERYK2EA0EB      TF                                                                          359731709
