@@ -28,6 +28,11 @@
     {"id": "tests",     "phase": "p0", "title": "Test suite (43 tests, incl. live CIFP)", "component": "tests", "start": 9, "days": 2, "deps": ["poc"], "status": "done"},
     {"id": "dashboard", "phase": "p0", "title": "Project dashboard (checklist + Gantt)", "component": "meta", "start": 10, "days": 1, "deps": ["poc"], "status": "done"},
 
+    {"id": "aiphunter",    "phase": "p1", "title": "AIPhunter agent — scan AIP sources & score parsing difficulty", "component": "agent", "start": 14, "days": 2, "deps": ["poc"], "status": "todo"},
+    {"id": "airport-scan", "phase": "p1", "title": "Scan ICAO IFR airports (OurAirports spine)", "component": "data", "start": 16, "days": 2, "deps": ["aiphunter"], "status": "todo"},
+    {"id": "country-group","phase": "p1", "title": "Group airports by country + runway/SID/STAR/APP counts", "component": "data", "start": 18, "days": 2, "deps": ["airport-scan"], "status": "todo"},
+    {"id": "country-table","phase": "p1", "title": "Country AIP-source table (source, format, AIXM ver, score 1–10)", "component": "data", "start": 20, "days": 3, "deps": ["aiphunter", "country-group"], "status": "todo"},
+    {"id": "dash-countries","phase": "p1", "title": "Dashboard: countries & parsing-difficulty JSON view", "component": "meta", "start": 23, "days": 2, "deps": ["country-table"], "status": "todo"},
     {"id": "faa-all",   "phase": "p1", "title": "Generalise FAA extractor to all SID/STAR/IAP", "component": "miner", "start": 14, "days": 6, "deps": ["poc"], "status": "todo"},
     {"id": "eaip",      "phase": "p1", "title": "eAIP HTML parsers (EGLL, VHHH, CYVR)", "component": "miner", "start": 16, "days": 8, "deps": ["faa-all"], "status": "todo"},
     {"id": "aixm-full", "phase": "p1", "title": "Full AIXM 5.2 serializer (beyond profile)", "component": "miner", "start": 18, "days": 6, "deps": ["gml"], "status": "todo"},
