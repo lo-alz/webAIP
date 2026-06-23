@@ -1752,25 +1752,25 @@
     },
     "MP": {
       "icao_prefix": "PG",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "FAA / AeroNav Services",
+      "aip_url": "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/cifp/",
+      "source_type": "ARINC424",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 2,
+      "confidence": "high",
+      "notes": "Northern Mariana Islands airports (PGSN Saipan, PGRO Rota, PGWT Tinian) are covered in FAA NASR CIFP (open ARINC 424, free download, no account). d-TPP PDF charts also freely available. CIFP updated every 28 days. No AIXM output; procedures fully coded in ARINC 424-18. Score 2: open coded ARINC 424 ground truth."
     },
     "QA": {
       "icao_prefix": "OT",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "QCAA / Qatar AIM",
+      "aip_url": "https://www.aim.gov.qa/",
+      "source_type": "mixed",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 7,
+      "confidence": "high",
+      "notes": "Open eAIP HTML at aim.gov.qa (no registration). SID/STAR and IAP procedures delivered exclusively as PDF charts per aerodrome AD-2.24 index. Tabular procedure PDFs are vector (Adobe Distiller/PostScript); graphical approach charts are scanned/image PDFs (OCR needed). No AIXM data. Mixed vector+scan PDF corpus with per-chart portal navigation adds friction (+1)."
     },
     "RW": {
       "icao_prefix": "HR",
@@ -1796,25 +1796,25 @@
     },
     "EH": {
       "icao_prefix": "GM",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "ONDA / SIA Maroc (Morocco)",
+      "aip_url": "https://siamaroc.onda.ma/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "paid",
+      "parsing_score": 9,
+      "confidence": "medium",
+      "notes": "Western Sahara is administered by Morocco; airports GMMH (Dakhla) and GMML (Laayoune) appear in the Morocco ONDA/SIA AIP. The SIA Maroc site serves a mix of HTML pages and per-aerodrome PDF documents (e.g. AD2GMMH.pdf); direct PDF URLs return 403, and an annual subscription/renewal system is in place (Abonnement 2026). No AIXM or coded data. Site uses the GM prefix for all Moroccan territory including the Western Sahara FIR Casablanca. eAIP HTML menus resolve to 403. Effectively a paid-subscription PDF AIP with poor open access; +1 for clunky portal and subscription friction."
     },
     "BH": {
       "icao_prefix": "OB",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "Civil Aviation Affairs / Ministry of Transportation and Telecommunications",
+      "aip_url": "https://aim.mtt.gov.bh/",
+      "source_type": "mixed",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 4,
+      "confidence": "high",
+      "notes": "Open eAIP HTML at aim.mtt.gov.bh (no registration, free). HTML aerodrome pages embed RNAV GNSS approach waypoint tables (path terminators, coordinates, altitudes in HTML). SID/STAR conventional charts are vector PDF links in the eAIP. No AIXM. Hybrid HTML-table plus PDF-chart structure; reasonably parseable but irregular across procedure types."
     },
     "BZ": {
       "icao_prefix": "MZ",
@@ -1884,14 +1884,14 @@
     },
     "DM": {
       "icao_prefix": "TD",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "TTCAA / Piarco AIS (publisher); ECCAA (safety oversight)",
+      "aip_url": "https://caa.gov.tt/eaip-acquisition-form/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "paid",
+      "parsing_score": 9,
+      "confidence": "high",
+      "notes": "Dominica procedures are published in the Eastern Caribbean (E/CAR) AIP produced by TTCAA/Piarco AIS, which covers Anguilla, Antigua & Barbuda, BVI, Dominica, Grenada, Montserrat, St Kitts/Nevis, St Lucia, St Vincent & the Grenadines, and Trinidad & Tobago. Access is via paid subscription (wire transfer, no online payment); free only for State CAA bodies with a Piarco AIS exchange agreement. The portal is login-gated. Format is electronic PDF download, not structured eAIP HTML; updated 3x/year (not AIRAC-aligned). No AIXM, no open download. Shared publisher across all ECAC Eastern Caribbean states except Barbados."
     },
     "SV": {
       "icao_prefix": "MS",
@@ -1928,36 +1928,36 @@
     },
     "GU": {
       "icao_prefix": "PG",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "FAA / AeroNav Services",
+      "aip_url": "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/cifp/",
+      "source_type": "ARINC424",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 2,
+      "confidence": "high",
+      "notes": "Guam (PGUM Antonio B. Won Pat Intl) is a US territory; all SID/STAR/IAP procedures are in FAA NASR CIFP (open ARINC 424) and d-TPP PDFs. Both freely downloadable without account from aeronav.faa.gov. CIFP is the authoritative ground truth for coordinate lookup. Score 2: open coded ARINC 424."
     },
     "GG": {
       "icao_prefix": "EG",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "NATS (National Air Traffic Services) / UK AIS — Guernsey Civil Aviation Authority",
+      "aip_url": "https://www.aurora.nats.co.uk/",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 4,
+      "confidence": "high",
+      "notes": "Guernsey (EGJB) is a UK Crown Dependency whose AIS is an integral part of the UK AIS system, published by NATS under the EG ICAO prefix (EGJ-block). The UK eAIP at aurora.nats.co.uk is freely accessible to the public without registration for the HTML AIP product. EGJB AD 2 section is present with full aerodrome data; SIDs (GULDA, ORTAC, DINARD, CAEN, SKERY) and STARs are published within the UK AIP structure. Charts are published as PDFs linked from the eAIP. No AIXM output. Score 4: open eAIP HTML with standard UK irregular structure requiring multi-cycle URL tracking."
     },
     "HK": {
       "icao_prefix": "VH",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "Civil Aviation Department (CAD) — Hong Kong SAR",
+      "aip_url": "https://www.ais.gov.hk/",
+      "source_type": "mixed",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 4,
+      "confidence": "high",
+      "notes": "Hong Kong AIS at ais.gov.hk publishes eAIP in HTML (no registration required). VHHH AD-2 HTML contains structured tables: waypoint coordinates, SID/STAR name-to-runway assignments, climb gradient requirements, and some altitude crossing constraints. However, detailed procedure geometry (leg-by-leg sequences, turn directions, speed restrictions on intermediate legs, RF leg radii) are only in linked PDF charts (e.g. VH-AD-2-VHHH-SID-RAMEN-C.pdf). Waypoint coordinates for shared fixes must be cross-referenced against EAD or ICAO APAC database. No AIXM output. Mixed HTML-table + PDF structure; HTML is parseable but incomplete without PDF charts. Score 4: open eAIP HTML with parseable but irregular/mixed structure requiring PDF supplement."
     },
     "MH": {
       "icao_prefix": "PK",
@@ -1972,14 +1972,14 @@
     },
     "MU": {
       "icao_prefix": "FI",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "Department of Civil Aviation, Republic of Mauritius",
+      "aip_url": "https://civil-aviation.govmu.org/eAIP/eAIPMauritius/index.html",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 4,
+      "confidence": "high",
+      "notes": "Open eAIP HTML hosted on govmu.org, no registration required. Covers FIMP (Sir Seewoosagur Ramgoolam Intl) and FIMR (Plaine Corail). Procedure charts linked as PDF from the HTML structure. RNAV/RNP1 SIDs and STARs implemented. No AIXM output. Irregular URL versioning per AIRAC cycle requires path-tracking. Score 4: open eAIP HTML, irregular structure."
     },
     "ME": {
       "icao_prefix": "LY",
@@ -1994,58 +1994,58 @@
     },
     "MK": {
       "icao_prefix": "LW",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "M-NAV / Civil Aviation Agency of North Macedonia",
+      "aip_url": "https://ais.m-nav.info/eAIP/",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 5,
+      "confidence": "medium",
+      "notes": "Open eAIP at ais.m-nav.info (no registration required). Frameset-based HTML portal; most procedure sections link to PDF files rather than embedding HTML tables. ECAC state: data also available via EUROCONTROL EAD Basic (free registration, AIXM 5.1). No direct AIXM download from national portal. EAD is the preferred machine-readable source (score reflects EAD free-account path)."
     },
     "RE": {
       "icao_prefix": "FM",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "SIA / DGAC France (Direction de la Navigation Aérienne)",
+      "aip_url": "https://www.sia.aviation-civile.gouv.fr/",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "free-account",
+      "parsing_score": 5,
+      "confidence": "high",
+      "notes": "Réunion (FMEE Roland Garros, FMEP Pierrefonds) is French territory; AIP published under SIA France as the RUN supplement. The SIA eAIP viewer (htmlshow) requires login/account creation ('Me connecter'). However, static PDF versions of procedure sections are served directly from sia.aviation-civile.gouv.fr paths for those who know the URL. The libre-disposition eAIP ZIP download covers metro France primarily; RUN is included in the broader eAIP set but accessed via the account-gated viewer in practice. Score 5: eAIP HTML behind free registration, matching the EAD-tier access pattern."
     },
     "SH": {
       "icao_prefix": "FH",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "ASSI (Air Safety Support International) / ATNS (Air Traffic and Navigation Services, South Africa) as service provider",
+      "aip_url": "https://atns.com/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 7,
+      "confidence": "medium",
+      "notes": "Saint Helena Airport (FHSH/HLE) procedures are published by ASSI (UK CAA subsidiary for Overseas Territories) with ATNS (South Africa) as the AIS service provider and hosting entity. AIP is distributed as PDF documents from atns.com under a 'St Helena Projects' section. Charts are vector PDF with selectable text (confirmed: embedded fonts Arial/Calibri, not scanned). Instrument procedures include RNP approach RWY 01, SIDs and STARs. No eAIP HTML, no AIXM, no coded data. Score 7: vector PDF charts requiring portal navigation; ATNS site navigation to find the correct section adds friction; last confirmed amendment 2025."
     },
     "KN": {
       "icao_prefix": "TK",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "TTCAA / Piarco AIS (publisher); ECCAA (safety oversight)",
+      "aip_url": "https://caa.gov.tt/eaip-acquisition-form/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "paid",
+      "parsing_score": 9,
+      "confidence": "high",
+      "notes": "Saint Kitts and Nevis (St Christopher/Nevis) procedures are published in the Eastern Caribbean (E/CAR) AIP produced by TTCAA/Piarco AIS. Same shared-publisher model as Dominica: paid subscription, login-gated portal, PDF download format, updated 3x/year, no AIXM, no open access. ECCAA provides safety oversight. ICAO AERODROMES: TKPK (Robert L Bradshaw Intl, Basseterre) and TKPN (Charlestown/Nevis)."
     },
     "LC": {
       "icao_prefix": "TL",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "TTCAA / Piarco AIS (publisher); ECCAA (safety oversight)",
+      "aip_url": "https://caa.gov.tt/eaip-acquisition-form/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "paid",
+      "parsing_score": 9,
+      "confidence": "high",
+      "notes": "Saint Lucia procedures are published in the Eastern Caribbean (E/CAR) AIP produced by TTCAA/Piarco AIS. Same shared-publisher model as Dominica and Saint Kitts: paid subscription, login-gated portal, PDF download, updated 3x/year, no AIXM, no open access. ECCAA provides safety oversight. ICAO AERODROMES: TLPC (George FL Charles/Vigie, Castries) and TLPL (Hewanorra Intl, Vieux Fort)."
     },
     "SC": {
       "icao_prefix": "FS",
@@ -2071,14 +2071,14 @@
     },
     "ST": {
       "icao_prefix": "FP",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "INAC (Instituto Nacional de Aviação Civil de São Tomé e Príncipe)",
+      "aip_url": "https://www.inac.st/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "restricted",
+      "parsing_score": 9,
+      "confidence": "low",
+      "notes": "São Tomé and Príncipe (FPST São Tomé Intl, FPPR Príncipe) has INAC as its civil aviation authority. No public eAIP or AIS portal is visible on inac.st. ASECNA covers 18 member states but São Tomé is not an ASECNA member and is not published on aim.asecna.aero. The only accessible procedure data is via Jeppesen/Navigraph (paid subscription). A national AIP GEN document exists in archived form (docplayer) but procedures/charts are not digitally published to an open portal. Score 9: effectively restricted/only available via commercial chart vendors; no public AIP portal found. Confidence low — a national AIP may exist in paper or internally but is not verifiable online."
     },
     "TG": {
       "icao_prefix": "DX",
@@ -2093,47 +2093,47 @@
     },
     "TT": {
       "icao_prefix": "TT",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "TTCAA (Trinidad and Tobago Civil Aviation Authority) / Piarco AIS",
+      "aip_url": "https://caa.gov.tt/eastern-caribbean-eaip/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "paid",
+      "parsing_score": 9,
+      "confidence": "high",
+      "notes": "Trinidad and Tobago is the publisher of the Eastern Caribbean (E/CAR) AIP and its own procedures are contained within that publication. TTCAA/Piarco AIS is the AIP authority for the entire region. The eAIP portal at caa.gov.tt is login-gated (returns 403 without credentials). Format is PDF download, not structured HTML; updated 3x/year (not AIRAC-aligned). Paid subscription for external users; free exchange for State CAA bodies. No AIXM, no open coded database. ICAO AERODROMES: TTPP (Piarco Intl, Port of Spain), TTCP (Crown Point Intl, Tobago)."
     },
     "VI": {
       "icao_prefix": "TI",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "FAA / AeroNav Services",
+      "aip_url": "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/cifp/",
+      "source_type": "ARINC424",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 2,
+      "confidence": "high",
+      "notes": "US Virgin Islands airports (TIST Cyril E. King, TISX Henry E. Rohlsen) are covered in FAA NASR CIFP and Southeast d-TPP volume. All procedures freely downloadable. d-TPP explicitly covers Virgin Islands. CIFP is open ARINC 424 ground truth. Score 2: open coded ARINC 424."
     },
     "UM": {
       "icao_prefix": "PL",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "FAA / AeroNav Services",
+      "aip_url": "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/cifp/",
+      "source_type": "ARINC424",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 2,
+      "confidence": "medium",
+      "notes": "US Minor Outlying Islands: airports span multiple ICAO prefixes — Palmyra Atoll (PLPA, prefix PL), Wake Island (PWAK, prefix PW), Midway (PMDY, prefix PM), Johnston Atoll (PJON, prefix PJ). Instrument procedures for active fields (PWAK has RNAV/VOR/DME approaches; PLPA has instrument approaches) are in FAA NASR CIFP and d-TPP, both freely downloadable. Many islands have no published instrument procedures or closed airfields. Confidence medium due to sparse/military-restricted access at some fields. Score 2 where procedures exist (open ARINC 424 CIFP)."
     },
     "AS": {
       "icao_prefix": "NS",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "FAA / AeroNav Services",
+      "aip_url": "https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/cifp/",
+      "source_type": "ARINC424",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 2,
+      "confidence": "high",
+      "notes": "American Samoa's only instrument-procedure airport is Pago Pago Intl (NSTU, ICAO prefix NS). FAA publishes procedures in NASR CIFP (open ARINC 424) and Pacific d-TPP. Freely downloadable without registration. NSTU has published IAPs and departure procedures current to each AIRAC cycle. Score 2: open coded ARINC 424."
     },
     "AI": {
       "icao_prefix": "TQ",
@@ -2148,14 +2148,14 @@
     },
     "AG": {
       "icao_prefix": "TA",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "TTCAA / Piarco AIS (publisher); ECCAA (safety oversight, HQ in Antigua)",
+      "aip_url": "https://caa.gov.tt/eaip-acquisition-form/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "paid",
+      "parsing_score": 9,
+      "confidence": "high",
+      "notes": "Antigua and Barbuda procedures are published in the Eastern Caribbean (E/CAR) AIP produced by TTCAA/Piarco AIS. ECCAA headquarters is in Antigua (St John's) and provides regional safety oversight, but it does not publish the AIP. Same paid-subscription, login-gated, PDF-format model as other Eastern Caribbean states. ICAO AERODROME: TAPA (VC Bird Intl, St John's). No AIXM, no open access."
     },
     "AW": {
       "icao_prefix": "TN",
@@ -2170,14 +2170,14 @@
     },
     "BB": {
       "icao_prefix": "TB",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "Barbados Civil Aviation Authority (BCAA) / Air Navigation Services Dept",
+      "aip_url": "https://www.bcaa.gov.bb/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "paid",
+      "parsing_score": 9,
+      "confidence": "medium",
+      "notes": "Barbados publishes its own independent AIP via BCAA (successor to the Civil Aviation Department); it is NOT included in the TTCAA Eastern Caribbean AIP state list. The Barbados AIP is available from the Aeronautical Information Service at BB$100/copy + BB$80/yr amendment service — sold by contact, no public online portal or eAIP found. Format is PDF (or possibly still physical/CD), no AIXM. BCAA website (bcaa.gov.bb) does not expose a public AIP download. Confidence medium because no current online portal was directly verified; ICAO AERODROME: TBPB (Sir Grantley Adams Intl). Jeppesen/Navigraph chart data is the practical alternative for procedures."
     },
     "BJ": {
       "icao_prefix": "DB",
@@ -2214,14 +2214,14 @@
     },
     "BN": {
       "icao_prefix": "WB",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "Department of Civil Aviation (DCA) Brunei Darussalam",
+      "aip_url": "https://www.dca.gov.bn/",
+      "source_type": "PDF-scan",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 8,
+      "confidence": "medium",
+      "notes": "DCA publishes AIP as PDF amendment pages at dca.gov.bn (no eAIP HTML portal; document list page confirms all-PDF format). Aerodrome charts (e.g. WBSB AD 2-1, AD 2-22) are scanned image PDFs requiring OCR. Text-based supplements (GEN, ENR sections) are vector PDFs. No AIXM. Only one instrument airport (WBSB). Open access, no registration; but scanned chart format and no structured HTML eAIP make extraction difficult."
     },
     "CX": {
       "icao_prefix": "YP",
@@ -2379,14 +2379,14 @@
     },
     "XK": {
       "icao_prefix": "BK",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "KANS (Kosovo Air Navigation Services Agency) / Civil Aviation Authority of Kosovo",
+      "aip_url": "https://kans-ks.org/eAIP/default.html",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 6,
+      "confidence": "medium",
+      "notes": "Open eAIP published by KANS at kans-ks.org (formerly ashna-ks.org; 301 redirect active). HTML eAIP shell with SID/STAR procedures as PDF chart files. Approach procedure charts appear to be vector PDFs. Direct fetch returns 403 for deep HTML pages; PDF charts accessible. Kosovo is not a full ECAC EAD participant; no confirmed AIXM export. Portal fragility and PDF-chart-only procedures add friction."
     },
     "LS": {
       "icao_prefix": "FX",
@@ -2401,14 +2401,14 @@
     },
     "LU": {
       "icao_prefix": "EL",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
-      "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "aip_authority": "AIM Belgium (skeyes) / ANA Luxembourg",
+      "aip_url": "https://ops.skeyes.be/html/belgocontrol_static/eaip/eAIP_Main/html/index-en-GB.html",
+      "source_type": "eAIP-HTML",
+      "aixm_version": "5.1",
+      "access": "open",
+      "parsing_score": 5,
+      "confidence": "high",
+      "notes": "Luxembourg AIP is jointly published with Belgium by AIM Belgium/skeyes at ops.skeyes.be (confirmed ELLX AD-2 pages present). eAIP is public/free; skeyes direct HTML pages return 403 from outside EU but eAIP is otherwise open. ECAC state: full EUROCONTROL EAD coverage with AIXM 5.1 export (free registration). EAD is the authoritative machine-readable source. Score 5 reflects EAD free-account path."
     },
     "MO": {
       "icao_prefix": "VM",
