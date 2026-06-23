@@ -83,6 +83,24 @@
   .legend{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin:12px 2px 0}
   .legend span{display:flex;align-items:center;gap:6px}
   .sw{width:12px;height:12px;border-radius:3px}
+  /* pipeline tab */
+  .pipe-note{color:var(--muted);font-size:12.5px;margin:14px 2px 12px;line-height:1.65}
+  .pipe-note .rub{color:#6b7a96}
+  .pipe-note b{color:var(--text)}
+  .ptable-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+  table.ptable{border-collapse:collapse;width:100%;font-size:12.5px;min-width:940px}
+  .ptable th{position:sticky;top:0;background:#0e1830;color:var(--muted);font-weight:600;
+    text-align:left;padding:9px 10px;cursor:pointer;white-space:nowrap;border-bottom:1px solid var(--line);user-select:none}
+  .ptable th:hover{color:var(--accent)}
+  .ptable td{padding:7px 10px;border-bottom:1px solid #142136;white-space:nowrap}
+  .ptable tbody tr:hover{background:#0f1b2e}
+  .al-l{text-align:left}.al-r{text-align:right}.al-c{text-align:center}
+  .ptable .iso{display:inline-block;min-width:22px;color:var(--accent);font-weight:700;font-size:11px}
+  .ptable .mono{font-family:ui-monospace,Menlo,monospace;color:#9fb4d6}
+  .ptable .dim{color:#475569}
+  .ptable a{color:#9fc7f0;text-decoration:none}.ptable a:hover{text-decoration:underline}
+  .ttag{font-size:10.5px;padding:2px 7px;border-radius:999px;background:#13233b;border:1px solid #25415f;color:#cfe0f5}
+  .score{display:inline-block;min-width:22px;padding:2px 7px;border-radius:6px;color:#08121e;font-weight:700;font-size:12px}
   footer{color:var(--muted);font-size:11.5px;padding:18px 0 40px;border-top:1px solid var(--line);margin-top:20px}
   .tip{position:fixed;pointer-events:none;background:#04101e;border:1px solid var(--accent);color:var(--text);
        font-size:11.5px;padding:6px 9px;border-radius:7px;opacity:0;transition:.1s;z-index:9;max-width:260px}
@@ -110,6 +128,7 @@
     <div class="tabs">
       <div class="tab active" data-view="checklist">☑ Checklist</div>
       <div class="tab" data-view="gantt">▦ Gantt</div>
+      <div class="tab" data-view="pipeline">▤ Pipeline</div>
       <div class="spacer"></div>
       <div class="btn" id="reset">↺ Reset to build status</div>
     </div>
@@ -119,6 +138,7 @@
 <div class="wrap">
   <div class="view" id="checklist"></div>
   <div class="view" id="gantt" style="display:none"></div>
+  <div class="view" id="pipeline" style="display:none"></div>
   <div class="legend" id="legend" style="display:none">
     <span><i class="sw" style="background:#34d399"></i>Done</span>
     <span><i class="sw" style="background:#f59e0b"></i>In progress</span>
@@ -350,6 +370,72 @@ function showTip(e,t,st){
 }
 function hideTip(){ tip.style.opacity=0; }
 
+/* ── Pipeline tab: country AIP-source & parsing-difficulty table ── */
+let PIPE=null, pipeSort={key:"ifr_airports",dir:-1};
+function scoreColor(s){
+  if(s==null) return "#33415c";
+  const c=["#34d399","#34d399","#5bd99a","#a3d977","#f5d142","#f5b342","#f59342","#f5703f","#ef5350","#e53935"];
+  return c[Math.max(1,Math.min(10,s))-1];
+}
+function fmtNum(v){ return v==null?'<span class="dim">·</span>':v.toLocaleString(); }
+function tag(v){ return (!v||v==="unknown"||v==="nil")?'<span class="dim">—</span>':`<span class="ttag">${v}</span>`; }
+async function renderPipeline(){
+  const root=document.getElementById("pipeline");
+  if(!PIPE){
+    root.innerHTML='<div class="pipe-note">Loading country scan…</div>';
+    try{
+      const r=await fetch("countries.json",{cache:"no-store"});
+      if(!r.ok) throw 0; PIPE=await r.json();
+    }catch(e){
+      root.innerHTML='<div class="pipe-note">Country data (<code>countries.json</code>) loads on the hosted dashboard. '+
+        'Generate it locally with <code>python scripts/scan_airports.py &amp;&amp; python scripts/build_country_table.py</code>.</div>';
+      return;
+    }
+  }
+  drawPipe();
+}
+function drawPipe(){
+  const root=document.getElementById("pipeline");
+  const rows=[...PIPE.countries].sort((a,b)=>{
+    let av=a[pipeSort.key], bv=b[pipeSort.key];
+    av=(av==null||av==="")?-Infinity:av; bv=(bv==null||bv==="")?-Infinity:bv;
+    if(typeof av==="string"||typeof bv==="string") return pipeSort.dir*String(av).localeCompare(String(bv));
+    return pipeSort.dir*(av-bv);
+  });
+  const totIfr=PIPE.countries.reduce((s,r)=>s+r.ifr_airports,0);
+  const cols=[["country","Country"],["icao_prefixes","ICAO"],["ifr_airports","IFR apts"],
+    ["airports","ICAO apts"],["runways","RWY"],["sids","SID"],["stars","STAR"],["apps","APP"],
+    ["aip_authority","AIP source"],["source_type","Format"],["aixm_version","AIXM"],
+    ["access","Access"],["parsing_score","Score"]];
+  let h=`<div class="pipe-note">Global ICAO airport scan (OurAirports) · procedures from FAA CIFP (US). `+
+    `<b>${PIPE.total}</b> countries · <b>${totIfr.toLocaleString()}</b> IFR-capable airports · `+
+    `<b>${PIPE.researched}</b> AIP sources scored by AIPhunter, ${PIPE.total-PIPE.researched} scaffolded.`+
+    `<br><span class="rub">Parsing score 1 (easy: AIXM 5.2, open) → 10 (paper / no digital AIP). Click a header to sort. Non-US procedure counts pending each country's parser.</span></div>`;
+  h+='<div class="ptable-wrap"><table class="ptable"><thead><tr>';
+  cols.forEach(([k,lbl])=>{ const ar=pipeSort.key===k?(pipeSort.dir<0?" ↓":" ↑"):""; h+=`<th data-k="${k}">${lbl}${ar}</th>`; });
+  h+='</tr></thead><tbody>';
+  rows.forEach(r=>{
+    h+='<tr>';
+    h+=`<td class="al-l"><span class="iso">${r.iso}</span> ${r.country}</td>`;
+    h+=`<td class="al-l mono">${(r.icao_prefixes||[]).join(" ")||r.icao_prefix||""}</td>`;
+    h+=`<td class="al-r">${r.ifr_airports}</td><td class="al-r dim">${r.airports}</td><td class="al-r dim">${r.runways}</td>`;
+    h+=`<td class="al-r">${fmtNum(r.sids)}</td><td class="al-r">${fmtNum(r.stars)}</td><td class="al-r">${fmtNum(r.apps)}</td>`;
+    h+=`<td class="al-l">${r.aip_authority?`<a href="${r.aip_url||'#'}" target="_blank" rel="noopener">${r.aip_authority}</a>`:'<span class="dim">—</span>'}</td>`;
+    h+=`<td class="al-l">${tag(r.source_type)}</td>`;
+    h+=`<td class="al-l">${(r.aixm_version&&r.aixm_version!=='nil')?r.aixm_version:'<span class="dim">—</span>'}</td>`;
+    h+=`<td class="al-l">${tag(r.access)}</td>`;
+    h+=`<td class="al-c"><span class="score" style="background:${scoreColor(r.parsing_score)}">${r.parsing_score==null?'·':r.parsing_score}</span></td>`;
+    h+='</tr>';
+  });
+  h+='</tbody></table></div>';
+  root.innerHTML=h;
+  root.querySelectorAll("th").forEach(th=>th.addEventListener("click",()=>{
+    const k=th.dataset.k;
+    pipeSort.dir = pipeSort.key===k ? -pipeSort.dir : ((k==="country"||k==="parsing_score")?1:-1);
+    pipeSort.key=k; drawPipe();
+  }));
+}
+
 function renderAll(){
   T={}; DATA.tasks.forEach(t=>T[t.id]=t);
   renderHeader(); renderChecklist();
@@ -361,10 +447,12 @@ document.querySelectorAll(".tab").forEach(tab=>{
     document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
     tab.classList.add("active");
     const v=tab.dataset.view;
-    document.getElementById("checklist").style.display = v==="checklist"?"block":"none";
-    document.getElementById("gantt").style.display = v==="gantt"?"block":"none";
+    ["checklist","gantt","pipeline"].forEach(id=>{
+      document.getElementById(id).style.display = v===id?"block":"none";
+    });
     document.getElementById("legend").style.display = v==="gantt"?"flex":"none";
     if(v==="gantt") renderGantt();
+    if(v==="pipeline") renderPipeline();
   });
 });
 document.getElementById("reset").addEventListener("click",()=>{

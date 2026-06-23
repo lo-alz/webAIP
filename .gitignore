@@ -9,6 +9,10 @@ data/navcanada/*
 # Generated SQLite waypoint index (built from sources / fixtures)
 data/waypoints/*.db
 
+# OurAirports raw CSV downloads + large per-airport scan output (regenerable)
+data/ourairports/
+data/airports.json
+
 # Committed fixtures are NOT ignored (data/fixtures/** is tracked)
 
 # Python
