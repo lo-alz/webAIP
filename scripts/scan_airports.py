@@ -101,7 +101,7 @@ def main() -> int:
 
     per_airport = []
     by_country = defaultdict(lambda: {
-        "airports": 0, "ifr_airports": 0, "runways": 0,
+        "airports": 0, "ifr_airports": 0, "runways": 0, "ifr_runways": 0,
         "sids": 0, "stars": 0, "apps": 0, "prefixes": Counter(),
         "procedures_known": False,
     })
@@ -131,6 +131,7 @@ def main() -> int:
         c["airports"] += 1
         c["ifr_airports"] += 1 if ifr else 0
         c["runways"] += rwys
+        c["ifr_runways"] += rwys if ifr else 0
         c["prefixes"][ident[:2]] += 1
         # CIFP is the authoritative full procedure source for the US NAS only;
         # a handful of border idents leak into it, so attribute country-level
@@ -152,6 +153,7 @@ def main() -> int:
             "airports": c["airports"],
             "ifr_airports": c["ifr_airports"],
             "runways": c["runways"],
+            "ifr_runways": c["ifr_runways"],
             "sids": c["sids"] if c["procedures_known"] else None,
             "stars": c["stars"] if c["procedures_known"] else None,
             "apps": c["apps"] if c["procedures_known"] else None,

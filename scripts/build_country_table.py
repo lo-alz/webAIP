@@ -108,6 +108,7 @@ def main() -> int:
             "airports": row["airports"],
             "ifr_airports": row["ifr_airports"],
             "runways": row["runways"],
+            "ifr_runways": row.get("ifr_runways"),
             "sids": row.get("sids"),
             "stars": row.get("stars"),
             "apps": row.get("apps"),

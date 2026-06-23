@@ -84,7 +84,12 @@
   .legend span{display:flex;align-items:center;gap:6px}
   .sw{width:12px;height:12px;border-radius:3px}
   /* pipeline tab */
-  .pipe-note{color:var(--muted);font-size:12.5px;margin:14px 2px 12px;line-height:1.65}
+  .pipe-bar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:14px 2px 8px}
+  .vfr{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text);cursor:pointer;
+    background:#0f1b2e;border:1px solid var(--line);padding:7px 12px;border-radius:8px;user-select:none}
+  .vfr input{accent-color:var(--accent);width:15px;height:15px;cursor:pointer;margin:0}
+  .pipe-stat{color:var(--muted);font-size:12.5px}.pipe-stat b{color:var(--text)}
+  .pipe-note{color:var(--muted);font-size:12.5px;margin:6px 2px 12px;line-height:1.65}
   .pipe-note .rub{color:#6b7a96}
   .pipe-note b{color:var(--text)}
   .ptable-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
@@ -371,7 +376,7 @@ function showTip(e,t,st){
 function hideTip(){ tip.style.opacity=0; }
 
 /* ── Pipeline tab: country AIP-source & parsing-difficulty table ── */
-let PIPE=null, pipeSort={key:"ifr_airports",dir:-1};
+let PIPE=null, pipeIfrOnly=true, pipeSort={key:"airports",dir:-1};
 function scoreColor(s){
   if(s==null) return "#33415c";
   const c=["#34d399","#34d399","#5bd99a","#a3d977","#f5d142","#f5b342","#f59342","#f5703f","#ef5350","#e53935"];
@@ -394,23 +399,28 @@ async function renderPipeline(){
   }
   drawPipe();
 }
+function aptVal(r){ return pipeIfrOnly ? r.ifr_airports : r.airports; }
+function rwyVal(r){ return pipeIfrOnly ? (r.ifr_runways!=null?r.ifr_runways:r.runways) : r.runways; }
+function sortVal(r,k){ return k==="airports"?aptVal(r) : k==="runways"?rwyVal(r) : k==="icao"?r.icao_prefix : r[k]; }
 function drawPipe(){
   const root=document.getElementById("pipeline");
   const rows=[...PIPE.countries].sort((a,b)=>{
-    let av=a[pipeSort.key], bv=b[pipeSort.key];
+    let av=sortVal(a,pipeSort.key), bv=sortVal(b,pipeSort.key);
     av=(av==null||av==="")?-Infinity:av; bv=(bv==null||bv==="")?-Infinity:bv;
     if(typeof av==="string"||typeof bv==="string") return pipeSort.dir*String(av).localeCompare(String(bv));
     return pipeSort.dir*(av-bv);
   });
-  const totIfr=PIPE.countries.reduce((s,r)=>s+r.ifr_airports,0);
-  const cols=[["country","Country"],["icao_prefixes","ICAO"],["ifr_airports","IFR apts"],
-    ["airports","ICAO apts"],["runways","RWY"],["sids","SID"],["stars","STAR"],["apps","APP"],
-    ["aip_authority","AIP source"],["source_type","Format"],["aixm_version","AIXM"],
-    ["access","Access"],["parsing_score","Score"]];
-  let h=`<div class="pipe-note">Global ICAO airport scan (OurAirports) · procedures from FAA CIFP (US). `+
-    `<b>${PIPE.total}</b> countries · <b>${totIfr.toLocaleString()}</b> IFR-capable airports · `+
-    `<b>${PIPE.researched}</b> AIP sources scored by AIPhunter, ${PIPE.total-PIPE.researched} scaffolded.`+
-    `<br><span class="rub">Parsing score 1 (easy: AIXM 5.2, open) → 10 (paper / no digital AIP). Click a header to sort. Non-US procedure counts pending each country's parser.</span></div>`;
+  const totApts=PIPE.countries.reduce((s,r)=>s+(aptVal(r)||0),0);
+  const aptLbl=pipeIfrOnly?"IFR airports":"Airports";
+  const cols=[["country","Country"],["icao","ICAO"],["airports",aptLbl],["runways","RWY"],
+    ["sids","SID"],["stars","STAR"],["apps","APP"],["aip_authority","AIP source"],
+    ["source_type","Format"],["aixm_version","AIXM"],["access","Access"],["parsing_score","Score"]];
+  let h=`<div class="pipe-bar"><label class="vfr"><input type="checkbox" id="ifrOnly"${pipeIfrOnly?" checked":""}> `+
+    `Exclude VFR-only airports</label>`+
+    `<span class="pipe-stat">${PIPE.total} countries · <b>${totApts.toLocaleString()}</b> ${pipeIfrOnly?"IFR-capable":"ICAO"} airports · `+
+    `<b>${PIPE.researched}</b> AIP sources scored</span></div>`;
+  h+=`<div class="pipe-note">Airport universe from OurAirports; US procedure counts from the FAA CIFP. `+
+    `Parsing score <b>1</b> (easy: AIXM 5.2, open) → <b>10</b> (paper / no digital AIP). Click a header to sort; non-US procedure counts pending each country's parser.</div>`;
   h+='<div class="ptable-wrap"><table class="ptable"><thead><tr>';
   cols.forEach(([k,lbl])=>{ const ar=pipeSort.key===k?(pipeSort.dir<0?" ↓":" ↑"):""; h+=`<th data-k="${k}">${lbl}${ar}</th>`; });
   h+='</tr></thead><tbody>';
@@ -418,7 +428,7 @@ function drawPipe(){
     h+='<tr>';
     h+=`<td class="al-l"><span class="iso">${r.iso}</span> ${r.country}</td>`;
     h+=`<td class="al-l mono">${r.icao_prefix||(r.icao_prefixes||[]).join(" ")}</td>`;
-    h+=`<td class="al-r">${r.ifr_airports}</td><td class="al-r dim">${r.airports}</td><td class="al-r dim">${r.runways}</td>`;
+    h+=`<td class="al-r">${(aptVal(r)||0).toLocaleString()}</td><td class="al-r dim">${(rwyVal(r)||0).toLocaleString()}</td>`;
     h+=`<td class="al-r">${fmtNum(r.sids)}</td><td class="al-r">${fmtNum(r.stars)}</td><td class="al-r">${fmtNum(r.apps)}</td>`;
     h+=`<td class="al-l">${r.aip_authority?`<a href="${r.aip_url||'#'}" target="_blank" rel="noopener">${r.aip_authority}</a>`:'<span class="dim">—</span>'}</td>`;
     h+=`<td class="al-l">${tag(r.source_type)}</td>`;
@@ -429,6 +439,8 @@ function drawPipe(){
   });
   h+='</tbody></table></div>';
   root.innerHTML=h;
+  const cb=document.getElementById("ifrOnly");
+  if(cb) cb.addEventListener("change",()=>{ pipeIfrOnly=cb.checked; drawPipe(); });
   root.querySelectorAll("th").forEach(th=>th.addEventListener("click",()=>{
     const k=th.dataset.k;
     pipeSort.dir = pipeSort.key===k ? -pipeSort.dir : ((k==="country"||k==="parsing_score")?1:-1);
