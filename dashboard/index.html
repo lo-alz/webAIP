@@ -405,8 +405,8 @@ async function renderPipeline(){
   }
   drawPipe();
 }
-function aptVal(r){ return pipeIfrOnly ? r.ifr_airports : r.airports; }
-function rwyVal(r){ return pipeIfrOnly ? (r.ifr_runways!=null?r.ifr_runways:r.runways) : r.runways; }
+function aptVal(r){ return (pipeIfrOnly && r.ifr_known) ? r.ifr_airports : r.airports; }
+function rwyVal(r){ return (pipeIfrOnly && r.ifr_known) ? r.ifr_runways : r.runways; }
 function sortVal(r,k){ return k==="airports"?aptVal(r) : k==="runways"?rwyVal(r) : k==="icao"?r.icao_prefix : r[k]; }
 function drawPipe(){
   const root=document.getElementById("pipeline");
@@ -423,20 +423,21 @@ function drawPipe(){
     ["source_type","Format"],["aixm_version","AIXM"],["access","Access"],["parsing_score","Score"]];
   let h=`<div class="pipe-bar"><label class="vfr"><input type="checkbox" id="ifrOnly"${pipeIfrOnly?" checked":""}> `+
     `Exclude VFR-only airports</label>`+
-    `<span class="pipe-stat">${PIPE.total} countries · <b>${pipeIfrOnly?"~":""}${totApts.toLocaleString()}</b> ${pipeIfrOnly?"IFR-capable":"ICAO"} airports · `+
+    `<span class="pipe-stat">${PIPE.total} countries · <b>${totApts.toLocaleString()}</b> airports · `+
     `<b>${PIPE.researched}</b> AIP sources scored</span></div>`;
-  h+=`<div class="pipe-note"><b>IFR airports</b> = ICAO-coded fields with published instrument procedures. `+
-    `US &amp; territories are exact (FAA CIFP); <b>~</b> marks countries estimated from paved-runway presence until that country's parser runs. `+
+  h+=`<div class="pipe-note"><b>IFR airports</b> = ICAO-coded fields with published instrument procedures (no runway heuristic). `+
+    `US &amp; territories are exact (FAA CIFP); other countries fall back to their full ICAO airport count `+
+    `(marked <span class="dim">*</span>) until that country's parser provides procedures. `+
     `Parsing score <b>1</b> (easy: AIXM 5.2, open) → <b>10</b> (paper / no digital AIP). Click a header to sort.</div>`;
   h+='<div class="ptable-wrap"><table class="ptable"><thead><tr>';
   cols.forEach(([k,lbl])=>{ const ar=pipeSort.key===k?(pipeSort.dir<0?" ↓":" ↑"):""; h+=`<th data-k="${k}">${lbl}${ar}</th>`; });
   h+='</tr></thead><tbody>';
   rows.forEach(r=>{
     h+='<tr>';
-    const est=pipeIfrOnly&&r.ifr_estimated?"~":"";
+    const fb=pipeIfrOnly&&!r.ifr_known?'<span class="dim">*</span>':"";
     h+=`<td class="al-l" title="${r.country}"><span class="iso">${r.iso}</span> ${r.country}</td>`;
     h+=`<td class="al-l mono">${r.icao_prefix||(r.icao_prefixes||[]).join(" ")}</td>`;
-    h+=`<td class="al-r">${est}${(aptVal(r)||0).toLocaleString()}</td><td class="al-r dim">${est}${(rwyVal(r)||0).toLocaleString()}</td>`;
+    h+=`<td class="al-r">${(aptVal(r)||0).toLocaleString()}${fb}</td><td class="al-r dim">${(rwyVal(r)||0).toLocaleString()}</td>`;
     h+=`<td class="al-r">${fmtNum(r.sids)}</td><td class="al-r">${fmtNum(r.stars)}</td><td class="al-r">${fmtNum(r.apps)}</td>`;
     h+=`<td class="al-l">${r.aip_authority?`<a href="${r.aip_url||'#'}" target="_blank" rel="noopener">${r.aip_authority}</a>`:'<span class="dim">—</span>'}</td>`;
     h+=`<td class="al-l">${tag(r.source_type)}</td>`;

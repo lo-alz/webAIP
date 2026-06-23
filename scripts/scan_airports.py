@@ -35,18 +35,11 @@ CACHE = ROOT / "data" / "ourairports"
 CIFP = Path(os.environ.get("NASR_DATA_DIR", ROOT / "data" / "nasr")) / "FAACIFP18"
 
 ICAO_RE = re.compile(r"^[A-Z]{4}$")
-# "IFR airport" = has published instrument procedures. For the US/its territories
-# we read this straight from the FAA CIFP (exact). Elsewhere we estimate it from
-# paved-runway presence until that country's parser exists. The paved-runway proxy
-# was calibrated against US CIFP ground truth (it recalls ~0.7 of procedure
-# airports, so non-US counts are conservative estimates).
-HARD_SURFACES = ("asp", "con", "pem", "bit", "tarmac", "paved", "asph", "concrete")
+# "IFR airport" = an ICAO-coded field with published instrument procedures. We
+# classify this ONLY from real procedure data, never from runway geometry. Today
+# that data exists for the US NAS (FAA CIFP); other countries' IFR status is
+# unknown until their parser runs, so their counts fall back to all ICAO airports.
 CIFP_ISO = {"US", "PR", "VI", "GU", "MP", "AS"}  # FAA CIFP coverage (exact procedures)
-
-
-def is_hard(surface: str) -> bool:
-    s = (surface or "").lower()
-    return any(k in s for k in HARD_SURFACES)
 
 
 def fetch_csv(name: str) -> list[dict]:
@@ -101,15 +94,12 @@ def main() -> int:
 
     # runway counts per airport ident (exclude closed runways)
     rwy_count = Counter()
-    rwy_hard = set()
     for r in runways:
         if r.get("closed", "0") in ("1", "true", "True"):
             continue
         ident = r.get("airport_ident", "").strip()
         if ident:
             rwy_count[ident] += 1
-            if is_hard(r.get("surface", "")):
-                rwy_hard.add(ident)
 
     us_proc, _ = us_procedure_counts()
 
@@ -130,12 +120,9 @@ def main() -> int:
         iso = a.get("iso_country", "").strip() or "??"
         rwys = rwy_count.get(ident, 0)
         procs = us_proc.get(ident)
-        if procs is not None:
-            ifr = True                  # in CIFP — has instrument procedures (exact)
-        elif iso in CIFP_ISO:
-            ifr = False                 # CIFP is complete for the US NAS: no proc = VFR
-        else:
-            ifr = ident in rwy_hard     # estimate: paved runway present
+        # IFR status from procedure data only: known for the US NAS (CIFP),
+        # unknown (None) elsewhere until that country is parsed.
+        ifr = (procs is not None) if iso in CIFP_ISO else None
 
         row = {
             "icao": ident, "name": a.get("name", ""), "iso_country": iso,
@@ -170,30 +157,32 @@ def main() -> int:
             "country": cname.get(iso, iso),
             "icao_prefixes": top_prefixes,
             "airports": c["airports"],
-            "ifr_airports": c["ifr_airports"],
-            "ifr_estimated": iso not in CIFP_ISO,
+            "ifr_known": iso in CIFP_ISO,
+            "ifr_airports": c["ifr_airports"] if iso in CIFP_ISO else None,
             "runways": c["runways"],
-            "ifr_runways": c["ifr_runways"],
+            "ifr_runways": c["ifr_runways"] if iso in CIFP_ISO else None,
             "sids": c["sids"] if c["procedures_known"] else None,
             "stars": c["stars"] if c["procedures_known"] else None,
             "apps": c["apps"] if c["procedures_known"] else None,
             "procedures_source": "FAA_CIFP" if c["procedures_known"] else None,
         })
-    country_rows.sort(key=lambda r: (-r["ifr_airports"], r["country"]))
+    country_rows.sort(key=lambda r: (-r["airports"], r["country"]))
 
     (ROOT / "data" / "airports.json").write_text(json.dumps(per_airport, indent=0))
     (ROOT / "dashboard" / "airports_by_country.json").write_text(
         json.dumps({"generated_from": "OurAirports + FAA CIFP (US)",
                     "countries": country_rows}, indent=2))
 
-    tot_ifr = sum(r["ifr_airports"] for r in country_rows)
+    tot_ifr = sum(r["ifr_airports"] or 0 for r in country_rows)
     print(f"\n{len(per_airport)} ICAO airports across {len(country_rows)} countries; "
-          f"{tot_ifr} IFR-capable (large/medium).")
-    print("Top 12 by IFR airport count:")
+          f"{tot_ifr} with known IFR procedures (US/CIFP) — other countries pending.")
+    print("Top 12 by ICAO airport count:")
     for r in country_rows[:12]:
+        ifr = r["ifr_airports"]
+        ifr_s = str(ifr) if ifr is not None else "pend"
         p = f" SID/STAR/APP={r['sids']}/{r['stars']}/{r['apps']}" if r["sids"] is not None else ""
-        print(f"  {r['iso_country']:3} {r['country'][:26]:26} ifr={r['ifr_airports']:4} "
-              f"rwy={r['runways']:5} prefixes={','.join(r['icao_prefixes'])}{p}")
+        print(f"  {r['iso_country']:3} {r['country'][:26]:26} all={r['airports']:5} "
+              f"ifr={ifr_s:>5} rwy={r['runways']:5}{p}")
     return 0
 
 

@@ -106,8 +106,8 @@ def main() -> int:
             "country": row["country"],
             "icao_prefixes": row.get("icao_prefixes", []),
             "airports": row["airports"],
-            "ifr_airports": row["ifr_airports"],
-            "ifr_estimated": row.get("ifr_estimated", True),
+            "ifr_airports": row.get("ifr_airports"),
+            "ifr_known": row.get("ifr_known", False),
             "runways": row["runways"],
             "ifr_runways": row.get("ifr_runways"),
             "sids": row.get("sids"),
@@ -120,7 +120,7 @@ def main() -> int:
         merged["researched"] = s.get("parsing_score") is not None
         rows.append(merged)
 
-    rows.sort(key=lambda r: (-r["ifr_airports"], r["country"]))
+    rows.sort(key=lambda r: (-r["airports"], r["country"]))
     researched = sum(1 for r in rows if r["researched"])
     OUT.write_text(json.dumps({
         "rubric": RUBRIC,
