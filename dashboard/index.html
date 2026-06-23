@@ -417,7 +417,7 @@ function drawPipe(){
   rows.forEach(r=>{
     h+='<tr>';
     h+=`<td class="al-l"><span class="iso">${r.iso}</span> ${r.country}</td>`;
-    h+=`<td class="al-l mono">${(r.icao_prefixes||[]).join(" ")||r.icao_prefix||""}</td>`;
+    h+=`<td class="al-l mono">${r.icao_prefix||(r.icao_prefixes||[]).join(" ")}</td>`;
     h+=`<td class="al-r">${r.ifr_airports}</td><td class="al-r dim">${r.airports}</td><td class="al-r dim">${r.runways}</td>`;
     h+=`<td class="al-r">${fmtNum(r.sids)}</td><td class="al-r">${fmtNum(r.stars)}</td><td class="al-r">${fmtNum(r.apps)}</td>`;
     h+=`<td class="al-l">${r.aip_authority?`<a href="${r.aip_url||'#'}" target="_blank" rel="noopener">${r.aip_authority}</a>`:'<span class="dim">—</span>'}</td>`;
