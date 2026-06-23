@@ -35,7 +35,18 @@ CACHE = ROOT / "data" / "ourairports"
 CIFP = Path(os.environ.get("NASR_DATA_DIR", ROOT / "data" / "nasr")) / "FAACIFP18"
 
 ICAO_RE = re.compile(r"^[A-Z]{4}$")
-IFR_TYPES = {"large_airport", "medium_airport"}
+# "IFR airport" = has published instrument procedures. For the US/its territories
+# we read this straight from the FAA CIFP (exact). Elsewhere we estimate it from
+# paved-runway presence until that country's parser exists. The paved-runway proxy
+# was calibrated against US CIFP ground truth (it recalls ~0.7 of procedure
+# airports, so non-US counts are conservative estimates).
+HARD_SURFACES = ("asp", "con", "pem", "bit", "tarmac", "paved", "asph", "concrete")
+CIFP_ISO = {"US", "PR", "VI", "GU", "MP", "AS"}  # FAA CIFP coverage (exact procedures)
+
+
+def is_hard(surface: str) -> bool:
+    s = (surface or "").lower()
+    return any(k in s for k in HARD_SURFACES)
 
 
 def fetch_csv(name: str) -> list[dict]:
@@ -90,12 +101,15 @@ def main() -> int:
 
     # runway counts per airport ident (exclude closed runways)
     rwy_count = Counter()
+    rwy_hard = set()
     for r in runways:
         if r.get("closed", "0") in ("1", "true", "True"):
             continue
         ident = r.get("airport_ident", "").strip()
         if ident:
             rwy_count[ident] += 1
+            if is_hard(r.get("surface", "")):
+                rwy_hard.add(ident)
 
     us_proc, _ = us_procedure_counts()
 
@@ -115,8 +129,13 @@ def main() -> int:
             continue
         iso = a.get("iso_country", "").strip() or "??"
         rwys = rwy_count.get(ident, 0)
-        ifr = atype in IFR_TYPES
         procs = us_proc.get(ident)
+        if procs is not None:
+            ifr = True                  # in CIFP — has instrument procedures (exact)
+        elif iso in CIFP_ISO:
+            ifr = False                 # CIFP is complete for the US NAS: no proc = VFR
+        else:
+            ifr = ident in rwy_hard     # estimate: paved runway present
 
         row = {
             "icao": ident, "name": a.get("name", ""), "iso_country": iso,
@@ -152,6 +171,7 @@ def main() -> int:
             "icao_prefixes": top_prefixes,
             "airports": c["airports"],
             "ifr_airports": c["ifr_airports"],
+            "ifr_estimated": iso not in CIFP_ISO,
             "runways": c["runways"],
             "ifr_runways": c["ifr_runways"],
             "sids": c["sids"] if c["procedures_known"] else None,

@@ -107,6 +107,7 @@ def main() -> int:
             "icao_prefixes": row.get("icao_prefixes", []),
             "airports": row["airports"],
             "ifr_airports": row["ifr_airports"],
+            "ifr_estimated": row.get("ifr_estimated", True),
             "runways": row["runways"],
             "ifr_runways": row.get("ifr_runways"),
             "sids": row.get("sids"),

@@ -11,45 +11,29 @@
         "KS"
       ],
       "airports": 2467,
-      "ifr_airports": 905,
+      "ifr_airports": 2181,
+      "ifr_estimated": false,
       "runways": 4063,
-      "ifr_runways": 1812,
+      "ifr_runways": 3643,
       "sids": 1999,
       "stars": 1688,
       "apps": 8634,
       "procedures_source": "FAA_CIFP"
     },
     {
-      "iso_country": "CA",
-      "country": "Canada",
+      "iso_country": "BR",
+      "country": "Brazil",
       "icao_prefixes": [
-        "CY",
-        "CZ",
-        "CW",
-        "CR"
+        "SD",
+        "SS",
+        "SJ",
+        "SN"
       ],
-      "airports": 417,
-      "ifr_airports": 246,
-      "runways": 532,
-      "ifr_runways": 373,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "CN",
-      "country": "China",
-      "icao_prefixes": [
-        "ZS",
-        "ZU",
-        "ZB",
-        "ZY"
-      ],
-      "airports": 283,
-      "ifr_airports": 228,
-      "runways": 297,
-      "ifr_runways": 264,
+      "airports": 2864,
+      "ifr_airports": 1531,
+      "ifr_estimated": true,
+      "runways": 2647,
+      "ifr_runways": 1556,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -65,9 +49,62 @@
         "YX"
       ],
       "airports": 1938,
-      "ifr_airports": 193,
+      "ifr_airports": 308,
+      "ifr_estimated": true,
       "runways": 1997,
-      "ifr_runways": 347,
+      "ifr_runways": 523,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "CA",
+      "country": "Canada",
+      "icao_prefixes": [
+        "CY",
+        "CZ",
+        "CW",
+        "CR"
+      ],
+      "airports": 417,
+      "ifr_airports": 264,
+      "ifr_estimated": true,
+      "runways": 532,
+      "ifr_runways": 401,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "FR",
+      "country": "France",
+      "icao_prefixes": [
+        "LF"
+      ],
+      "airports": 430,
+      "ifr_airports": 240,
+      "ifr_estimated": true,
+      "runways": 532,
+      "ifr_runways": 344,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "DE",
+      "country": "Germany",
+      "icao_prefixes": [
+        "ED",
+        "ET"
+      ],
+      "airports": 480,
+      "ifr_airports": 213,
+      "ifr_estimated": true,
+      "runways": 465,
+      "ifr_runways": 295,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -83,91 +120,10 @@
         "US"
       ],
       "airports": 460,
-      "ifr_airports": 181,
+      "ifr_airports": 211,
+      "ifr_estimated": true,
       "runways": 263,
-      "ifr_runways": 197,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "BR",
-      "country": "Brazil",
-      "icao_prefixes": [
-        "SD",
-        "SS",
-        "SJ",
-        "SN"
-      ],
-      "airports": 2864,
-      "ifr_airports": 135,
-      "runways": 2647,
-      "ifr_runways": 157,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "FR",
-      "country": "France",
-      "icao_prefixes": [
-        "LF"
-      ],
-      "airports": 430,
-      "ifr_airports": 135,
-      "runways": 532,
-      "ifr_runways": 199,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "IN",
-      "country": "India",
-      "icao_prefixes": [
-        "VE",
-        "VI",
-        "VO",
-        "VA"
-      ],
-      "airports": 198,
-      "ifr_airports": 128,
-      "runways": 202,
-      "ifr_runways": 145,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "JP",
-      "country": "Japan",
-      "icao_prefixes": [
-        "RJ",
-        "RO"
-      ],
-      "airports": 138,
-      "ifr_airports": 108,
-      "runways": 149,
-      "ifr_runways": 130,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "GB",
-      "country": "United Kingdom",
-      "icao_prefixes": [
-        "EG"
-      ],
-      "airports": 220,
-      "ifr_airports": 88,
-      "runways": 342,
-      "ifr_runways": 129,
+      "ifr_runways": 242,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -183,100 +139,81 @@
         "WP"
       ],
       "airports": 304,
-      "ifr_airports": 78,
+      "ifr_airports": 177,
+      "ifr_estimated": true,
       "runways": 220,
-      "ifr_runways": 79,
+      "ifr_runways": 187,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "DE",
-      "country": "Germany",
+      "iso_country": "IN",
+      "country": "India",
       "icao_prefixes": [
-        "ED",
-        "ET"
+        "VE",
+        "VI",
+        "VO",
+        "VA"
       ],
-      "airports": 480,
-      "ifr_airports": 75,
-      "runways": 465,
-      "ifr_runways": 115,
+      "airports": 198,
+      "ifr_airports": 167,
+      "ifr_estimated": true,
+      "runways": 202,
+      "ifr_runways": 188,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "IT",
-      "country": "Italy",
+      "iso_country": "CN",
+      "country": "China",
       "icao_prefixes": [
-        "LI"
+        "ZS",
+        "ZU",
+        "ZB",
+        "ZY"
       ],
-      "airports": 139,
-      "ifr_airports": 73,
-      "runways": 140,
-      "ifr_runways": 92,
+      "airports": 283,
+      "ifr_airports": 154,
+      "ifr_estimated": true,
+      "runways": 297,
+      "ifr_runways": 201,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "AR",
-      "country": "Argentina",
+      "iso_country": "GB",
+      "country": "United Kingdom",
       "icao_prefixes": [
-        "SA"
+        "EG"
       ],
-      "airports": 150,
-      "ifr_airports": 70,
-      "runways": 162,
-      "ifr_runways": 90,
+      "airports": 220,
+      "ifr_airports": 147,
+      "ifr_estimated": true,
+      "runways": 342,
+      "ifr_runways": 247,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "MX",
-      "country": "Mexico",
+      "iso_country": "JP",
+      "country": "Japan",
       "icao_prefixes": [
-        "MM"
+        "RJ",
+        "RO"
       ],
-      "airports": 98,
-      "ifr_airports": 69,
-      "runways": 110,
-      "ifr_runways": 86,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "IR",
-      "country": "Iran",
-      "icao_prefixes": [
-        "OI"
-      ],
-      "airports": 98,
-      "ifr_airports": 63,
-      "runways": 104,
-      "ifr_runways": 82,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "TR",
-      "country": "Turkey",
-      "icao_prefixes": [
-        "LT"
-      ],
-      "airports": 87,
-      "ifr_airports": 63,
-      "runways": 98,
-      "ifr_runways": 82,
+      "airports": 138,
+      "ifr_airports": 115,
+      "ifr_estimated": true,
+      "runways": 149,
+      "ifr_runways": 139,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -289,9 +226,92 @@
         "FA"
       ],
       "airports": 308,
-      "ifr_airports": 62,
+      "ifr_airports": 101,
+      "ifr_estimated": true,
       "runways": 179,
-      "ifr_runways": 87,
+      "ifr_runways": 145,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "CL",
+      "country": "Chile",
+      "icao_prefixes": [
+        "SC",
+        "SH"
+      ],
+      "airports": 497,
+      "ifr_airports": 100,
+      "ifr_estimated": true,
+      "runways": 355,
+      "ifr_runways": 109,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "SE",
+      "country": "Sweden",
+      "icao_prefixes": [
+        "ES",
+        "HS"
+      ],
+      "airports": 162,
+      "ifr_airports": 98,
+      "ifr_estimated": true,
+      "runways": 164,
+      "ifr_runways": 121,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "AR",
+      "country": "Argentina",
+      "icao_prefixes": [
+        "SA"
+      ],
+      "airports": 150,
+      "ifr_airports": 94,
+      "ifr_estimated": true,
+      "runways": 162,
+      "ifr_runways": 120,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "VE",
+      "country": "Venezuela",
+      "icao_prefixes": [
+        "SV"
+      ],
+      "airports": 366,
+      "ifr_airports": 94,
+      "ifr_estimated": true,
+      "runways": 112,
+      "ifr_runways": 103,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "IT",
+      "country": "Italy",
+      "icao_prefixes": [
+        "LI"
+      ],
+      "airports": 139,
+      "ifr_airports": 93,
+      "ifr_estimated": true,
+      "runways": 140,
+      "ifr_runways": 117,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -305,25 +325,26 @@
         "SQ"
       ],
       "airports": 139,
-      "ifr_airports": 60,
+      "ifr_airports": 90,
+      "ifr_estimated": true,
       "runways": 107,
-      "ifr_runways": 71,
+      "ifr_runways": 104,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "PH",
-      "country": "Philippines",
+      "iso_country": "MX",
+      "country": "Mexico",
       "icao_prefixes": [
-        "RP",
-        "PR"
+        "MM"
       ],
-      "airports": 101,
-      "ifr_airports": 56,
-      "runways": 80,
-      "ifr_runways": 58,
+      "airports": 98,
+      "ifr_airports": 89,
+      "ifr_estimated": true,
+      "runways": 110,
+      "ifr_runways": 108,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -338,40 +359,59 @@
         "GE"
       ],
       "airports": 198,
-      "ifr_airports": 54,
+      "ifr_airports": 88,
+      "ifr_estimated": true,
       "runways": 121,
-      "ifr_runways": 71,
+      "ifr_runways": 110,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "VE",
-      "country": "Venezuela",
+      "iso_country": "IR",
+      "country": "Iran",
       "icao_prefixes": [
-        "SV"
+        "OI"
       ],
-      "airports": 366,
-      "ifr_airports": 49,
-      "runways": 112,
-      "ifr_runways": 58,
+      "airports": 98,
+      "ifr_airports": 82,
+      "ifr_estimated": true,
+      "runways": 104,
+      "ifr_runways": 104,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "SE",
-      "country": "Sweden",
+      "iso_country": "TR",
+      "country": "Turkey",
       "icao_prefixes": [
-        "ES",
-        "HS"
+        "LT"
       ],
-      "airports": 162,
-      "ifr_airports": 46,
-      "runways": 164,
-      "ifr_runways": 58,
+      "airports": 87,
+      "ifr_airports": 78,
+      "ifr_estimated": true,
+      "runways": 98,
+      "ifr_runways": 98,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "PH",
+      "country": "Philippines",
+      "icao_prefixes": [
+        "RP",
+        "PR"
+      ],
+      "airports": 101,
+      "ifr_airports": 74,
+      "ifr_estimated": true,
+      "runways": 80,
+      "ifr_runways": 76,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -384,100 +424,26 @@
         "EN"
       ],
       "airports": 175,
-      "ifr_airports": 43,
+      "ifr_airports": 72,
+      "ifr_estimated": true,
       "runways": 93,
-      "ifr_runways": 46,
+      "ifr_runways": 76,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "TH",
-      "country": "Thailand",
+      "iso_country": "EC",
+      "country": "Ecuador",
       "icao_prefixes": [
-        "VT"
+        "SE"
       ],
-      "airports": 64,
-      "ifr_airports": 42,
-      "runways": 67,
-      "ifr_runways": 47,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "DZ",
-      "country": "Algeria",
-      "icao_prefixes": [
-        "DA"
-      ],
-      "airports": 53,
-      "ifr_airports": 38,
-      "runways": 65,
-      "ifr_runways": 57,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "NZ",
-      "country": "New Zealand",
-      "icao_prefixes": [
-        "NZ"
-      ],
-      "airports": 213,
-      "ifr_airports": 38,
-      "runways": 183,
-      "ifr_runways": 102,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "PK",
-      "country": "Pakistan",
-      "icao_prefixes": [
-        "OP"
-      ],
-      "airports": 67,
-      "ifr_airports": 37,
-      "runways": 62,
-      "ifr_runways": 50,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "SA",
-      "country": "Saudi Arabia",
-      "icao_prefixes": [
-        "OE"
-      ],
-      "airports": 60,
-      "ifr_airports": 36,
-      "runways": 66,
-      "ifr_runways": 46,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "CL",
-      "country": "Chile",
-      "icao_prefixes": [
-        "SC",
-        "SH"
-      ],
-      "airports": 497,
-      "ifr_airports": 33,
-      "runways": 355,
-      "ifr_runways": 38,
+      "airports": 268,
+      "ifr_airports": 67,
+      "ifr_estimated": true,
+      "runways": 176,
+      "ifr_runways": 68,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -490,9 +456,74 @@
         "EF"
       ],
       "airports": 101,
-      "ifr_airports": 31,
+      "ifr_airports": 65,
+      "ifr_estimated": true,
       "runways": 103,
-      "ifr_runways": 37,
+      "ifr_runways": 83,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "NZ",
+      "country": "New Zealand",
+      "icao_prefixes": [
+        "NZ"
+      ],
+      "airports": 213,
+      "ifr_airports": 58,
+      "ifr_estimated": true,
+      "runways": 183,
+      "ifr_runways": 128,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "TH",
+      "country": "Thailand",
+      "icao_prefixes": [
+        "VT"
+      ],
+      "airports": 64,
+      "ifr_airports": 58,
+      "ifr_estimated": true,
+      "runways": 67,
+      "ifr_runways": 65,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "SA",
+      "country": "Saudi Arabia",
+      "icao_prefixes": [
+        "OE"
+      ],
+      "airports": 60,
+      "ifr_airports": 51,
+      "ifr_estimated": true,
+      "runways": 66,
+      "ifr_runways": 63,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "GR",
+      "country": "Greece",
+      "icao_prefixes": [
+        "LG"
+      ],
+      "airports": 55,
+      "ifr_airports": 49,
+      "ifr_estimated": true,
+      "runways": 55,
+      "ifr_runways": 54,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -506,9 +537,74 @@
         "SO"
       ],
       "airports": 150,
-      "ifr_airports": 31,
+      "ifr_airports": 48,
+      "ifr_estimated": true,
       "runways": 54,
-      "ifr_runways": 32,
+      "ifr_runways": 49,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "PL",
+      "country": "Poland",
+      "icao_prefixes": [
+        "EP"
+      ],
+      "airports": 109,
+      "ifr_airports": 47,
+      "ifr_estimated": true,
+      "runways": 95,
+      "ifr_runways": 67,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "DZ",
+      "country": "Algeria",
+      "icao_prefixes": [
+        "DA"
+      ],
+      "airports": 53,
+      "ifr_airports": 44,
+      "ifr_estimated": true,
+      "runways": 65,
+      "ifr_runways": 64,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "PK",
+      "country": "Pakistan",
+      "icao_prefixes": [
+        "OP"
+      ],
+      "airports": 67,
+      "ifr_airports": 44,
+      "ifr_estimated": true,
+      "runways": 62,
+      "ifr_runways": 58,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "MM",
+      "country": "Myanmar",
+      "icao_prefixes": [
+        "VY"
+      ],
+      "airports": 69,
+      "ifr_airports": 40,
+      "ifr_estimated": true,
+      "runways": 40,
+      "ifr_runways": 40,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -521,9 +617,58 @@
         "LP"
       ],
       "airports": 71,
-      "ifr_airports": 31,
+      "ifr_airports": 40,
+      "ifr_estimated": true,
       "runways": 44,
-      "ifr_runways": 34,
+      "ifr_runways": 43,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "KR",
+      "country": "South Korea",
+      "icao_prefixes": [
+        "RK"
+      ],
+      "airports": 63,
+      "ifr_airports": 38,
+      "ifr_estimated": true,
+      "runways": 58,
+      "ifr_runways": 57,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "CH",
+      "country": "Switzerland",
+      "icao_prefixes": [
+        "LS"
+      ],
+      "airports": 85,
+      "ifr_airports": 37,
+      "ifr_estimated": true,
+      "runways": 76,
+      "ifr_runways": 56,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "PF",
+      "country": "French Polynesia",
+      "icao_prefixes": [
+        "NT"
+      ],
+      "airports": 54,
+      "ifr_airports": 33,
+      "ifr_estimated": true,
+      "runways": 36,
+      "ifr_runways": 33,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -537,9 +682,10 @@
         "WM"
       ],
       "airports": 77,
-      "ifr_airports": 29,
+      "ifr_airports": 32,
+      "ifr_estimated": true,
       "runways": 40,
-      "ifr_runways": 31,
+      "ifr_runways": 35,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -552,54 +698,58 @@
         "MY"
       ],
       "airports": 48,
-      "ifr_airports": 28,
+      "ifr_airports": 31,
+      "ifr_estimated": true,
       "runways": 36,
-      "ifr_runways": 30,
+      "ifr_runways": 34,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "GR",
-      "country": "Greece",
+      "iso_country": "EG",
+      "country": "Egypt",
       "icao_prefixes": [
-        "LG"
+        "HE"
       ],
-      "airports": 55,
-      "ifr_airports": 28,
-      "runways": 55,
-      "ifr_runways": 32,
+      "airports": 31,
+      "ifr_airports": 31,
+      "ifr_estimated": true,
+      "runways": 46,
+      "ifr_runways": 46,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "PL",
-      "country": "Poland",
+      "iso_country": "AT",
+      "country": "Austria",
       "icao_prefixes": [
-        "EP"
+        "LO"
       ],
-      "airports": 109,
-      "ifr_airports": 27,
-      "runways": 95,
-      "ifr_runways": 32,
+      "airports": 105,
+      "ifr_airports": 30,
+      "ifr_estimated": true,
+      "runways": 76,
+      "ifr_runways": 45,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "PF",
-      "country": "French Polynesia",
+      "iso_country": "CU",
+      "country": "Cuba",
       "icao_prefixes": [
-        "NT"
+        "MU"
       ],
-      "airports": 54,
-      "ifr_airports": 26,
-      "runways": 36,
-      "ifr_runways": 26,
+      "airports": 40,
+      "ifr_airports": 30,
+      "ifr_estimated": true,
+      "runways": 34,
+      "ifr_runways": 34,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -613,71 +763,10 @@
         "DM"
       ],
       "airports": 35,
-      "ifr_airports": 26,
+      "ifr_airports": 29,
+      "ifr_estimated": true,
       "runways": 33,
-      "ifr_runways": 28,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "KZ",
-      "country": "Kazakhstan",
-      "icao_prefixes": [
-        "UA",
-        "XA"
-      ],
-      "airports": 34,
-      "ifr_airports": 25,
-      "runways": 28,
-      "ifr_runways": 25,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "CU",
-      "country": "Cuba",
-      "icao_prefixes": [
-        "MU"
-      ],
-      "airports": 40,
-      "ifr_airports": 24,
-      "runways": 34,
-      "ifr_runways": 25,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "EG",
-      "country": "Egypt",
-      "icao_prefixes": [
-        "HE"
-      ],
-      "airports": 31,
-      "ifr_airports": 24,
-      "runways": 46,
-      "ifr_runways": 38,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "UA",
-      "country": "Ukraine",
-      "icao_prefixes": [
-        "UK",
-        "UP"
-      ],
-      "airports": 42,
-      "ifr_airports": 24,
-      "runways": 29,
-      "ifr_runways": 23,
+      "ifr_runways": 31,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -690,160 +779,10 @@
         "FM"
       ],
       "airports": 63,
-      "ifr_airports": 23,
+      "ifr_airports": 28,
+      "ifr_estimated": true,
       "runways": 33,
-      "ifr_runways": 25,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "KR",
-      "country": "South Korea",
-      "icao_prefixes": [
-        "RK"
-      ],
-      "airports": 63,
-      "ifr_airports": 23,
-      "runways": 58,
-      "ifr_runways": 39,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "AO",
-      "country": "Angola",
-      "icao_prefixes": [
-        "FN"
-      ],
-      "airports": 46,
-      "ifr_airports": 22,
-      "runways": 30,
-      "ifr_runways": 25,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "MM",
-      "country": "Myanmar",
-      "icao_prefixes": [
-        "VY"
-      ],
-      "airports": 69,
-      "ifr_airports": 22,
-      "runways": 40,
-      "ifr_runways": 21,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "CD",
-      "country": "Democratic Republic of the Congo",
-      "icao_prefixes": [
-        "FZ"
-      ],
-      "airports": 231,
-      "ifr_airports": 21,
-      "runways": 49,
-      "ifr_runways": 22,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "PG",
-      "country": "Papua New Guinea",
-      "icao_prefixes": [
-        "AY",
-        "AT"
-      ],
-      "airports": 432,
-      "ifr_airports": 21,
-      "runways": 303,
-      "ifr_runways": 23,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "VN",
-      "country": "Vietnam",
-      "icao_prefixes": [
-        "VV"
-      ],
-      "airports": 27,
-      "ifr_airports": 21,
-      "runways": 30,
-      "ifr_runways": 25,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "BO",
-      "country": "Bolivia",
-      "icao_prefixes": [
-        "SL"
-      ],
-      "airports": 185,
-      "ifr_airports": 20,
-      "runways": 37,
-      "ifr_runways": 23,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "MA",
-      "country": "Morocco",
-      "icao_prefixes": [
-        "GM"
-      ],
-      "airports": 27,
-      "ifr_airports": 19,
-      "runways": 27,
-      "ifr_runways": 22,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "RO",
-      "country": "Romania",
-      "icao_prefixes": [
-        "LR"
-      ],
-      "airports": 34,
-      "ifr_airports": 19,
-      "runways": 27,
-      "ifr_runways": 21,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "TW",
-      "country": "Taiwan",
-      "icao_prefixes": [
-        "RC"
-      ],
-      "airports": 30,
-      "ifr_airports": 19,
-      "runways": 31,
-      "ifr_runways": 26,
+      "ifr_runways": 30,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -858,114 +797,10 @@
         "ML"
       ],
       "airports": 136,
-      "ifr_airports": 17,
+      "ifr_airports": 26,
+      "ifr_estimated": true,
       "runways": 29,
-      "ifr_runways": 17,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "DK",
-      "country": "Denmark",
-      "icao_prefixes": [
-        "EK"
-      ],
-      "airports": 82,
-      "ifr_airports": 17,
-      "runways": 55,
-      "ifr_runways": 29,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "EC",
-      "country": "Ecuador",
-      "icao_prefixes": [
-        "SE"
-      ],
-      "airports": 268,
-      "ifr_airports": 17,
-      "runways": 176,
-      "ifr_runways": 18,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "KE",
-      "country": "Kenya",
-      "icao_prefixes": [
-        "HK"
-      ],
-      "airports": 51,
-      "ifr_airports": 17,
-      "runways": 31,
-      "ifr_runways": 22,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "ET",
-      "country": "Ethiopia",
-      "icao_prefixes": [
-        "HA"
-      ],
-      "airports": 49,
-      "ifr_airports": 16,
-      "runways": 23,
-      "ifr_runways": 17,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "IQ",
-      "country": "Iraq",
-      "icao_prefixes": [
-        "OR"
-      ],
-      "airports": 20,
-      "ifr_airports": 16,
-      "runways": 25,
-      "ifr_runways": 24,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "NA",
-      "country": "Namibia",
-      "icao_prefixes": [
-        "FY"
-      ],
-      "airports": 116,
-      "ifr_airports": 14,
-      "runways": 38,
-      "ifr_runways": 21,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "NL",
-      "country": "Netherlands",
-      "icao_prefixes": [
-        "EH"
-      ],
-      "airports": 126,
-      "ifr_airports": 14,
-      "runways": 43,
-      "ifr_runways": 23,
+      "ifr_runways": 26,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -978,114 +813,26 @@
         "LK"
       ],
       "airports": 115,
-      "ifr_airports": 13,
+      "ifr_airports": 26,
+      "ifr_estimated": true,
       "runways": 135,
-      "ifr_runways": 19,
+      "ifr_runways": 44,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "IS",
-      "country": "Iceland",
+      "iso_country": "AO",
+      "country": "Angola",
       "icao_prefixes": [
-        "BI"
+        "FN"
       ],
-      "airports": 71,
-      "ifr_airports": 13,
-      "runways": 32,
-      "ifr_runways": 16,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "MN",
-      "country": "Mongolia",
-      "icao_prefixes": [
-        "ZM"
-      ],
-      "airports": 30,
-      "ifr_airports": 13,
-      "runways": 20,
-      "ifr_runways": 14,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "MZ",
-      "country": "Mozambique",
-      "icao_prefixes": [
-        "FQ"
-      ],
-      "airports": 25,
-      "ifr_airports": 13,
-      "runways": 22,
-      "ifr_runways": 17,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "CH",
-      "country": "Switzerland",
-      "icao_prefixes": [
-        "LS"
-      ],
-      "airports": 85,
-      "ifr_airports": 13,
-      "runways": 76,
-      "ifr_runways": 26,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "TZ",
-      "country": "Tanzania",
-      "icao_prefixes": [
-        "HT"
-      ],
-      "airports": 64,
-      "ifr_airports": 12,
-      "runways": 28,
-      "ifr_runways": 14,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "TN",
-      "country": "Tunisia",
-      "icao_prefixes": [
-        "DT"
-      ],
-      "airports": 13,
-      "ifr_airports": 12,
-      "runways": 15,
-      "ifr_runways": 14,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "UZ",
-      "country": "Uzbekistan",
-      "icao_prefixes": [
-        "UT"
-      ],
-      "airports": 21,
-      "ifr_airports": 12,
-      "runways": 20,
-      "ifr_runways": 14,
+      "airports": 46,
+      "ifr_airports": 25,
+      "ifr_estimated": true,
+      "runways": 30,
+      "ifr_runways": 28,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1100,8 +847,412 @@
         "EP"
       ],
       "airports": 128,
-      "ifr_airports": 11,
+      "ifr_airports": 25,
+      "ifr_estimated": true,
       "runways": 57,
+      "ifr_runways": 35,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "DK",
+      "country": "Denmark",
+      "icao_prefixes": [
+        "EK"
+      ],
+      "airports": 82,
+      "ifr_airports": 25,
+      "ifr_estimated": true,
+      "runways": 55,
+      "ifr_runways": 40,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "KZ",
+      "country": "Kazakhstan",
+      "icao_prefixes": [
+        "UA",
+        "XA"
+      ],
+      "airports": 34,
+      "ifr_airports": 25,
+      "ifr_estimated": true,
+      "runways": 28,
+      "ifr_runways": 28,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "LY",
+      "country": "Libya",
+      "icao_prefixes": [
+        "HL"
+      ],
+      "airports": 35,
+      "ifr_airports": 25,
+      "ifr_estimated": true,
+      "runways": 40,
+      "ifr_runways": 40,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "VN",
+      "country": "Vietnam",
+      "icao_prefixes": [
+        "VV"
+      ],
+      "airports": 27,
+      "ifr_airports": 25,
+      "ifr_estimated": true,
+      "runways": 30,
+      "ifr_runways": 29,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "CD",
+      "country": "Democratic Republic of the Congo",
+      "icao_prefixes": [
+        "FZ"
+      ],
+      "airports": 231,
+      "ifr_airports": 24,
+      "ifr_estimated": true,
+      "runways": 49,
+      "ifr_runways": 25,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "UA",
+      "country": "Ukraine",
+      "icao_prefixes": [
+        "UK",
+        "UP"
+      ],
+      "airports": 42,
+      "ifr_airports": 24,
+      "ifr_estimated": true,
+      "runways": 29,
+      "ifr_runways": 28,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "BO",
+      "country": "Bolivia",
+      "icao_prefixes": [
+        "SL"
+      ],
+      "airports": 185,
+      "ifr_airports": 23,
+      "ifr_estimated": true,
+      "runways": 37,
+      "ifr_runways": 27,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "MA",
+      "country": "Morocco",
+      "icao_prefixes": [
+        "GM"
+      ],
+      "airports": 27,
+      "ifr_airports": 23,
+      "ifr_estimated": true,
+      "runways": 27,
+      "ifr_runways": 27,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "TW",
+      "country": "Taiwan",
+      "icao_prefixes": [
+        "RC"
+      ],
+      "airports": 30,
+      "ifr_airports": 23,
+      "ifr_estimated": true,
+      "runways": 31,
+      "ifr_runways": 30,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "RO",
+      "country": "Romania",
+      "icao_prefixes": [
+        "LR"
+      ],
+      "airports": 34,
+      "ifr_airports": 22,
+      "ifr_estimated": true,
+      "runways": 27,
+      "ifr_runways": 25,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "PG",
+      "country": "Papua New Guinea",
+      "icao_prefixes": [
+        "AY",
+        "AT"
+      ],
+      "airports": 432,
+      "ifr_airports": 21,
+      "ifr_estimated": true,
+      "runways": 303,
+      "ifr_runways": 25,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "ET",
+      "country": "Ethiopia",
+      "icao_prefixes": [
+        "HA"
+      ],
+      "airports": 49,
+      "ifr_airports": 20,
+      "ifr_estimated": true,
+      "runways": 23,
+      "ifr_runways": 21,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "IL",
+      "country": "Israel",
+      "icao_prefixes": [
+        "LL"
+      ],
+      "airports": 30,
+      "ifr_airports": 20,
+      "ifr_estimated": true,
+      "runways": 36,
+      "ifr_runways": 35,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "KE",
+      "country": "Kenya",
+      "icao_prefixes": [
+        "HK"
+      ],
+      "airports": 51,
+      "ifr_airports": 19,
+      "ifr_estimated": true,
+      "runways": 31,
+      "ifr_runways": 24,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "HU",
+      "country": "Hungary",
+      "icao_prefixes": [
+        "LH"
+      ],
+      "airports": 59,
+      "ifr_airports": 18,
+      "ifr_estimated": true,
+      "runways": 46,
+      "ifr_runways": 26,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "IS",
+      "country": "Iceland",
+      "icao_prefixes": [
+        "BI"
+      ],
+      "airports": 71,
+      "ifr_airports": 18,
+      "ifr_estimated": true,
+      "runways": 32,
+      "ifr_runways": 22,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "MZ",
+      "country": "Mozambique",
+      "icao_prefixes": [
+        "FQ"
+      ],
+      "airports": 25,
+      "ifr_airports": 18,
+      "ifr_estimated": true,
+      "runways": 22,
+      "ifr_runways": 22,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "NL",
+      "country": "Netherlands",
+      "icao_prefixes": [
+        "EH"
+      ],
+      "airports": 126,
+      "ifr_airports": 18,
+      "ifr_estimated": true,
+      "runways": 43,
+      "ifr_runways": 28,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "UZ",
+      "country": "Uzbekistan",
+      "icao_prefixes": [
+        "UT"
+      ],
+      "airports": 21,
+      "ifr_airports": 18,
+      "ifr_estimated": true,
+      "runways": 20,
+      "ifr_runways": 20,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "IQ",
+      "country": "Iraq",
+      "icao_prefixes": [
+        "OR"
+      ],
+      "airports": 20,
+      "ifr_airports": 17,
+      "ifr_estimated": true,
+      "runways": 25,
+      "ifr_runways": 25,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "NA",
+      "country": "Namibia",
+      "icao_prefixes": [
+        "FY"
+      ],
+      "airports": 116,
+      "ifr_airports": 17,
+      "ifr_estimated": true,
+      "runways": 38,
+      "ifr_runways": 25,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "LT",
+      "country": "Lithuania",
+      "icao_prefixes": [
+        "EY"
+      ],
+      "airports": 35,
+      "ifr_airports": 16,
+      "ifr_estimated": true,
+      "runways": 32,
+      "ifr_runways": 24,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "IE",
+      "country": "Ireland",
+      "icao_prefixes": [
+        "EI"
+      ],
+      "airports": 41,
+      "ifr_airports": 15,
+      "ifr_estimated": true,
+      "runways": 41,
+      "ifr_runways": 20,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "NP",
+      "country": "Nepal",
+      "icao_prefixes": [
+        "VN"
+      ],
+      "airports": 46,
+      "ifr_airports": 15,
+      "ifr_estimated": true,
+      "runways": 23,
+      "ifr_runways": 16,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "TZ",
+      "country": "Tanzania",
+      "icao_prefixes": [
+        "HT"
+      ],
+      "airports": 64,
+      "ifr_airports": 15,
+      "ifr_estimated": true,
+      "runways": 28,
       "ifr_runways": 18,
       "sids": null,
       "stars": null,
@@ -1109,15 +1260,192 @@
       "procedures_source": null
     },
     {
-      "iso_country": "GA",
-      "country": "Gabon",
+      "iso_country": "AE",
+      "country": "United Arab Emirates",
       "icao_prefixes": [
-        "FO"
+        "OM"
       ],
-      "airports": 28,
+      "airports": 25,
+      "ifr_airports": 15,
+      "ifr_estimated": true,
+      "runways": 23,
+      "ifr_runways": 20,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "ZW",
+      "country": "Zimbabwe",
+      "icao_prefixes": [
+        "FV"
+      ],
+      "airports": 89,
+      "ifr_airports": 15,
+      "ifr_estimated": true,
+      "runways": 21,
+      "ifr_runways": 18,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "PA",
+      "country": "Panama",
+      "icao_prefixes": [
+        "MP"
+      ],
+      "airports": 21,
+      "ifr_airports": 14,
+      "ifr_estimated": true,
+      "runways": 15,
+      "ifr_runways": 15,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "AF",
+      "country": "Afghanistan",
+      "icao_prefixes": [
+        "OA"
+      ],
+      "airports": 44,
+      "ifr_airports": 13,
+      "ifr_estimated": true,
+      "runways": 17,
+      "ifr_runways": 14,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "BG",
+      "country": "Bulgaria",
+      "icao_prefixes": [
+        "LB"
+      ],
+      "airports": 38,
+      "ifr_airports": 13,
+      "ifr_estimated": true,
+      "runways": 16,
+      "ifr_runways": 15,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "LK",
+      "country": "Sri Lanka",
+      "icao_prefixes": [
+        "VC"
+      ],
+      "airports": 14,
+      "ifr_airports": 13,
+      "ifr_estimated": true,
+      "runways": 13,
+      "ifr_runways": 13,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "TN",
+      "country": "Tunisia",
+      "icao_prefixes": [
+        "DT"
+      ],
+      "airports": 13,
+      "ifr_airports": 13,
+      "ifr_estimated": true,
+      "runways": 15,
+      "ifr_runways": 15,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "BW",
+      "country": "Botswana",
+      "icao_prefixes": [
+        "FB"
+      ],
+      "airports": 66,
+      "ifr_airports": 12,
+      "ifr_estimated": true,
+      "runways": 19,
+      "ifr_runways": 14,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "HR",
+      "country": "Croatia",
+      "icao_prefixes": [
+        "LD"
+      ],
+      "airports": 35,
+      "ifr_airports": 12,
+      "ifr_estimated": true,
+      "runways": 24,
+      "ifr_runways": 16,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "GL",
+      "country": "Greenland",
+      "icao_prefixes": [
+        "BG"
+      ],
+      "airports": 67,
+      "ifr_airports": 12,
+      "ifr_estimated": true,
+      "runways": 23,
+      "ifr_runways": 13,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "SD",
+      "country": "Sudan",
+      "icao_prefixes": [
+        "HS"
+      ],
+      "airports": 26,
+      "ifr_airports": 12,
+      "ifr_estimated": true,
+      "runways": 20,
+      "ifr_runways": 13,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "DO",
+      "country": "Dominican Republic",
+      "icao_prefixes": [
+        "MD"
+      ],
+      "airports": 32,
       "ifr_airports": 11,
-      "runways": 14,
-      "ifr_runways": 12,
+      "ifr_estimated": true,
+      "runways": 19,
+      "ifr_runways": 13,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1131,7 +1459,24 @@
       ],
       "airports": 25,
       "ifr_airports": 11,
+      "ifr_estimated": true,
       "runways": 12,
+      "ifr_runways": 11,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "BD",
+      "country": "Bangladesh",
+      "icao_prefixes": [
+        "VG"
+      ],
+      "airports": 15,
+      "ifr_airports": 10,
+      "ifr_estimated": true,
+      "runways": 10,
       "ifr_runways": 10,
       "sids": null,
       "stars": null,
@@ -1139,15 +1484,16 @@
       "procedures_source": null
     },
     {
-      "iso_country": "AE",
-      "country": "United Arab Emirates",
+      "iso_country": "BY",
+      "country": "Belarus",
       "icao_prefixes": [
-        "OM"
+        "UM"
       ],
-      "airports": 25,
-      "ifr_airports": 11,
-      "runways": 23,
-      "ifr_runways": 16,
+      "airports": 13,
+      "ifr_airports": 10,
+      "ifr_estimated": true,
+      "runways": 14,
+      "ifr_runways": 12,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1161,6 +1507,7 @@
       ],
       "airports": 26,
       "ifr_airports": 10,
+      "ifr_estimated": true,
       "runways": 13,
       "ifr_runways": 10,
       "sids": null,
@@ -1169,44 +1516,15 @@
       "procedures_source": null
     },
     {
-      "iso_country": "DO",
-      "country": "Dominican Republic",
+      "iso_country": "GA",
+      "country": "Gabon",
       "icao_prefixes": [
-        "MD"
+        "FO"
       ],
-      "airports": 32,
+      "airports": 28,
       "ifr_airports": 10,
-      "runways": 19,
-      "ifr_runways": 12,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "IE",
-      "country": "Ireland",
-      "icao_prefixes": [
-        "EI"
-      ],
-      "airports": 41,
-      "ifr_airports": 10,
-      "runways": 41,
-      "ifr_runways": 14,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "SN",
-      "country": "Senegal",
-      "icao_prefixes": [
-        "GO"
-      ],
-      "airports": 15,
-      "ifr_airports": 10,
-      "runways": 12,
+      "ifr_estimated": true,
+      "runways": 14,
       "ifr_runways": 10,
       "sids": null,
       "stars": null,
@@ -1214,28 +1532,30 @@
       "procedures_source": null
     },
     {
-      "iso_country": "LK",
-      "country": "Sri Lanka",
+      "iso_country": "GT",
+      "country": "Guatemala",
       "icao_prefixes": [
-        "VC"
+        "MG"
       ],
-      "airports": 14,
+      "airports": 24,
       "ifr_airports": 10,
-      "runways": 13,
-      "ifr_runways": 9,
+      "ifr_estimated": true,
+      "runways": 11,
+      "ifr_runways": 10,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "AF",
-      "country": "Afghanistan",
+      "iso_country": "HN",
+      "country": "Honduras",
       "icao_prefixes": [
-        "OA"
+        "MH"
       ],
-      "airports": 44,
-      "ifr_airports": 9,
+      "airports": 122,
+      "ifr_airports": 10,
+      "ifr_estimated": true,
       "runways": 17,
       "ifr_runways": 10,
       "sids": null,
@@ -1244,90 +1564,16 @@
       "procedures_source": null
     },
     {
-      "iso_country": "AT",
-      "country": "Austria",
+      "iso_country": "MR",
+      "country": "Mauritania",
       "icao_prefixes": [
-        "LO"
+        "GQ"
       ],
-      "airports": 105,
-      "ifr_airports": 9,
-      "runways": 76,
-      "ifr_runways": 22,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "BD",
-      "country": "Bangladesh",
-      "icao_prefixes": [
-        "VG"
-      ],
-      "airports": 15,
-      "ifr_airports": 9,
-      "runways": 10,
-      "ifr_runways": 9,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "GL",
-      "country": "Greenland",
-      "icao_prefixes": [
-        "BG"
-      ],
-      "airports": 67,
-      "ifr_airports": 9,
-      "runways": 23,
-      "ifr_runways": 9,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "HU",
-      "country": "Hungary",
-      "icao_prefixes": [
-        "LH"
-      ],
-      "airports": 59,
-      "ifr_airports": 9,
-      "runways": 46,
+      "airports": 20,
+      "ifr_airports": 10,
+      "ifr_estimated": true,
+      "runways": 12,
       "ifr_runways": 11,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "IL",
-      "country": "Israel",
-      "icao_prefixes": [
-        "LL"
-      ],
-      "airports": 30,
-      "ifr_airports": 9,
-      "runways": 36,
-      "ifr_runways": 19,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "LY",
-      "country": "Libya",
-      "icao_prefixes": [
-        "HL"
-      ],
-      "airports": 35,
-      "ifr_airports": 9,
-      "runways": 40,
-      "ifr_runways": 15,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1340,38 +1586,9 @@
         "NW"
       ],
       "airports": 17,
-      "ifr_airports": 9,
+      "ifr_airports": 10,
+      "ifr_estimated": true,
       "runways": 12,
-      "ifr_runways": 8,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "PR",
-      "country": "Puerto Rico",
-      "icao_prefixes": [
-        "TJ"
-      ],
-      "airports": 9,
-      "ifr_airports": 9,
-      "runways": 10,
-      "ifr_runways": 10,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "SD",
-      "country": "Sudan",
-      "icao_prefixes": [
-        "HS"
-      ],
-      "airports": 26,
-      "ifr_airports": 9,
-      "runways": 20,
       "ifr_runways": 10,
       "sids": null,
       "stars": null,
@@ -1385,53 +1602,9 @@
         "OY"
       ],
       "airports": 22,
-      "ifr_airports": 9,
+      "ifr_airports": 10,
+      "ifr_estimated": true,
       "runways": 15,
-      "ifr_runways": 8,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "ZM",
-      "country": "Zambia",
-      "icao_prefixes": [
-        "FL"
-      ],
-      "airports": 82,
-      "ifr_airports": 9,
-      "runways": 18,
-      "ifr_runways": 12,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "ZW",
-      "country": "Zimbabwe",
-      "icao_prefixes": [
-        "FV"
-      ],
-      "airports": 89,
-      "ifr_airports": 9,
-      "runways": 21,
-      "ifr_runways": 11,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "BY",
-      "country": "Belarus",
-      "icao_prefixes": [
-        "UM"
-      ],
-      "airports": 13,
-      "ifr_airports": 8,
-      "runways": 14,
       "ifr_runways": 10,
       "sids": null,
       "stars": null,
@@ -1439,135 +1612,16 @@
       "procedures_source": null
     },
     {
-      "iso_country": "BG",
-      "country": "Bulgaria",
+      "iso_country": "LV",
+      "country": "Latvia",
       "icao_prefixes": [
-        "LB"
+        "EV"
       ],
-      "airports": 38,
-      "ifr_airports": 8,
-      "runways": 16,
-      "ifr_runways": 9,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "HR",
-      "country": "Croatia",
-      "icao_prefixes": [
-        "LD"
-      ],
-      "airports": 35,
-      "ifr_airports": 8,
-      "runways": 24,
-      "ifr_runways": 9,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "HN",
-      "country": "Honduras",
-      "icao_prefixes": [
-        "MH"
-      ],
-      "airports": 122,
-      "ifr_airports": 8,
-      "runways": 17,
-      "ifr_runways": 8,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "NP",
-      "country": "Nepal",
-      "icao_prefixes": [
-        "VN"
-      ],
-      "airports": 46,
-      "ifr_airports": 8,
-      "runways": 23,
-      "ifr_runways": 8,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "PA",
-      "country": "Panama",
-      "icao_prefixes": [
-        "MP"
-      ],
-      "airports": 21,
-      "ifr_airports": 8,
-      "runways": 15,
-      "ifr_runways": 9,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "BW",
-      "country": "Botswana",
-      "icao_prefixes": [
-        "FB"
-      ],
-      "airports": 66,
-      "ifr_airports": 7,
-      "runways": 19,
-      "ifr_runways": 8,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "CI",
-      "country": "C\u00f4te d'Ivoire",
-      "icao_prefixes": [
-        "DI"
-      ],
-      "airports": 24,
-      "ifr_airports": 7,
-      "runways": 8,
-      "ifr_runways": 7,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "GT",
-      "country": "Guatemala",
-      "icao_prefixes": [
-        "MG"
-      ],
-      "airports": 24,
-      "ifr_airports": 7,
+      "airports": 17,
+      "ifr_airports": 9,
+      "ifr_estimated": true,
       "runways": 11,
-      "ifr_runways": 7,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "LT",
-      "country": "Lithuania",
-      "icao_prefixes": [
-        "EY"
-      ],
-      "airports": 35,
-      "ifr_airports": 7,
-      "runways": 32,
-      "ifr_runways": 8,
+      "ifr_runways": 9,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1580,9 +1634,58 @@
         "VR"
       ],
       "airports": 16,
-      "ifr_airports": 7,
+      "ifr_airports": 9,
+      "ifr_estimated": true,
       "runways": 10,
-      "ifr_runways": 7,
+      "ifr_runways": 9,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "MN",
+      "country": "Mongolia",
+      "icao_prefixes": [
+        "ZM"
+      ],
+      "airports": 30,
+      "ifr_airports": 9,
+      "ifr_estimated": true,
+      "runways": 20,
+      "ifr_runways": 10,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "NI",
+      "country": "Nicaragua",
+      "icao_prefixes": [
+        "MN"
+      ],
+      "airports": 29,
+      "ifr_airports": 9,
+      "ifr_estimated": true,
+      "runways": 11,
+      "ifr_runways": 9,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "SN",
+      "country": "Senegal",
+      "icao_prefixes": [
+        "GO"
+      ],
+      "airports": 15,
+      "ifr_airports": 9,
+      "ifr_estimated": true,
+      "runways": 12,
+      "ifr_runways": 9,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1596,8 +1699,105 @@
         "LS"
       ],
       "airports": 30,
-      "ifr_airports": 7,
+      "ifr_airports": 9,
+      "ifr_estimated": true,
       "runways": 34,
+      "ifr_runways": 13,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "ZM",
+      "country": "Zambia",
+      "icao_prefixes": [
+        "FL"
+      ],
+      "airports": 82,
+      "ifr_airports": 9,
+      "ifr_estimated": true,
+      "runways": 18,
+      "ifr_runways": 12,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "AZ",
+      "country": "Azerbaijan",
+      "icao_prefixes": [
+        "UB"
+      ],
+      "airports": 11,
+      "ifr_airports": 8,
+      "ifr_estimated": true,
+      "runways": 10,
+      "ifr_runways": 10,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "LA",
+      "country": "Laos",
+      "icao_prefixes": [
+        "VL"
+      ],
+      "airports": 17,
+      "ifr_airports": 8,
+      "ifr_estimated": true,
+      "runways": 9,
+      "ifr_runways": 8,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "MW",
+      "country": "Malawi",
+      "icao_prefixes": [
+        "FW"
+      ],
+      "airports": 24,
+      "ifr_airports": 8,
+      "ifr_estimated": true,
+      "runways": 11,
+      "ifr_runways": 9,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "CG",
+      "country": "Republic of the Congo",
+      "icao_prefixes": [
+        "FC"
+      ],
+      "airports": 49,
+      "ifr_airports": 8,
+      "ifr_estimated": true,
+      "runways": 9,
+      "ifr_runways": 8,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "SI",
+      "country": "Slovenia",
+      "icao_prefixes": [
+        "LJ"
+      ],
+      "airports": 16,
+      "ifr_airports": 8,
+      "ifr_estimated": true,
+      "runways": 18,
       "ifr_runways": 10,
       "sids": null,
       "stars": null,
@@ -1611,24 +1811,10 @@
         "SU"
       ],
       "airports": 41,
-      "ifr_airports": 7,
+      "ifr_airports": 8,
+      "ifr_estimated": true,
       "runways": 35,
-      "ifr_runways": 11,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "AZ",
-      "country": "Azerbaijan",
-      "icao_prefixes": [
-        "UB"
-      ],
-      "airports": 11,
-      "ifr_airports": 6,
-      "runways": 10,
-      "ifr_runways": 7,
+      "ifr_runways": 12,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1641,9 +1827,26 @@
         "GV"
       ],
       "airports": 9,
-      "ifr_airports": 6,
+      "ifr_airports": 7,
+      "ifr_estimated": true,
       "runways": 8,
-      "ifr_runways": 6,
+      "ifr_runways": 7,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "CI",
+      "country": "C\u00f4te d'Ivoire",
+      "icao_prefixes": [
+        "DI"
+      ],
+      "airports": 24,
+      "ifr_airports": 7,
+      "ifr_estimated": true,
+      "runways": 8,
+      "ifr_runways": 7,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1656,9 +1859,10 @@
         "EE"
       ],
       "airports": 34,
-      "ifr_airports": 6,
+      "ifr_airports": 7,
+      "ifr_estimated": true,
       "runways": 19,
-      "ifr_runways": 7,
+      "ifr_runways": 8,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1671,24 +1875,58 @@
         "DG"
       ],
       "airports": 9,
-      "ifr_airports": 6,
+      "ifr_airports": 7,
+      "ifr_estimated": true,
       "runways": 7,
-      "ifr_runways": 6,
+      "ifr_runways": 7,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "HT",
-      "country": "Haiti",
+      "iso_country": "JO",
+      "country": "Jordan",
       "icao_prefixes": [
-        "MT"
+        "OJ"
       ],
-      "airports": 6,
-      "ifr_airports": 6,
-      "runways": 6,
-      "ifr_runways": 6,
+      "airports": 7,
+      "ifr_airports": 7,
+      "ifr_estimated": true,
+      "runways": 9,
+      "ifr_runways": 9,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "ML",
+      "country": "Mali",
+      "icao_prefixes": [
+        "GA"
+      ],
+      "airports": 27,
+      "ifr_airports": 7,
+      "ifr_estimated": true,
+      "runways": 15,
+      "ifr_runways": 10,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "NE",
+      "country": "Niger",
+      "icao_prefixes": [
+        "DR"
+      ],
+      "airports": 21,
+      "ifr_airports": 7,
+      "ifr_estimated": true,
+      "runways": 9,
+      "ifr_runways": 8,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1701,23 +1939,74 @@
         "OO"
       ],
       "airports": 19,
-      "ifr_airports": 6,
+      "ifr_airports": 7,
+      "ifr_estimated": true,
       "runways": 11,
-      "ifr_runways": 8,
+      "ifr_runways": 9,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "CG",
-      "country": "Republic of the Congo",
+      "iso_country": "RS",
+      "country": "Serbia",
       "icao_prefixes": [
-        "FC"
+        "LY"
       ],
-      "airports": 49,
+      "airports": 23,
+      "ifr_airports": 7,
+      "ifr_estimated": true,
+      "runways": 19,
+      "ifr_runways": 12,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "SC",
+      "country": "Seychelles",
+      "icao_prefixes": [
+        "FS"
+      ],
+      "airports": 15,
+      "ifr_airports": 7,
+      "ifr_estimated": true,
+      "runways": 7,
+      "ifr_runways": 7,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "SO",
+      "country": "Somalia",
+      "icao_prefixes": [
+        "HC"
+      ],
+      "airports": 20,
+      "ifr_airports": 7,
+      "ifr_estimated": true,
+      "runways": 14,
+      "ifr_runways": 9,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "GN",
+      "country": "Guinea",
+      "icao_prefixes": [
+        "GU",
+        "GX"
+      ],
+      "airports": 15,
       "ifr_airports": 6,
-      "runways": 9,
+      "ifr_estimated": true,
+      "runways": 15,
       "ifr_runways": 6,
       "sids": null,
       "stars": null,
@@ -1725,15 +2014,48 @@
       "procedures_source": null
     },
     {
-      "iso_country": "SG",
-      "country": "Singapore",
+      "iso_country": "JM",
+      "country": "Jamaica",
       "icao_prefixes": [
-        "WS"
+        "MK"
       ],
       "airports": 6,
       "ifr_airports": 6,
-      "runways": 9,
-      "ifr_runways": 9,
+      "ifr_estimated": true,
+      "runways": 6,
+      "ifr_runways": 6,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "KP",
+      "country": "North Korea",
+      "icao_prefixes": [
+        "ZK"
+      ],
+      "airports": 7,
+      "ifr_airports": 6,
+      "ifr_estimated": true,
+      "runways": 7,
+      "ifr_runways": 7,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "PR",
+      "country": "Puerto Rico",
+      "icao_prefixes": [
+        "TJ"
+      ],
+      "airports": 9,
+      "ifr_airports": 6,
+      "ifr_estimated": false,
+      "runways": 10,
+      "ifr_runways": 7,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1747,8 +2069,25 @@
       ],
       "airports": 6,
       "ifr_airports": 6,
+      "ifr_estimated": true,
       "runways": 7,
       "ifr_runways": 7,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "TM",
+      "country": "Turkmenistan",
+      "icao_prefixes": [
+        "UT"
+      ],
+      "airports": 6,
+      "ifr_airports": 6,
+      "ifr_estimated": true,
+      "runways": 9,
+      "ifr_runways": 9,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1762,6 +2101,7 @@
       ],
       "airports": 10,
       "ifr_airports": 5,
+      "ifr_estimated": true,
       "runways": 7,
       "ifr_runways": 5,
       "sids": null,
@@ -1770,29 +2110,15 @@
       "procedures_source": null
     },
     {
-      "iso_country": "TD",
-      "country": "Chad",
+      "iso_country": "GF",
+      "country": "French Guiana",
       "icao_prefixes": [
-        "FT"
+        "SO"
       ],
-      "airports": 21,
+      "airports": 8,
       "ifr_airports": 5,
+      "ifr_estimated": true,
       "runways": 6,
-      "ifr_runways": 4,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "CY",
-      "country": "Cyprus",
-      "icao_prefixes": [
-        "LC"
-      ],
-      "airports": 5,
-      "ifr_airports": 5,
-      "runways": 5,
       "ifr_runways": 5,
       "sids": null,
       "stars": null,
@@ -1807,6 +2133,7 @@
       ],
       "airports": 7,
       "ifr_airports": 5,
+      "ifr_estimated": true,
       "runways": 5,
       "ifr_runways": 5,
       "sids": null,
@@ -1815,15 +2142,16 @@
       "procedures_source": null
     },
     {
-      "iso_country": "JM",
-      "country": "Jamaica",
+      "iso_country": "GY",
+      "country": "Guyana",
       "icao_prefixes": [
-        "MK"
+        "SY"
       ],
-      "airports": 6,
+      "airports": 51,
       "ifr_airports": 5,
-      "runways": 6,
-      "ifr_runways": 5,
+      "ifr_estimated": true,
+      "runways": 8,
+      "ifr_runways": 6,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -1838,97 +2166,8 @@
       ],
       "airports": 8,
       "ifr_airports": 5,
+      "ifr_estimated": true,
       "runways": 6,
-      "ifr_runways": 5,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "LA",
-      "country": "Laos",
-      "icao_prefixes": [
-        "VL"
-      ],
-      "airports": 17,
-      "ifr_airports": 5,
-      "runways": 9,
-      "ifr_runways": 5,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "MW",
-      "country": "Malawi",
-      "icao_prefixes": [
-        "FW"
-      ],
-      "airports": 24,
-      "ifr_airports": 5,
-      "runways": 11,
-      "ifr_runways": 6,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "ML",
-      "country": "Mali",
-      "icao_prefixes": [
-        "GA"
-      ],
-      "airports": 27,
-      "ifr_airports": 5,
-      "runways": 15,
-      "ifr_runways": 5,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "MD",
-      "country": "Moldova",
-      "icao_prefixes": [
-        "LU"
-      ],
-      "airports": 5,
-      "ifr_airports": 5,
-      "runways": 4,
-      "ifr_runways": 4,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "NE",
-      "country": "Niger",
-      "icao_prefixes": [
-        "DR"
-      ],
-      "airports": 21,
-      "ifr_airports": 5,
-      "runways": 9,
-      "ifr_runways": 6,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "KP",
-      "country": "North Korea",
-      "icao_prefixes": [
-        "ZK"
-      ],
-      "airports": 7,
-      "ifr_airports": 5,
-      "runways": 7,
       "ifr_runways": 5,
       "sids": null,
       "stars": null,
@@ -1943,6 +2182,7 @@
       ],
       "airports": 5,
       "ifr_airports": 5,
+      "ifr_estimated": true,
       "runways": 5,
       "ifr_runways": 5,
       "sids": null,
@@ -1951,29 +2191,31 @@
       "procedures_source": null
     },
     {
-      "iso_country": "RS",
-      "country": "Serbia",
+      "iso_country": "SG",
+      "country": "Singapore",
       "icao_prefixes": [
-        "LY"
+        "WS"
       ],
-      "airports": 23,
+      "airports": 6,
       "ifr_airports": 5,
-      "runways": 19,
-      "ifr_runways": 7,
+      "ifr_estimated": true,
+      "runways": 9,
+      "ifr_runways": 9,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "SO",
-      "country": "Somalia",
+      "iso_country": "VU",
+      "country": "Vanuatu",
       "icao_prefixes": [
-        "HC"
+        "NV"
       ],
-      "airports": 20,
+      "airports": 31,
       "ifr_airports": 5,
-      "runways": 14,
+      "ifr_estimated": true,
+      "runways": 30,
       "ifr_runways": 6,
       "sids": null,
       "stars": null,
@@ -1981,15 +2223,32 @@
       "procedures_source": null
     },
     {
-      "iso_country": "TM",
-      "country": "Turkmenistan",
+      "iso_country": "AM",
+      "country": "Armenia",
       "icao_prefixes": [
-        "UT"
+        "UD"
       ],
-      "airports": 6,
-      "ifr_airports": 5,
-      "runways": 9,
-      "ifr_runways": 8,
+      "airports": 4,
+      "ifr_airports": 4,
+      "ifr_estimated": true,
+      "runways": 4,
+      "ifr_runways": 4,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "BT",
+      "country": "Bhutan",
+      "icao_prefixes": [
+        "VQ"
+      ],
+      "airports": 5,
+      "ifr_airports": 4,
+      "ifr_estimated": true,
+      "runways": 4,
+      "ifr_runways": 4,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -2003,6 +2262,7 @@
       ],
       "airports": 12,
       "ifr_airports": 4,
+      "ifr_estimated": true,
       "runways": 7,
       "ifr_runways": 4,
       "sids": null,
@@ -2011,13 +2271,14 @@
       "procedures_source": null
     },
     {
-      "iso_country": "GF",
-      "country": "French Guiana",
+      "iso_country": "TD",
+      "country": "Chad",
       "icao_prefixes": [
-        "SO"
+        "FT"
       ],
-      "airports": 8,
+      "airports": 21,
       "ifr_airports": 4,
+      "ifr_estimated": true,
       "runways": 6,
       "ifr_runways": 4,
       "sids": null,
@@ -2026,14 +2287,15 @@
       "procedures_source": null
     },
     {
-      "iso_country": "GY",
-      "country": "Guyana",
+      "iso_country": "CY",
+      "country": "Cyprus",
       "icao_prefixes": [
-        "SY"
+        "LC"
       ],
-      "airports": 51,
+      "airports": 5,
       "ifr_airports": 4,
-      "runways": 8,
+      "ifr_estimated": true,
+      "runways": 5,
       "ifr_runways": 5,
       "sids": null,
       "stars": null,
@@ -2041,46 +2303,15 @@
       "procedures_source": null
     },
     {
-      "iso_country": "JO",
-      "country": "Jordan",
+      "iso_country": "SV",
+      "country": "El Salvador",
       "icao_prefixes": [
-        "OJ"
+        "MS"
       ],
-      "airports": 7,
+      "airports": 22,
       "ifr_airports": 4,
-      "runways": 9,
-      "ifr_runways": 6,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "KI",
-      "country": "Kiribati",
-      "icao_prefixes": [
-        "NG",
-        "PL",
-        "PC"
-      ],
-      "airports": 21,
-      "ifr_airports": 4,
-      "runways": 3,
-      "ifr_runways": 3,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "LV",
-      "country": "Latvia",
-      "icao_prefixes": [
-        "EV"
-      ],
-      "airports": 17,
-      "ifr_airports": 4,
-      "runways": 11,
+      "ifr_estimated": true,
+      "runways": 4,
       "ifr_runways": 4,
       "sids": null,
       "stars": null,
@@ -2088,15 +2319,81 @@
       "procedures_source": null
     },
     {
-      "iso_country": "MR",
-      "country": "Mauritania",
+      "iso_country": "GQ",
+      "country": "Equatorial Guinea",
       "icao_prefixes": [
-        "GQ"
+        "FG"
       ],
-      "airports": 20,
+      "airports": 4,
       "ifr_airports": 4,
-      "runways": 12,
+      "ifr_estimated": true,
+      "runways": 4,
+      "ifr_runways": 4,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "FJ",
+      "country": "Fiji",
+      "icao_prefixes": [
+        "NF"
+      ],
+      "airports": 29,
+      "ifr_airports": 4,
+      "ifr_estimated": true,
+      "runways": 9,
       "ifr_runways": 5,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "GP",
+      "country": "Guadeloupe",
+      "icao_prefixes": [
+        "TF"
+      ],
+      "airports": 6,
+      "ifr_airports": 4,
+      "ifr_estimated": true,
+      "runways": 4,
+      "ifr_runways": 4,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "HT",
+      "country": "Haiti",
+      "icao_prefixes": [
+        "MT"
+      ],
+      "airports": 6,
+      "ifr_airports": 4,
+      "ifr_estimated": true,
+      "runways": 6,
+      "ifr_runways": 4,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "MH",
+      "country": "Marshall Islands",
+      "icao_prefixes": [
+        "PK",
+        "ML"
+      ],
+      "airports": 5,
+      "ifr_airports": 4,
+      "ifr_estimated": true,
+      "runways": 5,
+      "ifr_runways": 4,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -2110,6 +2407,7 @@
       ],
       "airports": 4,
       "ifr_airports": 4,
+      "ifr_estimated": true,
       "runways": 4,
       "ifr_runways": 4,
       "sids": null,
@@ -2118,30 +2416,16 @@
       "procedures_source": null
     },
     {
-      "iso_country": "SL",
-      "country": "Sierra Leone",
+      "iso_country": "RW",
+      "country": "Rwanda",
       "icao_prefixes": [
-        "GF"
+        "HR"
       ],
-      "airports": 8,
+      "airports": 7,
       "ifr_airports": 4,
-      "runways": 4,
+      "ifr_estimated": true,
+      "runways": 5,
       "ifr_runways": 4,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "SI",
-      "country": "Slovenia",
-      "icao_prefixes": [
-        "LJ"
-      ],
-      "airports": 16,
-      "ifr_airports": 4,
-      "runways": 18,
-      "ifr_runways": 5,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -2156,6 +2440,7 @@
       ],
       "airports": 25,
       "ifr_airports": 4,
+      "ifr_estimated": true,
       "runways": 5,
       "ifr_runways": 4,
       "sids": null,
@@ -2171,6 +2456,7 @@
       ],
       "airports": 4,
       "ifr_airports": 4,
+      "ifr_estimated": true,
       "runways": 4,
       "ifr_runways": 4,
       "sids": null,
@@ -2186,8 +2472,25 @@
       ],
       "airports": 10,
       "ifr_airports": 4,
+      "ifr_estimated": true,
       "runways": 5,
       "ifr_runways": 4,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "TO",
+      "country": "Tonga",
+      "icao_prefixes": [
+        "NF"
+      ],
+      "airports": 6,
+      "ifr_airports": 4,
+      "ifr_estimated": true,
+      "runways": 6,
+      "ifr_runways": 5,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -2201,6 +2504,7 @@
       ],
       "airports": 8,
       "ifr_airports": 4,
+      "ifr_estimated": true,
       "runways": 6,
       "ifr_runways": 4,
       "sids": null,
@@ -2216,22 +2520,8 @@
       ],
       "airports": 23,
       "ifr_airports": 4,
+      "ifr_estimated": true,
       "runways": 11,
-      "ifr_runways": 5,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "VU",
-      "country": "Vanuatu",
-      "icao_prefixes": [
-        "NV"
-      ],
-      "airports": 31,
-      "ifr_airports": 4,
-      "runways": 30,
       "ifr_runways": 5,
       "sids": null,
       "stars": null,
@@ -2246,6 +2536,7 @@
       ],
       "airports": 4,
       "ifr_airports": 3,
+      "ifr_estimated": true,
       "runways": 3,
       "ifr_runways": 3,
       "sids": null,
@@ -2254,31 +2545,30 @@
       "procedures_source": null
     },
     {
-      "iso_country": "AQ",
-      "country": "Antarctica",
+      "iso_country": "BH",
+      "country": "Bahrain",
       "icao_prefixes": [
-        "SA",
-        "SC",
-        "EG",
-        "NZ"
+        "OB"
       ],
-      "airports": 21,
+      "airports": 3,
       "ifr_airports": 3,
-      "runways": 11,
-      "ifr_runways": 3,
+      "ifr_estimated": true,
+      "runways": 4,
+      "ifr_runways": 4,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "AM",
-      "country": "Armenia",
+      "iso_country": "BZ",
+      "country": "Belize",
       "icao_prefixes": [
-        "UD"
+        "MZ"
       ],
-      "airports": 4,
+      "airports": 5,
       "ifr_airports": 3,
+      "ifr_estimated": true,
       "runways": 4,
       "ifr_runways": 3,
       "sids": null,
@@ -2294,21 +2584,7 @@
       ],
       "airports": 3,
       "ifr_airports": 3,
-      "runways": 3,
-      "ifr_runways": 3,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "KY",
-      "country": "Cayman Islands",
-      "icao_prefixes": [
-        "MW"
-      ],
-      "airports": 3,
-      "ifr_airports": 3,
+      "ifr_estimated": true,
       "runways": 3,
       "ifr_runways": 3,
       "sids": null,
@@ -2324,6 +2600,7 @@
       ],
       "airports": 3,
       "ifr_airports": 3,
+      "ifr_estimated": true,
       "runways": 3,
       "ifr_runways": 3,
       "sids": null,
@@ -2332,14 +2609,15 @@
       "procedures_source": null
     },
     {
-      "iso_country": "GQ",
-      "country": "Equatorial Guinea",
+      "iso_country": "DJ",
+      "country": "Djibouti",
       "icao_prefixes": [
-        "FG"
+        "HD"
       ],
-      "airports": 4,
+      "airports": 9,
       "ifr_airports": 3,
-      "runways": 4,
+      "ifr_estimated": true,
+      "runways": 3,
       "ifr_runways": 3,
       "sids": null,
       "stars": null,
@@ -2354,22 +2632,8 @@
       ],
       "airports": 14,
       "ifr_airports": 3,
+      "ifr_estimated": true,
       "runways": 4,
-      "ifr_runways": 4,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "FJ",
-      "country": "Fiji",
-      "icao_prefixes": [
-        "NF"
-      ],
-      "airports": 29,
-      "ifr_airports": 3,
-      "runways": 9,
       "ifr_runways": 4,
       "sids": null,
       "stars": null,
@@ -2384,8 +2648,9 @@
       ],
       "airports": 5,
       "ifr_airports": 3,
+      "ifr_estimated": true,
       "runways": 6,
-      "ifr_runways": 5,
+      "ifr_runways": 6,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -2399,6 +2664,7 @@
       ],
       "airports": 3,
       "ifr_airports": 3,
+      "ifr_estimated": true,
       "runways": 5,
       "ifr_runways": 5,
       "sids": null,
@@ -2407,30 +2673,32 @@
       "procedures_source": null
     },
     {
-      "iso_country": "LR",
-      "country": "Liberia",
+      "iso_country": "MD",
+      "country": "Moldova",
       "icao_prefixes": [
-        "GL"
+        "LU"
       ],
-      "airports": 10,
+      "airports": 5,
       "ifr_airports": 3,
-      "runways": 2,
-      "ifr_runways": 2,
+      "ifr_estimated": true,
+      "runways": 4,
+      "ifr_runways": 4,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "NI",
-      "country": "Nicaragua",
+      "iso_country": "ME",
+      "country": "Montenegro",
       "icao_prefixes": [
-        "MN"
+        "LY"
       ],
-      "airports": 29,
+      "airports": 5,
       "ifr_airports": 3,
-      "runways": 11,
-      "ifr_runways": 3,
+      "ifr_estimated": true,
+      "runways": 5,
+      "ifr_runways": 4,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -2444,6 +2712,7 @@
       ],
       "airports": 3,
       "ifr_airports": 3,
+      "ifr_estimated": false,
       "runways": 3,
       "ifr_runways": 3,
       "sids": null,
@@ -2459,37 +2728,8 @@
       ],
       "airports": 3,
       "ifr_airports": 3,
+      "ifr_estimated": true,
       "runways": 4,
-      "ifr_runways": 4,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "RW",
-      "country": "Rwanda",
-      "icao_prefixes": [
-        "HR"
-      ],
-      "airports": 7,
-      "ifr_airports": 3,
-      "runways": 5,
-      "ifr_runways": 3,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "TO",
-      "country": "Tonga",
-      "icao_prefixes": [
-        "NF"
-      ],
-      "airports": 6,
-      "ifr_airports": 3,
-      "runways": 6,
       "ifr_runways": 4,
       "sids": null,
       "stars": null,
@@ -2504,68 +2744,9 @@
       ],
       "airports": 3,
       "ifr_airports": 3,
+      "ifr_estimated": true,
       "runways": 4,
       "ifr_runways": 4,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "BH",
-      "country": "Bahrain",
-      "icao_prefixes": [
-        "OB"
-      ],
-      "airports": 3,
-      "ifr_airports": 2,
-      "runways": 4,
-      "ifr_runways": 3,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "BZ",
-      "country": "Belize",
-      "icao_prefixes": [
-        "MZ"
-      ],
-      "airports": 5,
-      "ifr_airports": 2,
-      "runways": 4,
-      "ifr_runways": 2,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "BT",
-      "country": "Bhutan",
-      "icao_prefixes": [
-        "VQ"
-      ],
-      "airports": 5,
-      "ifr_airports": 2,
-      "runways": 4,
-      "ifr_runways": 2,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "VG",
-      "country": "British Virgin Islands",
-      "icao_prefixes": [
-        "TU"
-      ],
-      "airports": 4,
-      "ifr_airports": 2,
-      "runways": 3,
-      "ifr_runways": 2,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -2579,6 +2760,7 @@
       ],
       "airports": 48,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 4,
       "ifr_runways": 2,
       "sids": null,
@@ -2587,15 +2769,16 @@
       "procedures_source": null
     },
     {
-      "iso_country": "BI",
-      "country": "Burundi",
+      "iso_country": "KY",
+      "country": "Cayman Islands",
       "icao_prefixes": [
-        "HB"
+        "MW"
       ],
-      "airports": 4,
+      "airports": 3,
       "ifr_airports": 2,
-      "runways": 4,
-      "ifr_runways": 3,
+      "ifr_estimated": true,
+      "runways": 3,
+      "ifr_runways": 2,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -2609,7 +2792,24 @@
       ],
       "airports": 34,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 5,
+      "ifr_runways": 2,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "CK",
+      "country": "Cook Islands",
+      "icao_prefixes": [
+        "NC"
+      ],
+      "airports": 10,
+      "ifr_airports": 2,
+      "ifr_estimated": true,
+      "runways": 7,
       "ifr_runways": 2,
       "sids": null,
       "stars": null,
@@ -2624,22 +2824,8 @@
       ],
       "airports": 2,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 2,
-      "ifr_runways": 2,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "SV",
-      "country": "El Salvador",
-      "icao_prefixes": [
-        "MS"
-      ],
-      "airports": 22,
-      "ifr_airports": 2,
-      "runways": 4,
       "ifr_runways": 2,
       "sids": null,
       "stars": null,
@@ -2654,6 +2840,7 @@
       ],
       "airports": 16,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 3,
       "ifr_runways": 2,
       "sids": null,
@@ -2662,30 +2849,33 @@
       "procedures_source": null
     },
     {
-      "iso_country": "GP",
-      "country": "Guadeloupe",
+      "iso_country": "FK",
+      "country": "Falkland Islands",
       "icao_prefixes": [
-        "TF"
+        "EG",
+        "SF"
       ],
-      "airports": 6,
+      "airports": 2,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 4,
-      "ifr_runways": 2,
+      "ifr_runways": 4,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "GU",
-      "country": "Guam",
+      "iso_country": "GD",
+      "country": "Grenada",
       "icao_prefixes": [
-        "PG"
+        "TG"
       ],
       "airports": 2,
       "ifr_airports": 2,
-      "runways": 4,
-      "ifr_runways": 4,
+      "ifr_estimated": true,
+      "runways": 2,
+      "ifr_runways": 2,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -2699,8 +2889,25 @@
       ],
       "airports": 2,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 4,
       "ifr_runways": 4,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "GW",
+      "country": "Guinea-Bissau",
+      "icao_prefixes": [
+        "GG"
+      ],
+      "airports": 8,
+      "ifr_airports": 2,
+      "ifr_estimated": true,
+      "runways": 2,
+      "ifr_runways": 2,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -2714,6 +2921,7 @@
       ],
       "airports": 3,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 4,
       "ifr_runways": 4,
       "sids": null,
@@ -2722,16 +2930,66 @@
       "procedures_source": null
     },
     {
-      "iso_country": "MH",
-      "country": "Marshall Islands",
+      "iso_country": "KI",
+      "country": "Kiribati",
       "icao_prefixes": [
-        "PK",
-        "ML"
+        "NG",
+        "PL",
+        "PC"
       ],
-      "airports": 5,
+      "airports": 21,
       "ifr_airports": 2,
-      "runways": 5,
+      "ifr_estimated": true,
+      "runways": 3,
       "ifr_runways": 2,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "LS",
+      "country": "Lesotho",
+      "icao_prefixes": [
+        "FX"
+      ],
+      "airports": 34,
+      "ifr_airports": 2,
+      "ifr_estimated": true,
+      "runways": 4,
+      "ifr_runways": 4,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "LR",
+      "country": "Liberia",
+      "icao_prefixes": [
+        "GL"
+      ],
+      "airports": 10,
+      "ifr_airports": 2,
+      "ifr_estimated": true,
+      "runways": 2,
+      "ifr_runways": 2,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "MT",
+      "country": "Malta",
+      "icao_prefixes": [
+        "LM"
+      ],
+      "airports": 2,
+      "ifr_airports": 2,
+      "ifr_estimated": true,
+      "runways": 3,
+      "ifr_runways": 3,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -2745,22 +3003,8 @@
       ],
       "airports": 2,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 2,
-      "ifr_runways": 2,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "ME",
-      "country": "Montenegro",
-      "icao_prefixes": [
-        "LY"
-      ],
-      "airports": 5,
-      "ifr_airports": 2,
-      "runways": 5,
       "ifr_runways": 2,
       "sids": null,
       "stars": null,
@@ -2775,6 +3019,7 @@
       ],
       "airports": 3,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 2,
       "ifr_runways": 2,
       "sids": null,
@@ -2790,6 +3035,7 @@
       ],
       "airports": 2,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 3,
       "ifr_runways": 3,
       "sids": null,
@@ -2805,6 +3051,7 @@
       ],
       "airports": 2,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 2,
       "ifr_runways": 2,
       "sids": null,
@@ -2820,6 +3067,7 @@
       ],
       "airports": 2,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 2,
       "ifr_runways": 2,
       "sids": null,
@@ -2835,6 +3083,7 @@
       ],
       "airports": 2,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 2,
       "ifr_runways": 2,
       "sids": null,
@@ -2843,14 +3092,31 @@
       "procedures_source": null
     },
     {
-      "iso_country": "SC",
-      "country": "Seychelles",
+      "iso_country": "PM",
+      "country": "Saint Pierre and Miquelon",
       "icao_prefixes": [
-        "FS"
+        "LF"
       ],
-      "airports": 15,
+      "airports": 2,
       "ifr_airports": 2,
-      "runways": 7,
+      "ifr_estimated": true,
+      "runways": 2,
+      "ifr_runways": 2,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "WS",
+      "country": "Samoa",
+      "icao_prefixes": [
+        "NS"
+      ],
+      "airports": 4,
+      "ifr_airports": 2,
+      "ifr_estimated": true,
+      "runways": 2,
       "ifr_runways": 2,
       "sids": null,
       "stars": null,
@@ -2865,7 +3131,24 @@
       ],
       "airports": 37,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 32,
+      "ifr_runways": 2,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "SR",
+      "country": "Suriname",
+      "icao_prefixes": [
+        "SM"
+      ],
+      "airports": 46,
+      "ifr_airports": 2,
+      "ifr_estimated": true,
+      "runways": 2,
       "ifr_runways": 2,
       "sids": null,
       "stars": null,
@@ -2880,6 +3163,7 @@
       ],
       "airports": 2,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 2,
       "ifr_runways": 2,
       "sids": null,
@@ -2895,6 +3179,7 @@
       ],
       "airports": 7,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 2,
       "ifr_runways": 2,
       "sids": null,
@@ -2910,6 +3195,7 @@
       ],
       "airports": 2,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 2,
       "ifr_runways": 2,
       "sids": null,
@@ -2925,6 +3211,7 @@
       ],
       "airports": 2,
       "ifr_airports": 2,
+      "ifr_estimated": false,
       "runways": 2,
       "ifr_runways": 2,
       "sids": null,
@@ -2942,6 +3229,7 @@
       ],
       "airports": 3,
       "ifr_airports": 2,
+      "ifr_estimated": true,
       "runways": 3,
       "ifr_runways": 2,
       "sids": null,
@@ -2957,6 +3245,7 @@
       ],
       "airports": 3,
       "ifr_airports": 1,
+      "ifr_estimated": false,
       "runways": 4,
       "ifr_runways": 2,
       "sids": null,
@@ -2972,6 +3261,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -2987,6 +3277,7 @@
       ],
       "airports": 2,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3002,6 +3293,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3017,6 +3309,7 @@
       ],
       "airports": 2,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3032,6 +3325,7 @@
       ],
       "airports": 9,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 2,
       "ifr_runways": 1,
       "sids": null,
@@ -3047,6 +3341,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3062,7 +3357,24 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
+      "ifr_runways": 1,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "VG",
+      "country": "British Virgin Islands",
+      "icao_prefixes": [
+        "TU"
+      ],
+      "airports": 4,
+      "ifr_airports": 1,
+      "ifr_estimated": true,
+      "runways": 3,
       "ifr_runways": 1,
       "sids": null,
       "stars": null,
@@ -3077,8 +3389,25 @@
       ],
       "airports": 2,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "BI",
+      "country": "Burundi",
+      "icao_prefixes": [
+        "HB"
+      ],
+      "airports": 4,
+      "ifr_airports": 1,
+      "ifr_estimated": true,
+      "runways": 4,
+      "ifr_runways": 2,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -3092,6 +3421,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3107,22 +3437,8 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
-      "ifr_runways": 1,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "CK",
-      "country": "Cook Islands",
-      "icao_prefixes": [
-        "NC"
-      ],
-      "airports": 10,
-      "ifr_airports": 1,
-      "runways": 7,
       "ifr_runways": 1,
       "sids": null,
       "stars": null,
@@ -3137,39 +3453,9 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "DJ",
-      "country": "Djibouti",
-      "icao_prefixes": [
-        "HD"
-      ],
-      "airports": 9,
-      "ifr_airports": 1,
-      "runways": 3,
-      "ifr_runways": 1,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "FK",
-      "country": "Falkland Islands",
-      "icao_prefixes": [
-        "EG",
-        "SF"
-      ],
-      "airports": 2,
-      "ifr_airports": 1,
-      "runways": 4,
-      "ifr_runways": 2,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -3183,6 +3469,7 @@
       ],
       "airports": 9,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3198,6 +3485,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3213,6 +3501,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3221,46 +3510,16 @@
       "procedures_source": null
     },
     {
-      "iso_country": "GD",
-      "country": "Grenada",
+      "iso_country": "GU",
+      "country": "Guam",
       "icao_prefixes": [
-        "TG"
+        "PG"
       ],
       "airports": 2,
       "ifr_airports": 1,
-      "runways": 2,
-      "ifr_runways": 1,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "GN",
-      "country": "Guinea",
-      "icao_prefixes": [
-        "GU",
-        "GX"
-      ],
-      "airports": 15,
-      "ifr_airports": 1,
-      "runways": 15,
-      "ifr_runways": 1,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "GW",
-      "country": "Guinea-Bissau",
-      "icao_prefixes": [
-        "GG"
-      ],
-      "airports": 8,
-      "ifr_airports": 1,
-      "runways": 2,
-      "ifr_runways": 1,
+      "ifr_estimated": false,
+      "runways": 4,
+      "ifr_runways": 2,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -3274,6 +3533,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 2,
       "ifr_runways": 2,
       "sids": null,
@@ -3289,6 +3549,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3305,23 +3566,9 @@
       ],
       "airports": 3,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "LS",
-      "country": "Lesotho",
-      "icao_prefixes": [
-        "FX"
-      ],
-      "airports": 34,
-      "ifr_airports": 1,
-      "runways": 4,
-      "ifr_runways": 2,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -3335,6 +3582,7 @@
       ],
       "airports": 3,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 3,
       "ifr_runways": 1,
       "sids": null,
@@ -3350,23 +3598,9 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "MT",
-      "country": "Malta",
-      "icao_prefixes": [
-        "LM"
-      ],
-      "airports": 2,
-      "ifr_airports": 1,
-      "runways": 3,
-      "ifr_runways": 2,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -3380,6 +3614,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3395,6 +3630,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3410,6 +3646,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3425,6 +3662,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3440,6 +3678,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3455,6 +3694,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 2,
       "ifr_runways": 2,
       "sids": null,
@@ -3470,6 +3710,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3485,6 +3726,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3500,6 +3742,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3508,29 +3751,31 @@
       "procedures_source": null
     },
     {
-      "iso_country": "PM",
-      "country": "Saint Pierre and Miquelon",
+      "iso_country": "SM",
+      "country": "San Marino",
       "icao_prefixes": [
-        "LF"
+        "LI"
       ],
-      "airports": 2,
+      "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 2,
-      "ifr_runways": 1,
+      "ifr_runways": 2,
       "sids": null,
       "stars": null,
       "apps": null,
       "procedures_source": null
     },
     {
-      "iso_country": "WS",
-      "country": "Samoa",
+      "iso_country": "SL",
+      "country": "Sierra Leone",
       "icao_prefixes": [
-        "NS"
+        "GF"
       ],
-      "airports": 4,
+      "airports": 8,
       "ifr_airports": 1,
-      "runways": 2,
+      "ifr_estimated": true,
+      "runways": 4,
       "ifr_runways": 1,
       "sids": null,
       "stars": null,
@@ -3545,22 +3790,8 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
-      "ifr_runways": 1,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "SR",
-      "country": "Suriname",
-      "icao_prefixes": [
-        "SM"
-      ],
-      "airports": 46,
-      "ifr_airports": 1,
-      "runways": 2,
       "ifr_runways": 1,
       "sids": null,
       "stars": null,
@@ -3575,6 +3806,7 @@
       ],
       "airports": 1,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 1,
       "sids": null,
@@ -3590,8 +3822,28 @@
       ],
       "airports": 2,
       "ifr_airports": 1,
+      "ifr_estimated": true,
       "runways": 2,
       "ifr_runways": 1,
+      "sids": null,
+      "stars": null,
+      "apps": null,
+      "procedures_source": null
+    },
+    {
+      "iso_country": "AQ",
+      "country": "Antarctica",
+      "icao_prefixes": [
+        "SA",
+        "SC",
+        "EG",
+        "NZ"
+      ],
+      "airports": 21,
+      "ifr_airports": 0,
+      "ifr_estimated": true,
+      "runways": 11,
+      "ifr_runways": 0,
       "sids": null,
       "stars": null,
       "apps": null,
@@ -3605,6 +3857,7 @@
       ],
       "airports": 1,
       "ifr_airports": 0,
+      "ifr_estimated": true,
       "runways": 1,
       "ifr_runways": 0,
       "sids": null,
@@ -3620,6 +3873,7 @@
       ],
       "airports": 1,
       "ifr_airports": 0,
+      "ifr_estimated": true,
       "runways": 0,
       "ifr_runways": 0,
       "sids": null,
@@ -3635,22 +3889,8 @@
       ],
       "airports": 1,
       "ifr_airports": 0,
+      "ifr_estimated": true,
       "runways": 0,
-      "ifr_runways": 0,
-      "sids": null,
-      "stars": null,
-      "apps": null,
-      "procedures_source": null
-    },
-    {
-      "iso_country": "SM",
-      "country": "San Marino",
-      "icao_prefixes": [
-        "LI"
-      ],
-      "airports": 1,
-      "ifr_airports": 0,
-      "runways": 2,
       "ifr_runways": 0,
       "sids": null,
       "stars": null,

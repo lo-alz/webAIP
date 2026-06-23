@@ -94,11 +94,17 @@
   .pipe-note b{color:var(--text)}
   .ptable-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
   table.ptable{border-collapse:collapse;width:100%;font-size:12.5px;min-width:940px}
-  .ptable th{position:sticky;top:0;background:#0e1830;color:var(--muted);font-weight:600;
+  .ptable th{position:sticky;top:0;z-index:2;background:#0e1830;color:var(--muted);font-weight:600;
     text-align:left;padding:9px 10px;cursor:pointer;white-space:nowrap;border-bottom:1px solid var(--line);user-select:none}
   .ptable th:hover{color:var(--accent)}
   .ptable td{padding:7px 10px;border-bottom:1px solid #142136;white-space:nowrap}
   .ptable tbody tr:hover{background:#0f1b2e}
+  /* freeze the country column so it stays visible when scrolling right */
+  .ptable td:first-child{position:sticky;left:0;z-index:1;background:var(--bg);
+    max-width:150px;overflow:hidden;text-overflow:ellipsis;border-right:1px solid var(--line)}
+  .ptable th:first-child{position:sticky;left:0;z-index:3;background:#0e1830;
+    max-width:150px;overflow:hidden;text-overflow:ellipsis;border-right:1px solid var(--line)}
+  .ptable tbody tr:hover td:first-child{background:#0f1b2e}
   .al-l{text-align:left}.al-r{text-align:right}.al-c{text-align:center}
   .ptable .iso{display:inline-block;min-width:22px;color:var(--accent);font-weight:700;font-size:11px}
   .ptable .mono{font-family:ui-monospace,Menlo,monospace;color:#9fb4d6}
@@ -417,18 +423,20 @@ function drawPipe(){
     ["source_type","Format"],["aixm_version","AIXM"],["access","Access"],["parsing_score","Score"]];
   let h=`<div class="pipe-bar"><label class="vfr"><input type="checkbox" id="ifrOnly"${pipeIfrOnly?" checked":""}> `+
     `Exclude VFR-only airports</label>`+
-    `<span class="pipe-stat">${PIPE.total} countries · <b>${totApts.toLocaleString()}</b> ${pipeIfrOnly?"IFR-capable":"ICAO"} airports · `+
+    `<span class="pipe-stat">${PIPE.total} countries · <b>${pipeIfrOnly?"~":""}${totApts.toLocaleString()}</b> ${pipeIfrOnly?"IFR-capable":"ICAO"} airports · `+
     `<b>${PIPE.researched}</b> AIP sources scored</span></div>`;
-  h+=`<div class="pipe-note">Airport universe from OurAirports; US procedure counts from the FAA CIFP. `+
-    `Parsing score <b>1</b> (easy: AIXM 5.2, open) → <b>10</b> (paper / no digital AIP). Click a header to sort; non-US procedure counts pending each country's parser.</div>`;
+  h+=`<div class="pipe-note"><b>IFR airports</b> = ICAO-coded fields with published instrument procedures. `+
+    `US &amp; territories are exact (FAA CIFP); <b>~</b> marks countries estimated from paved-runway presence until that country's parser runs. `+
+    `Parsing score <b>1</b> (easy: AIXM 5.2, open) → <b>10</b> (paper / no digital AIP). Click a header to sort.</div>`;
   h+='<div class="ptable-wrap"><table class="ptable"><thead><tr>';
   cols.forEach(([k,lbl])=>{ const ar=pipeSort.key===k?(pipeSort.dir<0?" ↓":" ↑"):""; h+=`<th data-k="${k}">${lbl}${ar}</th>`; });
   h+='</tr></thead><tbody>';
   rows.forEach(r=>{
     h+='<tr>';
-    h+=`<td class="al-l"><span class="iso">${r.iso}</span> ${r.country}</td>`;
+    const est=pipeIfrOnly&&r.ifr_estimated?"~":"";
+    h+=`<td class="al-l" title="${r.country}"><span class="iso">${r.iso}</span> ${r.country}</td>`;
     h+=`<td class="al-l mono">${r.icao_prefix||(r.icao_prefixes||[]).join(" ")}</td>`;
-    h+=`<td class="al-r">${(aptVal(r)||0).toLocaleString()}</td><td class="al-r dim">${(rwyVal(r)||0).toLocaleString()}</td>`;
+    h+=`<td class="al-r">${est}${(aptVal(r)||0).toLocaleString()}</td><td class="al-r dim">${est}${(rwyVal(r)||0).toLocaleString()}</td>`;
     h+=`<td class="al-r">${fmtNum(r.sids)}</td><td class="al-r">${fmtNum(r.stars)}</td><td class="al-r">${fmtNum(r.apps)}</td>`;
     h+=`<td class="al-l">${r.aip_authority?`<a href="${r.aip_url||'#'}" target="_blank" rel="noopener">${r.aip_authority}</a>`:'<span class="dim">—</span>'}</td>`;
     h+=`<td class="al-l">${tag(r.source_type)}</td>`;
