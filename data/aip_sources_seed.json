@@ -542,14 +542,14 @@
     },
     "VN": {
       "icao_prefix": "VV",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "CAAV / VATM - Vietnam Aeronautical Information Centre (VNAIC)",
+      "aip_url": "https://aim.vatm.vn/",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 6,
+      "confidence": "high",
+      "notes": "Open eAIP HTML at aim.vatm.vn (VNAIC/VATM); no login required. SID/STAR/IAP charts are linked vector PDF graphics from HTML aerodrome pages. Bilingual (English/Vietnamese). Updated per AIRAC cycle (5 amendments/year plus AIRAC cycles). Confirmed Sep 2025 AIRAC available. No AIXM. RNP procedures well-represented. Portal URL structure is long/indirect but fully public."
     },
     "BO": {
       "icao_prefix": "SL",
@@ -564,14 +564,14 @@
     },
     "MA": {
       "icao_prefix": "GM",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "SIA-Maroc / ONDA / DGAC",
+      "aip_url": "https://siamaroc.onda.ma/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 6,
+      "confidence": "high",
+      "notes": "SIA-Maroc (Office National des Aéroports) publishes AIP as PDF documents directly at siamaroc.onda.ma/eaip/ — no login required, URLs are publicly indexed. AD2 sections (e.g. AD2GMMN, AD2GMME, AD2GMML) and individual chart PDFs (SID, STAR, IAC series) are available. Content appears vector/text-selectable based on document structure evidence. AIRAC-aligned updates confirmed through AIRAC 06/2026. No AIXM export. No eAIP HTML procedure tables — procedures are chart PDFs only."
     },
     "RO": {
       "icao_prefix": "LR",
@@ -586,14 +586,14 @@
     },
     "TW": {
       "icao_prefix": "RC",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "CAA Taiwan (Civil Aviation Administration, MOTC)",
+      "aip_url": "https://ais.caa.gov.tw/eaip/",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 6,
+      "confidence": "high",
+      "notes": "Open eAIP HTML at ais.caa.gov.tw; no login required. SID/STAR/IAP delivered as linked vector PDFs embedded in eAIP HTML aerodrome pages. AIRAC-cycle amendments published per ICAO schedule. No AIXM data. Charts have selectable text (created MS Office/CAD). URL structure is complex but all content is public."
     },
     "CR": {
       "icao_prefix": "MR",
@@ -707,25 +707,25 @@
     },
     "MN": {
       "icao_prefix": "ZM",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "Civil Aviation Authority of Mongolia (CAAM)",
+      "aip_url": "https://ais.mn/files/aip/eAIP/",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 6,
+      "confidence": "high",
+      "notes": "Open eAIP HTML at ais.mn, published by CAAM using Indra Avitech eWiz platform; no login required. SID/STAR/IAP charts linked as vector PDFs from HTML aerodrome pages. AIRAC-cycle updates confirmed through mid-2025. No AIXM. Moderate number of airports with IFR procedures (primarily ZMCK Ulaanbaatar). PDF files appear to have selectable text."
     },
     "MZ": {
       "icao_prefix": "FQ",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "IACM (Instituto de Aviação Civil de Moçambique)",
+      "aip_url": "https://www.iacm.gov.mz/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "restricted",
+      "parsing_score": 9,
+      "confidence": "medium",
+      "notes": "No public digital AIP portal identified. IACM website (iacm.gov.mz) has no AIP/eAIP section. Historical AIC documents reference a paid subscription model ($100-150 USD) for physical/PDF AIP distribution. No online eAIP, no AIXM, no open chart download portal found as of June 2026. Procedures may be obtainable via formal request to IACM AIS office or commercial providers (Jeppesen/Navigraph). Confidence medium as a fully-accessible portal may exist but was not discoverable."
     },
     "CH": {
       "icao_prefix": "LS",
@@ -762,14 +762,14 @@
     },
     "UZ": {
       "icao_prefix": "UT",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "Civil Aviation Administration of Uzbekistan / Uzaeronavigation",
+      "aip_url": "https://uzaeronavigation.com/ais/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "paid",
+      "parsing_score": 7,
+      "confidence": "medium",
+      "notes": "AIP published by Uzaeronavigation (Civil Aviation Administration) at uzaeronavigation.com. Procedures delivered as vector PDFs (created in MS Word/Office, selectable text confirmed). Individual chart PDF URLs resolve without authentication suggesting partial open access, but the main AIS portal indicates subscription model. AIRAC-cycle updates confirmed through Oct 2025. No eAIP HTML framework; each chart is a standalone PDF. No AIXM. Score 7 reflects PDF-only format plus uncertain/partial access; confidence medium due to ambiguous subscription boundary."
     },
     "BE": {
       "icao_prefix": "EB",
@@ -784,47 +784,47 @@
     },
     "GA": {
       "icao_prefix": "FO",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
-      "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "aip_authority": "ASECNA / ANAC Gabon",
+      "aip_url": "https://aim.asecna.aero/",
+      "source_type": "mixed",
+      "aixm_version": "4.5",
+      "access": "open",
+      "parsing_score": 7,
+      "confidence": "high",
+      "notes": "ASECNA unified eAIP covers all 18 member states. HTML pages (aim.asecna.aero/html/eAIP/) are open without login; procedure data lives in PDF charts under /cartes/atlas/gabon/ (e.g. FOOL SID-RNP16, STAR VOR-DME, IAC-ILS). At least one sampled chart (FOOL NDB16) appeared scanned/rasterised; others may be vector. AIXM 4.5 dataset available on paid subscription (€100/yr). eAIP updated per AIRAC cycle. Per-chart PDF navigation adds friction (+1 from base 6)."
     },
     "PY": {
       "icao_prefix": "SG",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "DINAC (Dirección Nacional de Aeronáutica Civil)",
+      "aip_url": "https://www.dinac.gov.py/v3/index.php/ais/aip-paraguay",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 6,
+      "confidence": "high",
+      "notes": "DINAC publishes AIP Paraguay as a downloadable RAR/PDF archive (Spanish; English GEN section available). PDF is vector text (selectable, not scanned; confirmed from AIP_PARAGUAY_ENGLISH_AMDT_21 sample). Charts are vector PDF. No eAIP HTML, no AIXM. Free direct download from dinac.gov.py with no account required. Update cadence irregular (roughly 1-2 amendments per year rather than strict AIRAC). Score 6 for open vector PDF without HTML structure."
     },
     "AE": {
       "icao_prefix": "OM",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "GCAA (General Civil Aviation Authority, UAE)",
+      "aip_url": "https://www.gcaa.gov.ae/en/ais/Pages/default.aspx",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "free-account",
+      "parsing_score": 7,
+      "confidence": "high",
+      "notes": "eAIP HTML hosted on GCAA website at gcaa.gov.ae; free but requires user registration (Sign In visible on portal page). AIP distributed in electronic format only (no paper). SID/STAR/IAP charts available as PDF files linked from eAIP HTML. AIRAC-cycle updated. AIM Data Sets advertised but AIXM format not confirmed for public download. +1 for registration requirement elevates from score 6."
     },
     "CM": {
       "icao_prefix": "FK",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
-      "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "aip_authority": "ASECNA / CCAA Cameroon",
+      "aip_url": "https://aim.asecna.aero/",
+      "source_type": "mixed",
+      "aixm_version": "4.5",
+      "access": "open",
+      "parsing_score": 7,
+      "confidence": "high",
+      "notes": "Cameroon is ASECNA member state. ASECNA eAIP covers FKKD (Douala) and FKYS (Yaoundé) with confirmed STAR RNAV30 and IAC ILS30 chart PDFs at aim.asecna.aero/html/eAIP/cartes/atlas/cameroun/. HTML eAIP pages open without login; chart PDFs also appear publicly accessible. AIXM 4.5 trial via subscription. AIRAC-aligned updates. Per-chart PDF navigation friction (+1 from base 6)."
     },
     "DO": {
       "icao_prefix": "MD",
@@ -927,14 +927,14 @@
     },
     "IL": {
       "icao_prefix": "LL",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "CAAI (Civil Aviation Authority of Israel) / MAPA GISrael",
+      "aip_url": "https://e-aip.azurefd.net/",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 6,
+      "confidence": "high",
+      "notes": "Open eAIP HTML at e-aip.azurefd.net (Azure CDN); no registration required per direct page access. Published by MAPA GISrael on behalf of CAAI. SID/STAR/IAP charts linked as PDF files from HTML aerodrome sections. AIRAC-cycle updates confirmed (Oct 2025 cycle visible). Non-commercial use restriction noted in terms. No AIXM data found. Israel is not ECAC so EAD Basic coverage is limited."
     },
     "LY": {
       "icao_prefix": "HL",
@@ -971,25 +971,25 @@
     },
     "SD": {
       "icao_prefix": "HS",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "SCAA / Sudan Civil Aviation Authority",
+      "aip_url": "https://scaa-aim.gov.sd/",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 8,
+      "confidence": "low",
+      "notes": "Sudan has an eAIP at scaa-aim.gov.sd producing HTML output (e.g. ENR-5.1 section confirmed). However, the portal uses a JavaScript-based DDoS-protection verification screen that blocks automated access. Active civil war since April 2023: Khartoum FIR (HSSS) closed, HSSS/Khartoum airport non-operational; SCAA relocated to Port Sudan (HSPN). AIP data currency is highly questionable — last confirmed HTML update was March 2022. +1 for verification-screen friction and conflict-zone data reliability issues."
     },
     "YE": {
       "icao_prefix": "OY",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "CAMA (Civil Aviation and Meteorology Authority)",
+      "aip_url": "https://cama.gov.ye/en",
+      "source_type": "PDF-scan",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "restricted",
+      "parsing_score": 10,
+      "confidence": "medium",
+      "notes": "Yemen is an active conflict zone (EASA CZIB, Safe Airspace Do-Not-Fly). Sana'a Airport (OYSN) was struck Dec 2024 and closed through May 2025. CAMA website (cama.gov.ye) has no online eAIP or downloadable AIP; only administrative pages. AIRAC AIP Amendment 02/24 referenced in Aden NOTAM suggests an AIP nominally exists but it is not publicly accessible. Historical procedure charts circulate in scanned PDF form via third parties (Scribd). No direct digital distribution path confirmed. Conflict severely degrades AIS operations. Score: restricted/inaccessible = 9, +1 for active conflict/no digital path = 10."
     },
     "ZM": {
       "icao_prefix": "FL",
@@ -1092,25 +1092,25 @@
     },
     "CI": {
       "icao_prefix": "DI",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "ASECNA (Agence pour la Sécurité de la Navigation Aérienne en Afrique et à Madagascar)",
+      "aip_url": "https://aim.asecna.aero/",
+      "source_type": "mixed",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 6,
+      "confidence": "high",
+      "notes": "ASECNA eAIP at aim.asecna.aero is publicly accessible (no login). Aerodrome reference data in HTML; all SID/STAR/IAP procedures are vector PDF charts (CorelDRAW-origin, text-selectable, confirmed for DIAP Abidjan). French-language only. ASECNA covers all 18 member states under shared portal; CI procedures under country prefix 06. ASECNA in early AIXM 4.5 implementation phase per APIRG-23 report; no coded database yet. AIRAC-cycle aligned."
     },
     "GT": {
       "icao_prefix": "MG",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "DGAC Guatemala (Dirección General de Aeronáutica Civil)",
+      "aip_url": "https://www.cocesna.org/aipca/AIP_2554/Eurocontrol/COCESNA/2025-11-28-NON%20AIRAC/html/index.html",
+      "source_type": "mixed",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 7,
+      "confidence": "high",
+      "notes": "Guatemala AIP published within the COCESNA Central America eAIP (from AMDT 25/23 all CA states are consolidated). Eurocontrol eAIP tool: HTML frameset for text/table sections, procedure charts (SID/STAR/IAP) as vector PDFs in the eAIP Maps subtree (confirmed MG_AD-2.MGGT IAC RNP and VOR charts). DGAC also maintains dgac.gob.gt/home/aip_e/ but it redirects to COCESNA. Open, no registration. Score 6 (open vector PDF charts in eAIP) +1 for multi-country frameset navigation = 7."
     },
     "LT": {
       "icao_prefix": "EY",
@@ -1136,14 +1136,14 @@
     },
     "SK": {
       "icao_prefix": "LZ",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
-      "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "aip_authority": "LPS SR (Letové prevádzkové služby Slovenskej republiky)",
+      "aip_url": "https://aim.lps.sk/web/",
+      "source_type": "eAIP-HTML",
+      "aixm_version": "5.1",
+      "access": "free-account",
+      "parsing_score": 5,
+      "confidence": "high",
+      "notes": "LPS SR publishes standard EUROCONTROL eAIP HTML at aim.lps.sk; free registration confirmed required for all content. ECAC state; data also available via EAD Basic (free account, AIXM 5.1). AIRAC-cycle aligned. No open anonymous access to procedure sections."
     },
     "UY": {
       "icao_prefix": "SU",
@@ -1334,25 +1334,25 @@
     },
     "MW": {
       "icao_prefix": "FW",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "MCAA (Malawi Civil Aviation Authority)",
+      "aip_url": "https://www.caa.gov.mw/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "restricted",
+      "parsing_score": 9,
+      "confidence": "low",
+      "notes": "MCAA established 2023 (transitioned from DCA). No publicly accessible eAIP portal found on caa.gov.mw. ICAO APIRG targeted Malawi for eAIP by 2025 but no live portal confirmed. AIP likely available on paper or PDF by direct request; no online distribution channel identified. No AIXM, no coded database. Main airports FWKI (Lilongwe) and FWCL (Blantyre). Confidence low as no direct portal verification possible."
     },
     "ML": {
       "icao_prefix": "GA",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
-      "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "aip_authority": "ASECNA / ANAC Mali",
+      "aip_url": "https://aim.asecna.aero/",
+      "source_type": "mixed",
+      "aixm_version": "4.5",
+      "access": "open",
+      "parsing_score": 7,
+      "confidence": "high",
+      "notes": "Mali is ASECNA member state; same unified eAIP at aim.asecna.aero as Gabon/Cameroon. ICAO prefix GA. HTML pages open without login; procedures in PDF charts under /cartes/atlas/mali/ (Bamako GABS and others). AIXM 4.5 trial dataset via €100/yr subscription. Chart PDFs include SID, STAR, IAC types; format quality varies (some raster, some vector). Per-chart manual navigation adds friction (+1)."
     },
     "MD": {
       "icao_prefix": "LU",
@@ -1400,14 +1400,14 @@
     },
     "RS": {
       "icao_prefix": "LY",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
-      "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "aip_authority": "SMATSA (Serbia and Montenegro Air Traffic Services)",
+      "aip_url": "https://smatsa.rs/en/aip/",
+      "source_type": "eAIP-HTML",
+      "aixm_version": "5.1",
+      "access": "open",
+      "parsing_score": 4,
+      "confidence": "high",
+      "notes": "SMATSA publishes eAIP HTML directly at smatsa.rs/upload/aip/published/ with no login required; individual section URLs confirmed publicly accessible. ECAC state; also available via EAD Basic (AIXM 5.1). eAIP effective date confirmed June 2026. Covers Serbia and Montenegro under LY prefix. Disclaimer: informational use only, not for operational navigation."
     },
     "SO": {
       "icao_prefix": "HC",
@@ -1543,14 +1543,14 @@
     },
     "SS": {
       "icao_prefix": "HS",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "SSCAA (South Sudan Civil Aviation Authority)",
+      "aip_url": "https://www.sscaa.gov.ss/publications/aip/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 8,
+      "confidence": "medium",
+      "notes": "SSCAA publishes AIP as PDF sections at sscaa.gov.ss with open public access. New SID/STAR/RNP APCH procedures for Juba (HSSJ) developed from 2023; Feb 2024 amendment published. PDFs appear vector/text-based (new-generation), not scanned. Conflict-zone context (ongoing instability); AIS capacity limited; no AIXM, no coded database. Single main airport (Juba); ground truth verification only by consensus. +1 for fragile AIS infrastructure."
     },
     "TJ": {
       "icao_prefix": "UT",
@@ -1587,14 +1587,14 @@
     },
     "UG": {
       "icao_prefix": "HU",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "UCAA (Uganda Civil Aviation Authority)",
+      "aip_url": "https://aim.caa.co.ug/",
+      "source_type": "eAIP-HTML",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "paid",
+      "parsing_score": 7,
+      "confidence": "medium",
+      "notes": "UCAA AIM portal at aim.caa.co.ug provides eAIP, amendments, supplements and AIC behind annual paid subscription (AIP subscription form required). Format is eAIP online plus paper/CD. GNSS approaches for Entebbe (HUEN) operational on test basis. No AIXM export. Subscription fee amount not publicly listed. Confidence medium as fee structure and exact eAIP format not fully verified."
     },
     "VU": {
       "icao_prefix": "NV",
@@ -1697,14 +1697,14 @@
     },
     "FJ": {
       "icao_prefix": "NF",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "Airports Fiji Limited (AIS Provider) / CAAF",
+      "aip_url": "https://airportsfiji.com/ais-fiji/",
+      "source_type": "PDF-text",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "paid",
+      "parsing_score": 9,
+      "confidence": "high",
+      "notes": "AIP Fiji Islands published by Airports Fiji Ltd as AIS provider; login-gated portal (airportsfiji.com/ais-fiji) with subscription required — PPRuNe forum reports ~NZD 350 single-use purchase. Format is PDF (vector text confirmed from GEN section sample). No AIXM, no open download. AIRAC-aligned amendment service. No free-account path. Procedures (SID/STAR/IAP) are embedded as PDF chart pages. +1 friction for portal account and subscription paywall."
     },
     "KW": {
       "icao_prefix": "OK",
@@ -1741,14 +1741,14 @@
     },
     "NI": {
       "icao_prefix": "MN",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "INAC (Instituto Nicaragüense de Aeronáutica Civil)",
+      "aip_url": "https://www.cocesna.org/aipca/AIPMN/inicio.html",
+      "source_type": "mixed",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 7,
+      "confidence": "high",
+      "notes": "eAIP published via COCESNA (Eurocontrol eAIP tool); HTML frameset index plus procedure charts as vector PDFs embedded in eAIP tree (e.g. MN_AD-2 ILS charts). Top-level HTML and text sections are machine-readable; SID/STAR/IAP content is in PDF chart files within the eAIP package, not in HTML tables. INAC also mirrors a full PDF AIP at inac.gob.ni. No registration needed. AIRAC cycle updates confirmed 2025. Score 6 (open vector PDF in eAIP) +1 for frameset navigation complexity = 7."
     },
     "MP": {
       "icao_prefix": "PG",
@@ -1895,14 +1895,14 @@
     },
     "SV": {
       "icao_prefix": "MS",
-      "aip_authority": null,
-      "aip_url": null,
-      "source_type": "unknown",
+      "aip_authority": "AAC El Salvador (Autoridad de Aviación Civil) via COCESNA",
+      "aip_url": "https://www.cocesna.org/aipca/AIPMS/inicio.html",
+      "source_type": "mixed",
       "aixm_version": "nil",
-      "access": "unknown",
-      "parsing_score": null,
-      "confidence": "none",
-      "notes": "unresearched — run AIPhunter"
+      "access": "open",
+      "parsing_score": 7,
+      "confidence": "high",
+      "notes": "El Salvador AIP published via COCESNA eAIP (Eurocontrol tool); same architecture as Guatemala/Nicaragua — HTML frameset for GEN/ENR text, SID/STAR/IAP as vector PDF charts in eAIP Maps tree (e.g. MS_AD-2.MSLP SID RWY 25, IAC RNP Z). AAC also maintains aac.gob.sv/aip/ but content is served via COCESNA. Fully open, no account. AIRAC and non-AIRAC amendments published 2024-2026. Score 6 (open vector PDF in eAIP) +1 for frameset complexity = 7."
     },
     "SZ": {
       "icao_prefix": "FD",
