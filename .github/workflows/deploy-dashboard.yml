@@ -1,13 +1,16 @@
-name: Deploy dashboard to GitHub Pages
+name: Deploy dashboard + viewer to GitHub Pages
 
-# Publishes dashboard/ as the Pages site root -> https://lo-alz.github.io/webaip/
-# (index.html + tasks.json served together, so the live fetch works).
+# Publishes a combined static site (case-sensitive URL!):
+#   dashboard/          -> https://lo-alz.github.io/webAIP/         (checklist + pipeline)
+#   visualization/cesium -> https://lo-alz.github.io/webAIP/viewer/ (3D procedure viewer)
+# index.html + tasks.json/countries.json are served together so the live fetch works.
 
 on:
   push:
     branches: [claude/read-markdown-xez32t]
     paths:
       - "dashboard/**"
+      - "visualization/**"
       - ".github/workflows/deploy-dashboard.yml"
   workflow_dispatch:
 
@@ -35,10 +38,16 @@ jobs:
         with:
           enablement: true
 
-      - name: Upload dashboard artifact
+      - name: Assemble site (dashboard at root, viewer at /viewer/)
+        run: |
+          mkdir -p _site/viewer
+          cp -r dashboard/.            _site/
+          cp -r visualization/cesium/. _site/viewer/
+
+      - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dashboard
+          path: _site
 
       - name: Deploy to GitHub Pages
         id: deployment

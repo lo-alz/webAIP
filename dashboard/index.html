@@ -35,7 +35,7 @@
   .tab.active{color:#04121e;background:var(--accent);border-color:var(--accent)}
   .spacer{flex:1}
   .btn{cursor:pointer;padding:7px 13px;border-radius:8px;border:1px solid var(--line);
-       background:var(--panel);color:var(--muted);font-size:12.5px}
+       background:var(--panel);color:var(--muted);font-size:12.5px;text-decoration:none;display:inline-block}
   .btn:hover{color:var(--text);border-color:var(--accent)}
   .view{padding:14px 0 60px}
 
@@ -141,6 +141,7 @@
       <div class="tab" data-view="gantt">▦ Gantt</div>
       <div class="tab" data-view="pipeline">▤ Pipeline</div>
       <div class="spacer"></div>
+      <a class="btn" href="viewer/" title="Open the CesiumJS 3D procedure viewer">🌐 3D viewer</a>
       <div class="btn" id="reset">↺ Reset to build status</div>
     </div>
   </div>
