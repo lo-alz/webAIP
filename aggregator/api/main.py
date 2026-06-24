@@ -11,6 +11,10 @@ Endpoints (all cycle-scoped where relevant):
   GET /procedures/{id}/kml                  KML download (static path + gx:Track)
                                            — opens in Google Earth
 
+Static front-ends mounted same-origin (when present):
+  /viz/        CesiumJS 3D procedure viewer
+  /dashboard/  project checklist + Gantt + parsing-difficulty pipeline view
+
 Connection comes from ``$DATABASE_URL``. Run:
     DATABASE_URL=postgresql://... uvicorn aggregator.api.main:app --port 8080
 """
@@ -39,13 +43,17 @@ app.add_middleware(
     allow_origins=["*"], allow_methods=["GET"], allow_headers=["*"],
 )
 
-# Serve the CesiumJS viewer same-origin as the API at /viz (so no CORS needed
-# for the page itself): http://<host>/viz/?pid=<id>
-_VIZ_DIR = Path(__file__).resolve().parents[2] / "visualization" / "cesium"
-if _VIZ_DIR.is_dir():
-    from fastapi.staticfiles import StaticFiles
+# Serve the static front-ends same-origin as the API (so their fetch() calls
+# need no CORS): the CesiumJS viewer at /viz and the project dashboard at
+# /dashboard — http://<host>/viz/?pid=<id> and http://<host>/dashboard/
+_REPO = Path(__file__).resolve().parents[2]
+for _route, _dir in (("/viz", _REPO / "visualization" / "cesium"),
+                     ("/dashboard", _REPO / "dashboard")):
+    if _dir.is_dir():
+        from fastapi.staticfiles import StaticFiles
 
-    app.mount("/viz", StaticFiles(directory=str(_VIZ_DIR), html=True), name="viz")
+        app.mount(_route, StaticFiles(directory=str(_dir), html=True),
+                  name=_route.strip("/"))
 
 
 def _conn():

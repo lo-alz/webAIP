@@ -1,6 +1,6 @@
 {
   "project": "AeroAIP Subnet",
-  "updated": "2026-06-22",
+  "updated": "2026-06-24",
   "phases": [
     {"id": "p0", "name": "Phase 0 — Proof of Concept", "weeks": "1–2"},
     {"id": "p1", "name": "Phase 1 — Pipeline Build", "weeks": "3–6"},
@@ -25,19 +25,19 @@
     {"id": "download",  "phase": "p0", "title": "download_waypoint_dbs.sh (live FAA)", "component": "scripts", "start": 2, "days": 1, "deps": ["sources"], "status": "done"},
     {"id": "buildidx",  "phase": "p0", "title": "build_waypoint_index.py", "component": "scripts", "start": 7, "days": 1, "deps": ["wpdb", "cifp"], "status": "done"},
     {"id": "poc",       "phase": "p0", "title": "poc_extraction.py — KLAX DOTSS2 end-to-end", "component": "scripts", "start": 8, "days": 2, "deps": ["assemble", "scoring", "gml", "buildidx", "dtpp"], "status": "done"},
-    {"id": "tests",     "phase": "p0", "title": "Test suite (43 tests, incl. live CIFP)", "component": "tests", "start": 9, "days": 2, "deps": ["poc"], "status": "done"},
+    {"id": "tests",     "phase": "p0", "title": "Test suite (75 tests, incl. live CIFP)", "component": "tests", "start": 9, "days": 2, "deps": ["poc"], "status": "done"},
     {"id": "dashboard", "phase": "p0", "title": "Project dashboard (checklist + Gantt)", "component": "meta", "start": 10, "days": 1, "deps": ["poc"], "status": "done"},
 
-    {"id": "aiphunter",    "phase": "p1", "title": "AIPhunter agent — scan AIP sources & score parsing difficulty", "component": "agent", "start": 14, "days": 2, "deps": ["poc"], "status": "todo"},
-    {"id": "airport-scan", "phase": "p1", "title": "Scan ICAO IFR airports (OurAirports spine)", "component": "data", "start": 16, "days": 2, "deps": ["aiphunter"], "status": "todo"},
-    {"id": "country-group","phase": "p1", "title": "Group airports by country + runway/SID/STAR/APP counts", "component": "data", "start": 18, "days": 2, "deps": ["airport-scan"], "status": "todo"},
-    {"id": "country-table","phase": "p1", "title": "Country AIP-source table (source, format, AIXM ver, score 1–10)", "component": "data", "start": 20, "days": 3, "deps": ["aiphunter", "country-group"], "status": "todo"},
-    {"id": "dash-countries","phase": "p1", "title": "Dashboard: countries & parsing-difficulty JSON view", "component": "meta", "start": 23, "days": 2, "deps": ["country-table"], "status": "todo"},
+    {"id": "aiphunter",    "phase": "p1", "title": "AIPhunter agent — scan AIP sources & score parsing difficulty", "component": "agent", "start": 14, "days": 2, "deps": ["poc"], "status": "done"},
+    {"id": "airport-scan", "phase": "p1", "title": "Scan ICAO IFR airports (OurAirports spine)", "component": "data", "start": 16, "days": 2, "deps": ["aiphunter"], "status": "done"},
+    {"id": "country-group","phase": "p1", "title": "Group airports by country + runway/SID/STAR/APP counts", "component": "data", "start": 18, "days": 2, "deps": ["airport-scan"], "status": "inprogress"},
+    {"id": "country-table","phase": "p1", "title": "Country AIP-source table (source, format, AIXM ver, score 1–10)", "component": "data", "start": 20, "days": 3, "deps": ["aiphunter", "country-group"], "status": "done"},
+    {"id": "dash-countries","phase": "p1", "title": "Dashboard: countries & parsing-difficulty JSON view", "component": "meta", "start": 23, "days": 2, "deps": ["country-table"], "status": "done"},
     {"id": "faa-all",   "phase": "p1", "title": "Generalise FAA extractor to all SID/STAR/IAP", "component": "miner", "start": 14, "days": 6, "deps": ["poc"], "status": "todo"},
-    {"id": "eaip",      "phase": "p1", "title": "eAIP HTML parsers (EGLL, VHHH, CYVR)", "component": "miner", "start": 16, "days": 8, "deps": ["faa-all"], "status": "todo"},
+    {"id": "eaip",      "phase": "p1", "title": "eAIP HTML parsers (EGLL, VHHH, CYVR)", "component": "miner", "start": 16, "days": 8, "deps": ["faa-all"], "status": "inprogress"},
     {"id": "aixm-full", "phase": "p1", "title": "Full AIXM 5.2 serializer (beyond profile)", "component": "miner", "start": 18, "days": 6, "deps": ["gml"], "status": "todo"},
-    {"id": "postgis",   "phase": "p1", "title": "PostGIS schema (AIRAC-versioned, spatial)", "component": "aggregator", "start": 20, "days": 5, "deps": ["aixm-full"], "status": "todo"},
-    {"id": "ead",       "phase": "p1", "title": "EAD AIXM 5.1 → 5.2 mapping", "component": "validator", "start": 22, "days": 5, "deps": ["eaip", "aixm-full"], "status": "todo"},
+    {"id": "postgis",   "phase": "p1", "title": "PostGIS schema (AIRAC-versioned, spatial)", "component": "aggregator", "start": 20, "days": 5, "deps": ["aixm-full"], "status": "done"},
+    {"id": "ead",       "phase": "p1", "title": "EAD AIXM 5.1 → 5.2 mapping", "component": "validator", "start": 22, "days": 5, "deps": ["eaip", "aixm-full"], "status": "inprogress"},
     {"id": "scheduler", "phase": "p1", "title": "AIRAC 28-day scheduler", "component": "scripts", "start": 24, "days": 3, "deps": ["faa-all"], "status": "todo"},
 
     {"id": "bootstrap", "phase": "p2", "title": "bootstrap_testnet.sh (subnet, wallets, faucet)", "component": "subnet", "start": 42, "days": 4, "deps": ["scheduler", "postgis"], "status": "todo"},
@@ -45,8 +45,8 @@
     {"id": "uscycle",   "phase": "p2", "title": "Process one full US AIRAC cycle", "component": "subnet", "start": 50, "days": 6, "deps": ["valnode"], "status": "todo"},
     {"id": "miners",    "phase": "p2", "title": "Recruit 3–5 external testnet miners", "component": "subnet", "start": 56, "days": 6, "deps": ["uscycle"], "status": "todo"},
 
-    {"id": "cesium",    "phase": "p3", "title": "CesiumJS 3D SID/STAR globe", "component": "viz", "start": 70, "days": 6, "deps": ["uscycle"], "status": "todo"},
-    {"id": "kml",       "phase": "p3", "title": "KML export endpoint (Google Earth)", "component": "viz", "start": 72, "days": 3, "deps": ["postgis"], "status": "todo"},
+    {"id": "cesium",    "phase": "p3", "title": "CesiumJS 3D SID/STAR globe", "component": "viz", "start": 70, "days": 6, "deps": ["uscycle"], "status": "done"},
+    {"id": "kml",       "phase": "p3", "title": "KML export endpoint (Google Earth)", "component": "viz", "start": 72, "days": 3, "deps": ["postgis"], "status": "done"},
     {"id": "demo",      "phase": "p3", "title": "Demo video: chart → AIXM 5.2 → 3D globe", "component": "viz", "start": 76, "days": 4, "deps": ["cesium", "kml"], "status": "todo"},
 
     {"id": "monitor",   "phase": "p4", "title": "Monitor registration-cost trough", "component": "ops", "start": 84, "days": 4, "deps": ["miners"], "status": "todo"},
