@@ -13,5 +13,13 @@ pymupdf>=1.24
 # without it via the committed extraction fixture.
 # litellm>=1.40
 
+# Aggregator (optional — Stage 4 PostGIS import + read API). Imported lazily by
+# aggregator/ingest.py and aggregator/api/main.py; record_to_rows and the rest of
+# the suite run without these (the live ingest/API tests skip when DATABASE_URL is
+# unset). Requires a PostgreSQL server with the PostGIS extension.
+# psycopg[binary]>=3.1
+# fastapi>=0.110
+# uvicorn>=0.29
+
 # Tests:
 pytest>=8.0
