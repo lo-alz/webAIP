@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AeroAIP fixture — representative AIXM 5.1 subset for the EGLL DET2J RNAV SID,
+  standing in for an EUROCONTROL EAD AIXM 5.1 export (the UK/EGLL is a Phase-0
+  test airport; access via EAD Basic, free registration). The aixm:DesignatedPoint
+  features carry REAL gml:pos geometry (the part coordinates depend on); the leg
+  encoding is the compact form miner/extractor/aixm_upconverter.py reads. Used by
+  scripts/poc_egll_eaip.py and tests/test_aixm_upconvert.py.
+-->
+<aixm:AIXMBasicMessage
+    xmlns:aixm="http://www.aixm.aero/schema/5.1"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <aixm:hasMember>
+    <aixm:DesignatedPoint gml:id="WP_OCK">
+      <aixm:timeSlice>
+        <aixm:DesignatedPointTimeSlice gml:id="WPTS_OCK">
+          <aixm:designator>OCK</aixm:designator>
+          <aixm:icaoRegion>EG</aixm:icaoRegion>
+          <aixm:location>
+            <aixm:Point gml:id="P_OCK"><gml:pos>51.30527800 -0.44722200</gml:pos></aixm:Point>
+          </aixm:location>
+        </aixm:DesignatedPointTimeSlice>
+      </aixm:timeSlice>
+    </aixm:DesignatedPoint>
+  </aixm:hasMember>
+
+  <aixm:hasMember>
+    <aixm:DesignatedPoint gml:id="WP_BIG">
+      <aixm:timeSlice>
+        <aixm:DesignatedPointTimeSlice gml:id="WPTS_BIG">
+          <aixm:designator>BIG</aixm:designator>
+          <aixm:icaoRegion>EG</aixm:icaoRegion>
+          <aixm:location>
+            <aixm:Point gml:id="P_BIG"><gml:pos>51.33083300 0.03472200</gml:pos></aixm:Point>
+          </aixm:location>
+        </aixm:DesignatedPointTimeSlice>
+      </aixm:timeSlice>
+    </aixm:DesignatedPoint>
+  </aixm:hasMember>
+
+  <aixm:hasMember>
+    <aixm:DesignatedPoint gml:id="WP_DET">
+      <aixm:timeSlice>
+        <aixm:DesignatedPointTimeSlice gml:id="WPTS_DET">
+          <aixm:designator>DET</aixm:designator>
+          <aixm:icaoRegion>EG</aixm:icaoRegion>
+          <aixm:location>
+            <aixm:Point gml:id="P_DET"><gml:pos>51.30416700 0.59722200</gml:pos></aixm:Point>
+          </aixm:location>
+        </aixm:DesignatedPointTimeSlice>
+      </aixm:timeSlice>
+    </aixm:DesignatedPoint>
+  </aixm:hasMember>
+
+  <aixm:hasMember>
+    <aixm:StandardInstrumentDeparture gml:id="SID_DET2J">
+      <aixm:timeSlice>
+        <aixm:StandardInstrumentDepartureTimeSlice gml:id="SIDTS_DET2J">
+          <aixm:designator>DET2J</aixm:designator>
+          <aixm:airportICAO>EGLL</aixm:airportICAO>
+          <aixm:pbnRequirement>D1</aixm:pbnRequirement>
+          <aixm:transition kind="runway" designator="09R" id="DET2J.09R">
+            <aixm:leg seq="10" pathTerminator="VA" courseMag="91.0" altType="AT_OR_ABOVE" altFt="1080"/>
+            <aixm:leg seq="20" pathTerminator="DF" point="OCK" flyOver="false" altType="AT_OR_BELOW" altFt="3000"/>
+            <aixm:leg seq="30" pathTerminator="TF" point="BIG" flyOver="false"/>
+            <aixm:leg seq="40" pathTerminator="TF" point="DET" flyOver="false" altType="AT_OR_ABOVE" altFt="5000" spdType="AT_OR_BELOW" spdKt="250"/>
+          </aixm:transition>
+        </aixm:StandardInstrumentDepartureTimeSlice>
+      </aixm:timeSlice>
+    </aixm:StandardInstrumentDeparture>
+  </aixm:hasMember>
+
+</aixm:AIXMBasicMessage>

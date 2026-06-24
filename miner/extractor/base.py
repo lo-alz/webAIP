@@ -24,6 +24,14 @@ class ExtractedLeg(TypedDict, total=False):
     turn_direction: str | None      # L / R
     radius_nm: float | None         # RF legs
     center_fix_id: str | None       # RF legs — identifier only
+    # CONSENSUS escape hatch (spec §7, ZSPD tier-3 only). Populated ONLY by
+    # no-ground-truth extractors for countries with NO coded waypoint database,
+    # and consulted ONLY after a DB lookup misses (see miner.assemble, the
+    # ``on_missing='consensus'`` policy). It NEVER overrides a DB record and is
+    # hard-rejected for US (K/P) airports by validator.validation_rules. For any
+    # country with a waypoint database this stays absent — the strict
+    # structure-only contract above is unchanged.
+    fallback_latlon: tuple[str, str] | None  # (lat, lon) decimal-degree text
 
 
 class ExtractedTransition(TypedDict, total=False):

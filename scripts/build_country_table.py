@@ -29,7 +29,11 @@ SEED = ROOT / "data" / "aip_sources_seed.json"
 OUT = ROOT / "dashboard" / "countries.json"
 
 SEED_FIELDS = ["icao_prefix", "aip_authority", "aip_url", "source_type",
-               "aixm_version", "access", "parsing_score", "confidence", "notes"]
+               "aixm_version", "access", "parsing_score", "confidence", "notes",
+               # parsing-method catalog (derived by scripts/backfill_parser_methods.py;
+               # parser_method_override / method_notes are AIPhunter's escape hatch)
+               "acquisition_method", "parser_method",
+               "parser_method_override", "method_notes"]
 
 RUBRIC = ("1=AIXM5.2 open · 2=AIXM5.1/4.5 or open ARINC424 · 3=open structured/clean eAIP · "
           "4=open eAIP irregular · 5=eAIP free-account (EAD) · 6=open vector PDF · "
@@ -48,6 +52,8 @@ def default_entry(scan_row: dict) -> dict:
         "parsing_score": None,
         "confidence": "none",
         "notes": "unresearched — run AIPhunter",
+        "acquisition_method": None,
+        "parser_method": None,
     }
 
 

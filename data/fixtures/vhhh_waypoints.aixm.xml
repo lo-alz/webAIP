@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  AeroAIP fixture — VHHH-area significant points, standing in for the ICAO APAC
+  regional set that Hong Kong procedures cross-reference (CAAS HK has no open
+  coded procedure DB, so coordinates come from the regional point database).
+  Loaded into the waypoint index with source_db="CAAS_HK" by
+  scripts/poc_vhhh_eaip.py via miner.extractor.aixm_upconverter.parse_waypoints.
+  Coordinates are within the VH country bounding box (validator/validation_rules).
+-->
+<aixm:AIXMBasicMessage
+    xmlns:aixm="http://www.aixm.aero/schema/5.1"
+    xmlns:gml="http://www.opengis.net/gml/3.2">
+
+  <aixm:hasMember>
+    <aixm:DesignatedPoint gml:id="WP_SOLLY">
+      <aixm:timeSlice><aixm:DesignatedPointTimeSlice gml:id="TS_SOLLY">
+        <aixm:designator>SOLLY</aixm:designator>
+        <aixm:icaoRegion>VH</aixm:icaoRegion>
+        <aixm:location><aixm:Point gml:id="PT_SOLLY"><gml:pos>22.20000000 113.80000000</gml:pos></aixm:Point></aixm:location>
+      </aixm:DesignatedPointTimeSlice></aixm:timeSlice>
+    </aixm:DesignatedPoint>
+  </aixm:hasMember>
+
+  <aixm:hasMember>
+    <aixm:DesignatedPoint gml:id="WP_OCEAN">
+      <aixm:timeSlice><aixm:DesignatedPointTimeSlice gml:id="TS_OCEAN">
+        <aixm:designator>OCEAN</aixm:designator>
+        <aixm:icaoRegion>VH</aixm:icaoRegion>
+        <aixm:location><aixm:Point gml:id="PT_OCEAN"><gml:pos>22.05000000 113.60000000</gml:pos></aixm:Point></aixm:location>
+      </aixm:DesignatedPointTimeSlice></aixm:timeSlice>
+    </aixm:DesignatedPoint>
+  </aixm:hasMember>
+
+  <aixm:hasMember>
+    <aixm:DesignatedPoint gml:id="WP_PORPA">
+      <aixm:timeSlice><aixm:DesignatedPointTimeSlice gml:id="TS_PORPA">
+        <aixm:designator>PORPA</aixm:designator>
+        <aixm:icaoRegion>VH</aixm:icaoRegion>
+        <aixm:location><aixm:Point gml:id="PT_PORPA"><gml:pos>21.90000000 113.55000000</gml:pos></aixm:Point></aixm:location>
+      </aixm:DesignatedPointTimeSlice></aixm:timeSlice>
+    </aixm:DesignatedPoint>
+  </aixm:hasMember>
+
+  <aixm:hasMember>
+    <aixm:DesignatedPoint gml:id="WP_TAMOT">
+      <aixm:timeSlice><aixm:DesignatedPointTimeSlice gml:id="TS_TAMOT">
+        <aixm:designator>TAMOT</aixm:designator>
+        <aixm:icaoRegion>VH</aixm:icaoRegion>
+        <aixm:location><aixm:Point gml:id="PT_TAMOT"><gml:pos>21.75000000 113.50000000</gml:pos></aixm:Point></aixm:location>
+      </aixm:DesignatedPointTimeSlice></aixm:timeSlice>
+    </aixm:DesignatedPoint>
+  </aixm:hasMember>
+
+</aixm:AIXMBasicMessage>

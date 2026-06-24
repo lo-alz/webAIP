@@ -420,7 +420,8 @@ function drawPipe(){
   const aptLbl=pipeIfrOnly?"IFR airports":"Airports";
   const cols=[["country","Country"],["icao","ICAO"],["airports",aptLbl],["runways","RWY"],
     ["sids","SID"],["stars","STAR"],["apps","APP"],["aip_authority","AIP source"],
-    ["source_type","Format"],["aixm_version","AIXM"],["access","Access"],["parsing_score","Score"]];
+    ["source_type","Format"],["parser_method","Parser"],["aixm_version","AIXM"],
+    ["access","Access"],["parsing_score","Score"]];
   let h=`<div class="pipe-bar"><label class="vfr"><input type="checkbox" id="ifrOnly"${pipeIfrOnly?" checked":""}> `+
     `Exclude VFR-only airports</label>`+
     `<span class="pipe-stat">${PIPE.total} countries · <b>${totApts.toLocaleString()}</b> airports · `+
@@ -441,6 +442,7 @@ function drawPipe(){
     h+=`<td class="al-r">${fmtNum(r.sids)}</td><td class="al-r">${fmtNum(r.stars)}</td><td class="al-r">${fmtNum(r.apps)}</td>`;
     h+=`<td class="al-l">${r.aip_authority?`<a href="${r.aip_url||'#'}" target="_blank" rel="noopener">${r.aip_authority}</a>`:'<span class="dim">—</span>'}</td>`;
     h+=`<td class="al-l">${tag(r.source_type)}</td>`;
+    h+=`<td class="al-l">${r.parser_method?tag((r.parser_method_override||r.parser_method)+(r.parser_method_override?' *':'')):'<span class="dim">—</span>'}</td>`;
     h+=`<td class="al-l">${(r.aixm_version&&r.aixm_version!=='nil')?r.aixm_version:'<span class="dim">—</span>'}</td>`;
     h+=`<td class="al-l">${tag(r.access)}</td>`;
     h+=`<td class="al-c"><span class="score" style="background:${scoreColor(r.parsing_score)}">${r.parsing_score==null?'·':r.parsing_score}</span></td>`;

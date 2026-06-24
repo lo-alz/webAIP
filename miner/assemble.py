@@ -9,8 +9,10 @@ LLM never contributes a coordinate.
 from __future__ import annotations
 
 import datetime as _dt
+import decimal
 from typing import Optional
 
+from miner.coordinates import canonical
 from miner.extractor.base import ExtractedLeg, ExtractedProcedure
 from miner.schemas import (
     AltConstraint,
@@ -19,7 +21,12 @@ from miner.schemas import (
     RunwayTransition,
     SIDRecord,
     SpeedConstraint,
+    WGS84Point,
 )
+
+# Confidence ceiling applied to any record that needed a CONSENSUS waypoint
+# (no authoritative DB record existed). Mirrors the spec's "confidence: LOW".
+_CONSENSUS_CONFIDENCE = 0.4
 
 
 def _alt(d: Optional[dict]) -> Optional[AltConstraint]:
@@ -37,12 +44,39 @@ def _speed(d: Optional[dict]) -> Optional[SpeedConstraint]:
     return SpeedConstraint(type=d["type"], value_kt=int(d["value_kt"]))
 
 
-def _leg(e: ExtractedLeg, index, region: Optional[str]) -> ProcedureLeg:
+def _consensus_point(wp_id: str, latlon, wtype: str = "NAMED") -> WGS84Point:
+    """Build a CONSENSUS-flagged point from an extractor's chart-text fallback.
+
+    Used ONLY when the authoritative waypoint DB has no record (spec §7). The
+    coordinate is the extractor's last-resort estimate, flagged ``CONSENSUS`` and
+    confidence-downgraded; ``validation_rules`` hard-rejects it for US airports.
+    """
+    lat, lon = latlon
+    return WGS84Point(
+        lat=decimal.Decimal(canonical(decimal.Decimal(str(lat)))),
+        lon=decimal.Decimal(canonical(decimal.Decimal(str(lon)))),
+        waypoint_id=wp_id,
+        waypoint_type=wtype,
+        source_db="CONSENSUS",
+    )
+
+
+def _leg(e: ExtractedLeg, index, region: Optional[str], *,
+         on_missing: str = "raise", consensus: Optional[list] = None) -> ProcedureLeg:
     wp_id = e.get("waypoint_id")
     center_id = e.get("center_fix_id")
     waypoint = index.lookup(wp_id, region) if wp_id else None
     if wp_id and waypoint is None:
-        raise KeyError(f"Waypoint {wp_id!r} not found in index (region={region})")
+        # Authoritative DB miss. Default policy aborts the record (US strictness).
+        # The 'consensus' policy is the no-ground-truth fallback: use the
+        # extractor's chart-text estimate, flagged CONSENSUS, if it provided one.
+        fallback = e.get("fallback_latlon")
+        if on_missing == "consensus" and fallback:
+            waypoint = _consensus_point(wp_id, fallback)
+            if consensus is not None:
+                consensus.append(wp_id)
+        else:
+            raise KeyError(f"Waypoint {wp_id!r} not found in index (region={region})")
     center = index.lookup(center_id, region) if center_id else None
     if center_id and center is None:
         raise KeyError(f"Center fix {center_id!r} not found in index")
@@ -69,13 +103,26 @@ def build_sid_from_extraction(
     region: Optional[str] = None,
     source_url: str = "",
     confidence: float = 0.95,
+    on_missing: str = "raise",
 ) -> SIDRecord:
-    """Build a SIDRecord, looking up every coordinate from ``index``."""
+    """Build a SIDRecord, looking up every coordinate from ``index``.
+
+    ``on_missing`` controls behaviour when an identifier is absent from the
+    waypoint index:
+      * ``"raise"`` (default) — abort the record (US/coded strictness; unchanged).
+      * ``"consensus"`` — for no-ground-truth countries, use the extractor's
+        ``fallback_latlon`` flagged ``CONSENSUS`` and downgrade confidence.
+    """
+    consensus: list[str] = []
+
+    def mk(e):
+        return _leg(e, index, region, on_missing=on_missing, consensus=consensus)
+
     runway_transitions: list[RunwayTransition] = []
     enroute_transitions: list[EnrouteTransition] = []
 
     for t in extracted.get("transitions", []) or []:
-        legs = [_leg(e, index, region) for e in t.get("legs", [])]
+        legs = [mk(e) for e in t.get("legs", [])]
         if t.get("kind") == "runway":
             runway_transitions.append(
                 RunwayTransition(
@@ -93,7 +140,7 @@ def build_sid_from_extraction(
                 )
             )
 
-    common = [_leg(e, index, region) for e in extracted.get("common_route", []) or []]
+    common = [mk(e) for e in extracted.get("common_route", []) or []]
 
     return SIDRecord(
         airport_icao=extracted["airport_icao"],
@@ -103,7 +150,8 @@ def build_sid_from_extraction(
         enroute_transitions=enroute_transitions,
         pbn_nav_spec=extracted.get("pbn_nav_spec"),
         airac_cycle=airac,
-        extraction_confidence=confidence,
+        # CONSENSUS waypoints cap confidence at the LOW ceiling (spec §7).
+        extraction_confidence=min(confidence, _CONSENSUS_CONFIDENCE) if consensus else confidence,
         source_url=source_url,
         coverage_source="miner",
         extracted_at=_dt.datetime.now(_dt.timezone.utc).isoformat(),

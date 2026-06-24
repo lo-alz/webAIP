@@ -1,0 +1,35 @@
+<!--
+  AeroAIP fixture — CAAS HK eAIP-style procedure tables for the VHHH OCEA1A RNAV
+  SID (Hong Kong is a Phase-0 test airport; open eAIP HTML at eaip.cad.gov.hk).
+  Structure only: sequence / path terminator / fix identifier / fly flag /
+  altitude / speed. NO coordinates — those come from the waypoint index. Used by
+  scripts/poc_vhhh_eaip.py and tests/test_eaip_html.py.
+-->
+<html>
+<head><meta charset="utf-8"><title>VHHH AD 2.24 — OCEA1A DEPARTURE</title></head>
+<body>
+  <div class="procedure" data-record-type="SID" data-airport="VHHH"
+       data-procedure="OCEA1A" data-pbn="D1">
+
+    <h3>OCEA1A DEPARTURE — RWY 07L</h3>
+    <table class="transition" data-kind="runway" data-designator="07L"
+           data-transition-id="OCEA1A.07L">
+      <thead><tr><th>Seq</th><th>Path</th><th>Fix</th><th>Fly</th><th>Alt (ft)</th><th>Spd (kt)</th></tr></thead>
+      <tbody>
+        <tr><td>10</td><td>IF</td><td>SOLLY</td><td>FLY-BY</td><td>+4000</td><td></td></tr>
+        <tr><td>20</td><td>TF</td><td>OCEAN</td><td>FLY-BY</td><td>-8000</td><td>-250</td></tr>
+      </tbody>
+    </table>
+
+    <h3>OCEA1A — COMMON ROUTE</h3>
+    <table class="common-route" data-kind="common">
+      <thead><tr><th>Seq</th><th>Path</th><th>Fix</th><th>Fly</th><th>Alt (ft)</th><th>Spd (kt)</th></tr></thead>
+      <tbody>
+        <tr><td>10</td><td>TF</td><td>PORPA</td><td>FLY-BY</td><td></td><td></td></tr>
+        <tr><td>20</td><td>TF</td><td>TAMOT</td><td>FLY-OVER</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+
+  </div>
+</body>
+</html>

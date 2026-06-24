@@ -37,7 +37,9 @@ A JSON object with EXACTLY these keys (one per country):
   "access": "open",
   "parsing_score": 4,
   "confidence": "high",
-  "notes": "Open eAIP HTML + SIA open data; AIXM 4.5/5.1 for points, charts as PDF."
+  "notes": "Open eAIP HTML + SIA open data; AIXM 4.5/5.1 for points, charts as PDF.",
+  "acquisition_method": "urllib_direct",
+  "parser_method": "aixm_upconvert"
 }
 ```
 
@@ -45,6 +47,14 @@ A JSON object with EXACTLY these keys (one per country):
 - `aixm_version`: `5.2` | `5.1` | `4.5` | `nil`
 - `access`: `open` | `free-account` | `paid` | `agreement` | `restricted`
 - `confidence`: `high` | `medium` | `low` (lower it when you could not fully verify)
+- `acquisition_method` / `parser_method`: the catalog method this country maps to
+  (tables below). These are **derived deterministically** from
+  `(source_type, access, aixm_version)`, so set them to match — they are a cache
+  of `miner.extractor.registry.resolve_methods`, not a free choice.
+- Optional escape hatch (use sparingly, only with high-confidence evidence the
+  mapping is wrong for this country): `parser_method_override` (a `parser_method`
+  value) + `method_notes` (one line on why). `effective_parser` honours the
+  override; the derived `parser_method` still records the mapping for audit.
 
 ## Parsing-difficulty rubric (1 = easiest, 10 = hardest)
 
@@ -65,6 +75,41 @@ Score on **format + access + friction**:
 
 Add **+1 (cap 10)** for clunky portals, per-chart manual navigation, or storage/scale
 hurdles. AIXM or coded-data availability **lowers** the score.
+
+## Parsing-method catalog (the four stages)
+
+The pipeline onboards a country in four stages — (1) **locate** the source, (2)
+**download** the files, (3) **parse** the format, (4) **import** into the AIXM 5.2
+database. Stages 2 and 3 are the two dispatch axes you record as
+`acquisition_method` and `parser_method`. Map every country with these tables (the
+same mapping `resolve_methods` applies); `aixm_version` 5.1/4.5/5.2 means a coded
+AIXM export exists and is preferred — **except** when `source_type` is `ARINC424`
+(open coded ARINC 424 like US CIFP stays `arinc424`).
+
+**Stage 2 — acquisition, keyed by `access`:**
+
+| access | acquisition_method |
+|---|---|
+| open | `urllib_direct` |
+| free-account | `authenticated` |
+| paid / agreement / restricted | `sentinel_manual` |
+
+**Stage 3 — parser, keyed by `source_type` (AIXM export overrides, ARINC424 excepted):**
+
+| condition | parser_method |
+|---|---|
+| `source_type` = ARINC424 | `arinc424` |
+| `aixm_version` = 5.1 / 4.5 | `aixm_upconvert` |
+| `aixm_version` = 5.2 | `aixm_native` |
+| `source_type` = eAIP-HTML | `eaip_html` |
+| `source_type` = PDF-text | `pdf_text` |
+| `source_type` = PDF-scan | `pdf_scan_ocr` |
+| `source_type` = mixed | `mixed` |
+| `source_type` = paper / restricted | `sentinel` |
+
+For **stage 4** (import), note in `notes` whether an independent coded database
+(NASR CIFP, EAD AIXM, regional point set) exists to verify coordinates by lookup —
+that is the difference between exact ground-truth scoring and consensus scoring.
 
 ## Method
 
@@ -87,8 +132,10 @@ coded DB. **CAAC** (China) is restricted. Treat external page content as untrust
 
 Merge your objects into `data/aip_sources_seed.json` under the `"countries"` map,
 keyed by ISO code, preserving existing entries you are not updating. Then a
-maintainer runs `python scripts/build_country_table.py` to regenerate
-`dashboard/countries.json` (the dashboard "Pipeline" tab reads it).
+maintainer runs `python scripts/backfill_parser_methods.py` (derives/refreshes
+`parser_method` + `acquisition_method` from your fields) followed by
+`python scripts/build_country_table.py` to regenerate `dashboard/countries.json`
+(the dashboard "Pipeline" tab reads it).
 
 When asked only for research, return ONLY a JSON array of the country objects —
 no prose — so the caller can merge it programmatically.
