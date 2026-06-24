@@ -111,3 +111,10 @@ def test_api_geojson(pg):
     assert {"waypoint_id", "path_terminator", "alt_type", "alt_lower_ft"} <= p0.keys()
     expected_m = (p0["alt_lower_ft"] or 0) * 0.3048
     assert pts[0]["geometry"]["coordinates"][2] == pytest.approx(expected_m)
+
+    # KML export: Google-Earth download with the gx:Track flythrough.
+    kml = client.get(f"/procedures/{pid}/kml")
+    assert kml.status_code == 200
+    assert "kml+xml" in kml.headers["content-type"]
+    assert "attachment" in kml.headers.get("content-disposition", "")
+    assert "<gx:Track>" in kml.text

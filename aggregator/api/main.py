@@ -7,7 +7,9 @@ Endpoints (all cycle-scoped where relevant):
   GET /procedures?airport=&airac=&type=    procedure list
   GET /procedures/{id}                     procedure + ordered legs (with coords)
   GET /procedures/{id}/geojson             FeatureCollection (fixes + route line)
-                                           — ready for CesiumJS / Google Earth
+                                           — ready for CesiumJS
+  GET /procedures/{id}/kml                  KML download (static path + gx:Track)
+                                           — opens in Google Earth
 
 Connection comes from ``$DATABASE_URL``. Run:
     DATABASE_URL=postgresql://... uvicorn aggregator.api.main:app --port 8080
@@ -19,6 +21,9 @@ from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import Response
+
+from visualization.kml_export import procedure_to_kml
 
 app = FastAPI(title="AeroAIP Aggregator", version="0.1")
 
@@ -35,8 +40,8 @@ app.add_middleware(
 )
 
 # Serve the CesiumJS viewer same-origin as the API at /viz (so no CORS needed
-# for the page itself): http://<host>/viz/cesium/?pid=<id>
-_VIZ_DIR = Path(__file__).resolve().parents[2] / "visualization"
+# for the page itself): http://<host>/viz/?pid=<id>
+_VIZ_DIR = Path(__file__).resolve().parents[2] / "visualization" / "cesium"
 if _VIZ_DIR.is_dir():
     from fastapi.staticfiles import StaticFiles
 
@@ -117,6 +122,19 @@ def procedure_detail(pid: int):
     return {"procedure": proc, "legs": legs}
 
 
+def _route_legs(c, pid: int) -> list[dict]:
+    """Coordinate-bearing legs for a procedure, ordered — shared by geojson + kml."""
+    return c.execute(
+        """SELECT waypoint_id, segment, sequence_number, path_terminator,
+                  alt_type, alt_lower_ft,
+                  ST_X(geom) AS lon, ST_Y(geom) AS lat
+           FROM procedure_leg
+           WHERE procedure_id=%s AND geom IS NOT NULL
+           ORDER BY segment, sequence_number""",
+        (pid,),
+    ).fetchall()
+
+
 @app.get("/procedures/{pid}/geojson")
 def procedure_geojson(pid: int):
     """Fixes as 3D Point features + the ordered route as a 3D LineString.
@@ -127,15 +145,7 @@ def procedure_geojson(pid: int):
     """
     with _conn() as c:
         _procedure_or_404(c, pid)
-        pts = c.execute(
-            """SELECT waypoint_id, segment, sequence_number, path_terminator,
-                      alt_type, alt_lower_ft,
-                      ST_X(geom) AS lon, ST_Y(geom) AS lat
-               FROM procedure_leg
-               WHERE procedure_id=%s AND geom IS NOT NULL
-               ORDER BY segment, sequence_number""",
-            (pid,),
-        ).fetchall()
+        pts = _route_legs(c, pid)
 
     def _coords(p):
         return [p["lon"], p["lat"], (p["alt_lower_ft"] or 0) * _FT_TO_M]
@@ -156,3 +166,19 @@ def procedure_geojson(pid: int):
             "properties": {"role": "route"},
         })
     return {"type": "FeatureCollection", "features": features}
+
+
+@app.get("/procedures/{pid}/kml")
+def procedure_kml(pid: int):
+    """KML download: static extruded 3D path + a gx:Track flythrough (Google Earth)."""
+    with _conn() as c:
+        proc = _procedure_or_404(c, pid)
+        legs = _route_legs(c, pid)
+    kml = procedure_to_kml(proc, legs)
+    fname = "_".join(str(proc.get(k) or "").strip().replace(" ", "")
+                     for k in ("airport_icao", "procedure_name")) or f"procedure_{pid}"
+    return Response(
+        content=kml,
+        media_type="application/vnd.google-earth.kml+xml",
+        headers={"Content-Disposition": f'attachment; filename="{fname}.kml"'},
+    )

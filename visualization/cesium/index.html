@@ -20,11 +20,31 @@
     #hud h1 { margin: 0 0 4px; font-size: 15px; color: #7fd0ff; }
     #hud .mode { font-size: 11px; opacity: 0.8; }
     #hud .err { color: #ff8a8a; }
+    #picker {
+      position: absolute; top: 10px; right: 10px; z-index: 10; display: none;
+      font: 13px/1.4 system-ui, sans-serif; color: #e8f1ff;
+      background: rgba(10, 22, 40, 0.78); padding: 10px 14px; border-radius: 8px;
+      border: 1px solid rgba(120, 170, 255, 0.35);
+    }
+    #picker label { display: block; font-size: 11px; opacity: 0.8; margin: 6px 0 2px; }
+    #picker select { width: 220px; max-width: 60vw; padding: 3px; }
+    #picker a.kml {
+      display: inline-block; margin-top: 10px; padding: 5px 10px; border-radius: 6px;
+      background: #ffd166; color: #1a2740; text-decoration: none; font-weight: 600;
+    }
+    #picker a.kml[aria-disabled="true"] { opacity: 0.4; pointer-events: none; }
   </style>
 </head>
 <body>
   <div id="cesiumContainer"></div>
   <div id="hud"><h1>AeroAIP</h1><div class="mode">loading…</div></div>
+  <div id="picker">
+    <label for="airportSel">Airport (ICAO)</label>
+    <select id="airportSel"></select>
+    <label for="procSel">Procedure</label>
+    <select id="procSel"></select>
+    <a id="kmlLink" class="kml" href="#" aria-disabled="true">⤓ Download KML</a>
+  </div>
 
   <script>
   "use strict";
@@ -67,27 +87,10 @@
     return viewer;
   }
 
-  async function loadData() {
-    if (pid) {
-      const url = `${apiBase}/procedures/${encodeURIComponent(pid)}/geojson`;
-      const r = await fetch(url);
-      if (!r.ok) throw new Error(`GET ${url} → ${r.status}`);
-      return { geojson: await r.json(), live: true };
-    }
-    const r = await fetch("sample_klax_dotss2.geojson");
-    if (!r.ok) throw new Error(`sample fetch → ${r.status}`);
-    return { geojson: await r.json(), live: false };
-  }
-
-  // Try to resolve a human procedure name in live mode (best-effort, non-fatal).
-  async function procedureName() {
-    if (!pid) return "KLAX DOTSS2";
-    try {
-      const r = await fetch(`${apiBase}/procedures/${encodeURIComponent(pid)}`);
-      if (!r.ok) return `procedure ${pid}`;
-      const p = (await r.json()).procedure || {};
-      return [p.airport_icao, p.procedure_name].filter(Boolean).join(" ") || `procedure ${pid}`;
-    } catch { return `procedure ${pid}`; }
+  async function getJSON(url) {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`GET ${url} → ${r.status}`);
+    return r.json();
   }
 
   function altLabel(props) {
@@ -97,6 +100,7 @@
   }
 
   function render(viewer, geojson) {
+    viewer.entities.removeAll();   // swap cleanly when a new procedure is picked
     const points = geojson.features.filter(f => f.geometry.type === "Point");
     const route = geojson.features.find(f => f.geometry.type === "LineString");
 
@@ -150,19 +154,88 @@
     }
   }
 
+  // ── live picker, backed by /airports + /procedures ──────────────────────────
+  const airportSel = document.querySelector("#airportSel");
+  const procSel = document.querySelector("#procSel");
+  const kmlLink = document.querySelector("#kmlLink");
+
+  async function loadProcedure(viewer, id, label) {
+    const geojson = await getJSON(`${apiBase}/procedures/${encodeURIComponent(id)}/geojson`);
+    render(viewer, geojson);
+    kmlLink.href = `${apiBase}/procedures/${encodeURIComponent(id)}/kml`;
+    kmlLink.setAttribute("aria-disabled", "false");
+    setHud(`<div>${label || `procedure ${id}`}</div>`, `live · procedure ${id}`);
+    await viewer.flyTo(viewer.entities, { duration: 1.5 });
+  }
+
+  async function populateProcedures(viewer, icao, preferId) {
+    const procs = await getJSON(`${apiBase}/procedures?airport=${encodeURIComponent(icao)}`);
+    procSel.innerHTML = "";
+    for (const p of procs) {
+      const opt = document.createElement("option");
+      opt.value = p.id;
+      opt.textContent = `${p.record_type} · ${p.procedure_name}`;
+      opt.dataset.label = `${p.airport_icao} ${p.procedure_name}`;
+      procSel.appendChild(opt);
+    }
+    if (!procs.length) { setHud(`<div>${icao}</div>`, "no procedures for this airport"); return; }
+    const target = procs.find(p => String(p.id) === String(preferId)) || procs[0];
+    procSel.value = target.id;
+    await loadProcedure(viewer, target.id, `${target.airport_icao} ${target.procedure_name}`);
+  }
+
+  async function startLive(viewer, airports) {
+    const icaos = [...new Set(airports.map(a => a.airport_icao))].sort();
+    airportSel.innerHTML = "";
+    for (const icao of icaos) {
+      const opt = document.createElement("option");
+      opt.value = icao; opt.textContent = icao;
+      airportSel.appendChild(opt);
+    }
+    document.querySelector("#picker").style.display = "block";
+
+    // Deep-link: if ?pid= was given, start on that airport/procedure.
+    let startIcao = icaos[0];
+    if (pid) {
+      try {
+        const detail = await getJSON(`${apiBase}/procedures/${encodeURIComponent(pid)}`);
+        if (detail.procedure?.airport_icao) startIcao = detail.procedure.airport_icao;
+      } catch { /* fall back to first airport */ }
+    }
+    airportSel.value = startIcao;
+
+    airportSel.addEventListener("change", () => populateProcedures(viewer, airportSel.value).catch(showError));
+    procSel.addEventListener("change", () => {
+      const opt = procSel.selectedOptions[0];
+      loadProcedure(viewer, procSel.value, opt?.dataset.label).catch(showError);
+    });
+
+    await populateProcedures(viewer, startIcao, pid);
+  }
+
+  async function startSample(viewer) {
+    document.querySelector("#picker").style.display = "none";
+    const geojson = await getJSON("sample_klax_dotss2.geojson");
+    render(viewer, geojson);
+    setHud(`<div>KLAX DOTSS2</div>`, "bundled sample · no backend");
+    await viewer.flyTo(viewer.entities, { duration: 2.0 });
+  }
+
+  function showError(e) {
+    setHud(`<div class="err">Failed to load: ${e.message}</div>`,
+           "is the API running and CORS-enabled?");
+    console.error(e);
+  }
+
   (async () => {
+    const viewer = await initViewer();
     try {
-      const viewer = await initViewer();
-      const { geojson, live } = await loadData();
-      render(viewer, geojson);
-      const name = await procedureName();
-      setHud(`<div>${name}</div>`,
-             live ? `live · /procedures/${pid}/geojson` : "bundled sample · no backend");
-      await viewer.flyTo(viewer.entities, { duration: 2.0 });
+      // Live mode if the read API answers; otherwise the zero-backend sample.
+      const airports = await getJSON(`${apiBase}/airports`);
+      await startLive(viewer, airports);
     } catch (e) {
-      setHud(`<div class="err">Failed to load: ${e.message}</div>`,
-             pid ? "is the API running and CORS-enabled?" : "");
-      console.error(e);
+      console.warn("API unreachable — falling back to bundled sample:", e.message);
+      try { await startSample(viewer); } catch (e2) { showError(e2); }
     }
   })();
   </script>
