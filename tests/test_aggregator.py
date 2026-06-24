@@ -95,5 +95,19 @@ def test_api_geojson(pg):
 
     gj = client.get(f"/procedures/{pid}/geojson").json()
     assert gj["type"] == "FeatureCollection"
-    assert any(f["geometry"]["type"] == "LineString" for f in gj["features"])
-    assert any(f["geometry"]["type"] == "Point" for f in gj["features"])
+    line = [f for f in gj["features"] if f["geometry"]["type"] == "LineString"]
+    pts = [f for f in gj["features"] if f["geometry"]["type"] == "Point"]
+    assert line and pts
+
+    # 3D coordinates: every position is [lon, lat, alt_m].
+    for f in line + pts:
+        coords = f["geometry"]["coordinates"]
+        positions = coords if f["geometry"]["type"] == "LineString" else [coords]
+        for lon, lat, alt_m in positions:
+            assert -180 <= lon <= 180 and -90 <= lat <= 90 and alt_m >= 0
+
+    # alt_m is the lower constraint in feet → metres; new props are exposed.
+    p0 = pts[0]["properties"]
+    assert {"waypoint_id", "path_terminator", "alt_type", "alt_lower_ft"} <= p0.keys()
+    expected_m = (p0["alt_lower_ft"] or 0) * 0.3048
+    assert pts[0]["geometry"]["coordinates"][2] == pytest.approx(expected_m)

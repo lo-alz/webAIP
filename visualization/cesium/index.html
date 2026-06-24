@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AeroAIP — 3D Procedure Viewer</title>
+
+  <!-- CesiumJS from CDN (pinned). No build step, no npm. -->
+  <link rel="stylesheet" href="https://cesium.com/downloads/cesiumjs/releases/1.130/Build/Cesium/Widgets/widgets.css" />
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.130/Build/Cesium/Cesium.js"></script>
+
+  <style>
+    html, body, #cesiumContainer { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; }
+    #hud {
+      position: absolute; top: 10px; left: 10px; z-index: 10;
+      font: 13px/1.4 system-ui, sans-serif; color: #e8f1ff;
+      background: rgba(10, 22, 40, 0.78); padding: 10px 14px; border-radius: 8px;
+      border: 1px solid rgba(120, 170, 255, 0.35); max-width: 320px;
+    }
+    #hud h1 { margin: 0 0 4px; font-size: 15px; color: #7fd0ff; }
+    #hud .mode { font-size: 11px; opacity: 0.8; }
+    #hud .err { color: #ff8a8a; }
+  </style>
+</head>
+<body>
+  <div id="cesiumContainer"></div>
+  <div id="hud"><h1>AeroAIP</h1><div class="mode">loading…</div></div>
+
+  <script>
+  "use strict";
+
+  // ── Optional credentials (all OFF by default — the MVP needs none) ──────────
+  // 1) Cesium Ion (Bing imagery + world terrain). Without it we use OpenStreetMap.
+  //    Cesium.Ion.defaultAccessToken = 'YOUR_CESIUM_ION_TOKEN';
+  //
+  // 2) Google Photorealistic 3D Tiles — the modern "Google Earth look".
+  //    CesiumJS ingests Google's tiles directly, so adopting Cesium does NOT
+  //    forfeit Google's photorealistic imagery. To enable, get a Google Maps
+  //    Platform key and uncomment in initViewer():
+  //      const g = await Cesium.createGooglePhotorealistic3DTileset({ key: 'YOUR_GOOGLE_MAPS_KEY' });
+  //      viewer.scene.primitives.add(g);
+  // ────────────────────────────────────────────────────────────────────────────
+
+  const params = new URLSearchParams(location.search);
+  const pid = params.get("pid");                 // live mode when present
+  const apiBase = (params.get("api") || "").replace(/\/$/, ""); // default: same origin
+  const hud = document.querySelector("#hud");
+
+  function setHud(html, mode) {
+    hud.innerHTML = `<h1>AeroAIP</h1>${html}` + (mode ? `<div class="mode">${mode}</div>` : "");
+  }
+
+  const ALT_SYMBOL = { AT_OR_ABOVE: "≥", AT_OR_BELOW: "≤", AT: "=", BETWEEN: "↕" };
+  const M_TO_FT = 1 / 0.3048;
+
+  async function initViewer() {
+    // Tokenless OpenStreetMap base layer + ellipsoid terrain → no credentials.
+    const viewer = new Cesium.Viewer("cesiumContainer", {
+      baseLayer: Cesium.ImageryLayer.fromProviderAsync(
+        Promise.resolve(new Cesium.OpenStreetMapImageryProvider({ url: "https://tile.openstreetmap.org/" }))
+      ),
+      baseLayerPicker: false, geocoder: false, homeButton: false,
+      navigationHelpButton: false, animation: false, timeline: false,
+      sceneModePicker: true, infoBox: true, selectionIndicator: true,
+    });
+    viewer.scene.globe.enableLighting = true;
+    return viewer;
+  }
+
+  async function loadData() {
+    if (pid) {
+      const url = `${apiBase}/procedures/${encodeURIComponent(pid)}/geojson`;
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(`GET ${url} → ${r.status}`);
+      return { geojson: await r.json(), live: true };
+    }
+    const r = await fetch("sample_klax_dotss2.geojson");
+    if (!r.ok) throw new Error(`sample fetch → ${r.status}`);
+    return { geojson: await r.json(), live: false };
+  }
+
+  // Try to resolve a human procedure name in live mode (best-effort, non-fatal).
+  async function procedureName() {
+    if (!pid) return "KLAX DOTSS2";
+    try {
+      const r = await fetch(`${apiBase}/procedures/${encodeURIComponent(pid)}`);
+      if (!r.ok) return `procedure ${pid}`;
+      const p = (await r.json()).procedure || {};
+      return [p.airport_icao, p.procedure_name].filter(Boolean).join(" ") || `procedure ${pid}`;
+    } catch { return `procedure ${pid}`; }
+  }
+
+  function altLabel(props) {
+    if (props.alt_lower_ft == null) return "";
+    const sym = ALT_SYMBOL[props.alt_type] || "";
+    return `${sym}${props.alt_lower_ft.toLocaleString()} ft`;
+  }
+
+  function render(viewer, geojson) {
+    const points = geojson.features.filter(f => f.geometry.type === "Point");
+    const route = geojson.features.find(f => f.geometry.type === "LineString");
+
+    // Each waypoint: a point at altitude, a label, and a thin drop line to ground
+    // so the height reads clearly against the terrain below.
+    for (const f of points) {
+      const [lon, lat, altM] = f.geometry.coordinates;
+      const p = f.properties || {};
+      const top = Cesium.Cartesian3.fromDegrees(lon, lat, altM);
+      const ground = Cesium.Cartesian3.fromDegrees(lon, lat, 0);
+
+      viewer.entities.add({
+        position: top,
+        point: { pixelSize: 9, color: Cesium.Color.CYAN,
+                 outlineColor: Cesium.Color.BLACK, outlineWidth: 2,
+                 disableDepthTestDistance: Number.POSITIVE_INFINITY },
+        label: {
+          text: `${p.waypoint_id || "?"}${altLabel(p) ? "  " + altLabel(p) : ""}`,
+          font: "13px sans-serif", fillColor: Cesium.Color.WHITE,
+          outlineColor: Cesium.Color.BLACK, outlineWidth: 3,
+          style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+          pixelOffset: new Cesium.Cartesian2(0, -14),
+          disableDepthTestDistance: Number.POSITIVE_INFINITY,
+        },
+        polyline: {
+          positions: [ground, top], width: 1,
+          material: Cesium.Color.CYAN.withAlpha(0.35),
+        },
+        description:
+          `<b>${p.waypoint_id || ""}</b><br/>leg ${p.sequence_number} · ${p.path_terminator || ""}` +
+          `<br/>segment ${p.segment || ""}<br/>altitude ${altLabel(p) || "—"}`,
+      });
+    }
+
+    // The route itself: a polyline that climbs through the per-vertex heights,
+    // plus a translucent "wall" dropped to the ground for the vertical profile.
+    if (route) {
+      const positions = route.geometry.coordinates.map(
+        ([lon, lat, altM]) => Cesium.Cartesian3.fromDegrees(lon, lat, altM));
+      viewer.entities.add({
+        polyline: { positions, width: 3, clampToGround: false,
+          material: new Cesium.PolylineGlowMaterialProperty({
+            glowPower: 0.2, color: Cesium.Color.fromCssColorString("#ffd166") }) },
+      });
+      viewer.entities.add({
+        wall: { positions,
+          minimumHeights: positions.map(() => 0),
+          material: Cesium.Color.fromCssColorString("#ffd166").withAlpha(0.12),
+          outline: true, outlineColor: Cesium.Color.fromCssColorString("#ffd166").withAlpha(0.3) },
+      });
+    }
+  }
+
+  (async () => {
+    try {
+      const viewer = await initViewer();
+      const { geojson, live } = await loadData();
+      render(viewer, geojson);
+      const name = await procedureName();
+      setHud(`<div>${name}</div>`,
+             live ? `live · /procedures/${pid}/geojson` : "bundled sample · no backend");
+      await viewer.flyTo(viewer.entities, { duration: 2.0 });
+    } catch (e) {
+      setHud(`<div class="err">Failed to load: ${e.message}</div>`,
+             pid ? "is the API running and CORS-enabled?" : "");
+      console.error(e);
+    }
+  })();
+  </script>
+</body>
+</html>

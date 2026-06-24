@@ -15,11 +15,32 @@ Connection comes from ``$DATABASE_URL``. Run:
 from __future__ import annotations
 
 import os
+from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI, HTTPException
 
 app = FastAPI(title="AeroAIP Aggregator", version="0.1")
+
+# Feet → metres: GeoJSON/Cesium heights are metres, ARINC 424 altitudes are feet MSL.
+_FT_TO_M = 0.3048
+
+# Dev convenience: allow the static viewer (or any origin) to call the read API
+# from the browser. Permissive on purpose — this is a read-only public dataset.
+from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], allow_methods=["GET"], allow_headers=["*"],
+)
+
+# Serve the CesiumJS viewer same-origin as the API at /viz (so no CORS needed
+# for the page itself): http://<host>/viz/cesium/?pid=<id>
+_VIZ_DIR = Path(__file__).resolve().parents[2] / "visualization"
+if _VIZ_DIR.is_dir():
+    from fastapi.staticfiles import StaticFiles
+
+    app.mount("/viz", StaticFiles(directory=str(_VIZ_DIR), html=True), name="viz")
 
 
 def _conn():
@@ -98,28 +119,40 @@ def procedure_detail(pid: int):
 
 @app.get("/procedures/{pid}/geojson")
 def procedure_geojson(pid: int):
-    """Fixes as Point features + the ordered route as a LineString."""
+    """Fixes as 3D Point features + the ordered route as a 3D LineString.
+
+    Coordinates are ``[lon, lat, alt_m]`` where ``alt_m`` is the leg's lower
+    altitude constraint (feet MSL → metres), or 0 when unconstrained — so a
+    CesiumJS client renders the procedure as a climbing/descending path.
+    """
     with _conn() as c:
         _procedure_or_404(c, pid)
         pts = c.execute(
-            """SELECT waypoint_id, segment, sequence_number,
+            """SELECT waypoint_id, segment, sequence_number, path_terminator,
+                      alt_type, alt_lower_ft,
                       ST_X(geom) AS lon, ST_Y(geom) AS lat
                FROM procedure_leg
                WHERE procedure_id=%s AND geom IS NOT NULL
                ORDER BY segment, sequence_number""",
             (pid,),
         ).fetchall()
+
+    def _coords(p):
+        return [p["lon"], p["lat"], (p["alt_lower_ft"] or 0) * _FT_TO_M]
+
     features = [{
         "type": "Feature",
-        "geometry": {"type": "Point", "coordinates": [p["lon"], p["lat"]]},
+        "geometry": {"type": "Point", "coordinates": _coords(p)},
         "properties": {"waypoint_id": p["waypoint_id"], "segment": p["segment"],
-                       "sequence_number": p["sequence_number"]},
+                       "sequence_number": p["sequence_number"],
+                       "path_terminator": p["path_terminator"],
+                       "alt_type": p["alt_type"], "alt_lower_ft": p["alt_lower_ft"]},
     } for p in pts]
     if len(pts) >= 2:
         features.append({
             "type": "Feature",
             "geometry": {"type": "LineString",
-                         "coordinates": [[p["lon"], p["lat"]] for p in pts]},
+                         "coordinates": [_coords(p) for p in pts]},
             "properties": {"role": "route"},
         })
     return {"type": "FeatureCollection", "features": features}

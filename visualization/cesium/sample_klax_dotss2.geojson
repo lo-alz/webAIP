@@ -1,0 +1,75 @@
+{
+  "type": "FeatureCollection",
+  "_comment": "AeroAIP demo sample — KLAX DOTSS2 SID (RWY 24L → DOTSS → CLEEE). Waypoint identifiers and WGS-84 coordinates are authentic FAA NASR CIFP values; the climbing altitude profile is illustrative for the viewer. This is the exact shape served by GET /procedures/{id}/geojson (coordinates are [lon, lat, alt_metres]).",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-118.465147, 33.943681, 914.4]},
+      "properties": {"waypoint_id": "DLREY", "segment": "DOTSS2.24L", "sequence_number": 20, "path_terminator": "DF", "alt_type": "AT_OR_BELOW", "alt_lower_ft": 3000}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-118.505789, 33.942461, 1524.0]},
+      "properties": {"waypoint_id": "ENNEY", "segment": "DOTSS2.24L", "sequence_number": 30, "path_terminator": "TF", "alt_type": "AT_OR_BELOW", "alt_lower_ft": 5000}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-118.643889, 33.931667, 2133.6]},
+      "properties": {"waypoint_id": "NAANC", "segment": "DOTSS2.24L", "sequence_number": 40, "path_terminator": "TF", "alt_type": "AT_OR_ABOVE", "alt_lower_ft": 7000}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-118.637292, 33.840575, 2743.2]},
+      "properties": {"waypoint_id": "HAYNK", "segment": "DOTSS2.24L", "sequence_number": 50, "path_terminator": "TF", "alt_type": "AT_OR_ABOVE", "alt_lower_ft": 9000}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-118.520833, 33.697222, 3352.8]},
+      "properties": {"waypoint_id": "PEVEE", "segment": "DOTSS2.COMMON", "sequence_number": 60, "path_terminator": "TF", "alt_type": "AT_OR_ABOVE", "alt_lower_ft": 11000}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-118.342997, 33.644550, 3962.4]},
+      "properties": {"waypoint_id": "HOLTZ", "segment": "DOTSS2.COMMON", "sequence_number": 70, "path_terminator": "TF", "alt_type": "AT_OR_ABOVE", "alt_lower_ft": 13000}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-117.795283, 33.644106, 4572.0]},
+      "properties": {"waypoint_id": "DOTSS", "segment": "DOTSS2.COMMON", "sequence_number": 80, "path_terminator": "TF", "alt_type": "AT_OR_ABOVE", "alt_lower_ft": 15000}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-117.233639, 33.751372, 5181.6]},
+      "properties": {"waypoint_id": "EYEDL", "segment": "DOTSS2.CLEEE", "sequence_number": 90, "path_terminator": "TF", "alt_type": "AT_OR_ABOVE", "alt_lower_ft": 17000}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-116.973875, 33.746056, 5791.2]},
+      "properties": {"waypoint_id": "HOMER", "segment": "DOTSS2.CLEEE", "sequence_number": 100, "path_terminator": "TF", "alt_type": "AT_OR_ABOVE", "alt_lower_ft": 19000}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [-116.073311, 33.723383, 6400.8]},
+      "properties": {"waypoint_id": "CLEEE", "segment": "DOTSS2.CLEEE", "sequence_number": 110, "path_terminator": "TF", "alt_type": "AT_OR_ABOVE", "alt_lower_ft": 21000}
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-118.465147, 33.943681, 914.4],
+          [-118.505789, 33.942461, 1524.0],
+          [-118.643889, 33.931667, 2133.6],
+          [-118.637292, 33.840575, 2743.2],
+          [-118.520833, 33.697222, 3352.8],
+          [-118.342997, 33.644550, 3962.4],
+          [-117.795283, 33.644106, 4572.0],
+          [-117.233639, 33.751372, 5181.6],
+          [-116.973875, 33.746056, 5791.2],
+          [-116.073311, 33.723383, 6400.8]
+        ]
+      },
+      "properties": {"role": "route"}
+    }
+  ]
+}
