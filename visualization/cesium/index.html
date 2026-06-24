@@ -19,6 +19,7 @@
     }
     #hud h1 { margin: 0 0 4px; font-size: 15px; color: #7fd0ff; }
     #hud .mode { font-size: 11px; opacity: 0.8; }
+    #hud .hint { font-size: 11px; color: #7fd0ff; margin-top: 3px; }
     #hud .err { color: #ff8a8a; }
     #picker {
       position: absolute; top: 10px; right: 10px; z-index: 10; display: none;
@@ -49,16 +50,14 @@
   <script>
   "use strict";
 
-  // ── Optional credentials (all OFF by default — the MVP needs none) ──────────
-  // 1) Cesium Ion (Bing imagery + world terrain). Without it we use OpenStreetMap.
-  //    Cesium.Ion.defaultAccessToken = 'YOUR_CESIUM_ION_TOKEN';
-  //
-  // 2) Google Photorealistic 3D Tiles — the modern "Google Earth look".
-  //    CesiumJS ingests Google's tiles directly, so adopting Cesium does NOT
-  //    forfeit Google's photorealistic imagery. To enable, get a Google Maps
-  //    Platform key and uncomment in initViewer():
-  //      const g = await Cesium.createGooglePhotorealistic3DTileset({ key: 'YOUR_GOOGLE_MAPS_KEY' });
-  //      viewer.scene.primitives.add(g);
+  // ── Cesium ion token ────────────────────────────────────────────────────────
+  // Client-side token (safe to embed, like every web Cesium app). For safety,
+  // restrict it to your allowed URLs in the ion console → Access Tokens.
+  // It unlocks Bing aerial satellite imagery + Cesium World 3D terrain (the
+  // "Google Earth" look). If it is blank/invalid the viewer falls back to
+  // tokenless Esri satellite imagery so the globe is never empty.
+  Cesium.Ion.defaultAccessToken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2ZmRkOGU0ZC0zNTNjLTRkZTItOTdjZC1mYjQ2NzFkZjJiZTUiLCJpZCI6NDQ4NjgxLCJzdWIiOiJsby1hbHoiLCJpc3MiOiJodHRwczovL2FwaS5jZXNpdW0uY29tIiwiYXVkIjoiQWlwIiwiaWF0IjoxNzgyMzIyMDEwfQ.C4v_E9T7BsDVkATniFix9eZFb8CzU5-hwmLKGPg_18U";
   // ────────────────────────────────────────────────────────────────────────────
 
   const params = new URLSearchParams(location.search);
@@ -74,16 +73,42 @@
   const M_TO_FT = 1 / 0.3048;
 
   async function initViewer() {
-    // Tokenless OpenStreetMap base layer + ellipsoid terrain → no credentials.
+    // Try Cesium ion: Bing aerial satellite + Cesium World 3D terrain.
+    // Fall back to tokenless Esri World Imagery (satellite) + ellipsoid terrain
+    // if the token is missing/invalid, so the globe is never blank.
+    let baseLayer, terrain, usingIon = false;
+    const hasToken = !!(Cesium.Ion.defaultAccessToken || "").trim();
+    if (hasToken) {
+      try {
+        baseLayer = Cesium.ImageryLayer.fromWorldImagery({});   // ion Bing aerial
+        terrain = Cesium.Terrain.fromWorldTerrain();            // ion world terrain
+        usingIon = true;
+      } catch (e) {
+        console.warn("Cesium ion setup failed — using Esri fallback:", e.message);
+      }
+    }
+    if (!usingIon) {
+      baseLayer = Cesium.ImageryLayer.fromProviderAsync(
+        Cesium.ArcGisMapServerImageryProvider.fromUrl(
+          "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"),
+        {});
+      terrain = undefined; // ellipsoid
+    }
+
     const viewer = new Cesium.Viewer("cesiumContainer", {
-      baseLayer: Cesium.ImageryLayer.fromProviderAsync(
-        Promise.resolve(new Cesium.OpenStreetMapImageryProvider({ url: "https://tile.openstreetmap.org/" }))
-      ),
-      baseLayerPicker: false, geocoder: false, homeButton: false,
-      navigationHelpButton: false, animation: false, timeline: false,
+      // baseLayer is only valid with baseLayerPicker:false, so we set imagery +
+      // terrain explicitly and keep the picker off.
+      baseLayer,
+      ...(terrain ? { terrain } : {}),
+      baseLayerPicker: false,
+      geocoder: false, homeButton: false, navigationHelpButton: false,
+      animation: true, timeline: true,   // playback controls for the departure flight
       sceneModePicker: true, infoBox: true, selectionIndicator: true,
     });
     viewer.scene.globe.enableLighting = true;
+    if (usingIon) viewer.scene.globe.depthTestAgainstTerrain = true;
+    console.info(usingIon ? "Imagery: Cesium ion (satellite + world terrain)"
+                          : "Imagery: Esri World Imagery (tokenless fallback)");
     return viewer;
   }
 
@@ -151,7 +176,78 @@
           material: Cesium.Color.fromCssColorString("#ffd166").withAlpha(0.12),
           outline: true, outlineColor: Cesium.Color.fromCssColorString("#ffd166").withAlpha(0.3) },
       });
+      buildFlight(viewer, route.geometry.coordinates);
+    } else {
+      stopFlight(viewer);   // no route → don't auto-play an empty clock
     }
+  }
+
+  // Park the playback clock when there's nothing to fly.
+  function stopFlight(viewer) {
+    viewer.clock.shouldAnimate = false;
+  }
+
+  // Animate an aircraft climbing along the SID's LineString, driven by the
+  // timeline. Times are distance-proportional at a nominal climb groundspeed,
+  // so the plane visibly speeds through long legs and eases through short ones.
+  function buildFlight(viewer, coords) {
+    if (!coords || coords.length < 2) { stopFlight(viewer); return; }
+
+    const GROUNDSPEED_MS = 250 * 0.514444;   // ~250 kt climb groundspeed
+    const PLAYBACK_SECONDS = 28;             // wall-clock length of the animation
+
+    // Cumulative horizontal (great-circle) distance → seconds at groundspeed.
+    const geo = new Cesium.EllipsoidGeodesic();
+    const secs = [0];
+    for (let i = 1; i < coords.length; i++) {
+      geo.setEndPoints(
+        Cesium.Cartographic.fromDegrees(coords[i - 1][0], coords[i - 1][1]),
+        Cesium.Cartographic.fromDegrees(coords[i][0], coords[i][1]));
+      secs[i] = secs[i - 1] + geo.surfaceDistance / GROUNDSPEED_MS;
+    }
+    const total = secs[secs.length - 1] || 1;
+
+    const start = Cesium.JulianDate.fromIso8601("2024-01-01T00:00:00Z");
+    const stop = Cesium.JulianDate.addSeconds(start, total, new Cesium.JulianDate());
+
+    const sampled = new Cesium.SampledPositionProperty();
+    for (let i = 0; i < coords.length; i++) {
+      const [lon, lat, altM] = coords[i];
+      const t = Cesium.JulianDate.addSeconds(start, secs[i], new Cesium.JulianDate());
+      sampled.addSample(t, Cesium.Cartesian3.fromDegrees(lon, lat, altM));
+    }
+    sampled.setInterpolationOptions({
+      interpolationDegree: 1,
+      interpolationAlgorithm: Cesium.LinearApproximation,
+    });
+    sampled.forwardExtrapolationType = Cesium.ExtrapolationType.HOLD;
+
+    // Drive the clock: play the whole SID in ~PLAYBACK_SECONDS, looping.
+    viewer.clock.startTime = start.clone();
+    viewer.clock.stopTime = stop.clone();
+    viewer.clock.currentTime = start.clone();
+    viewer.clock.clockRange = Cesium.ClockRange.LOOP_STOP;
+    viewer.clock.multiplier = Math.max(total / PLAYBACK_SECONDS, 1);
+    viewer.clock.shouldAnimate = true;
+    if (viewer.timeline) viewer.timeline.zoomTo(start, stop);
+
+    viewer.entities.add({
+      id: "aircraft",
+      position: sampled,
+      orientation: new Cesium.VelocityOrientationProperty(sampled),
+      // glTF aircraft; a small point stays visible if the model can't load.
+      model: { uri: "aircraft.glb", minimumPixelSize: 64, maximumScale: 20000 },
+      point: { pixelSize: 10, color: Cesium.Color.RED,
+               outlineColor: Cesium.Color.WHITE, outlineWidth: 1,
+               disableDepthTestDistance: Number.POSITIVE_INFINITY },
+      path: {
+        resolution: 1, leadTime: 0, trailTime: total,
+        width: 4,
+        material: new Cesium.PolylineGlowMaterialProperty({
+          glowPower: 0.3, color: Cesium.Color.fromCssColorString("#7fd0ff") }),
+      },
+      description: "Departure flight — use the timeline to scrub, pause or change speed.",
+    });
   }
 
   // ── live picker, backed by /airports + /procedures ──────────────────────────
@@ -164,7 +260,8 @@
     render(viewer, geojson);
     kmlLink.href = `${apiBase}/procedures/${encodeURIComponent(id)}/kml`;
     kmlLink.setAttribute("aria-disabled", "false");
-    setHud(`<div>${label || `procedure ${id}`}</div>`, `live · procedure ${id}`);
+    setHud(`<div>${label || `procedure ${id}`}</div><div class="hint">▶ flying the departure — use the timeline to scrub / pause</div>`,
+           `live · procedure ${id}`);
     await viewer.flyTo(viewer.entities, { duration: 1.5 });
   }
 
@@ -217,7 +314,8 @@
     document.querySelector("#picker").style.display = "none";
     const geojson = await getJSON("sample_klax_dotss2.geojson");
     render(viewer, geojson);
-    setHud(`<div>KLAX DOTSS2</div>`, "bundled sample · no backend");
+    setHud(`<div>KLAX DOTSS2</div><div class="hint">▶ flying the departure — use the timeline to scrub / pause</div>`,
+           "bundled sample · no backend");
     await viewer.flyTo(viewer.entities, { duration: 2.0 });
   }
 
