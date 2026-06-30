@@ -19,6 +19,9 @@ data/state/*
 !data/manifests/.gitkeep
 !data/state/.gitkeep
 
+# Loop 2 AIXM 5.2 GML artifacts (regenerable from the coded source)
+data/aixm/
+
 # Committed fixtures are NOT ignored (data/fixtures/** is tracked)
 
 # Python

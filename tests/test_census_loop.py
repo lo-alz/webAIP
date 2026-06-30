@@ -14,6 +14,14 @@ from miner.loop import checks, sources_us
 from miner.loop.census import Context, census_step, run_census
 from miner.loop.framework import OK, PENDING, SKIPPED, LoopRunner, StepResult
 
+# The US source data (FAACIFP18, OurAirports CSVs, d-TPP XML) is large and
+# gitignored — present in dev/this session, downloaded in CI. Tests that need it
+# skip cleanly when it is absent; the pure framework/check tests always run.
+_DATA_PRESENT = (sources_us.CIFP_PATH.exists()
+                 and (sources_us.OURAIRPORTS_DIR / "airports.csv").exists()
+                 and sources_us.DTPP_PATH.exists())
+requires_data = pytest.mark.skipif(not _DATA_PRESENT, reason="US source data not present")
+
 
 # ── framework: idempotency, resume, determinism ──────────────────────────────
 def _double(item):
@@ -54,6 +62,7 @@ def test_runner_records_errors_without_aborting(tmp_path):
 
 
 # ── source adapters ──────────────────────────────────────────────────────────
+@requires_data
 def test_cifp_manifest_has_klax_dotss2():
     man = sources_us.cifp_manifest()
     assert "KLAX" in man, "CIFP fixture must include KLAX"
@@ -64,6 +73,7 @@ def test_cifp_manifest_has_klax_dotss2():
     assert len(sids) == len(set(sids))
 
 
+@requires_data
 def test_dtpp_inventory_classifies_klax():
     inv = sources_us.dtpp_inventory()
     assert "KLAX" in inv
@@ -113,6 +123,7 @@ def test_dtpp_reconcile_missing_record():
 
 
 # ── end-to-end census ────────────────────────────────────────────────────────
+@requires_data
 def test_census_step_klax_clean():
     # Drive the per-airport step directly (parses sources once; no full loop).
     ctx, _ = Context.for_us("2607")
@@ -125,6 +136,7 @@ def test_census_step_klax_clean():
     assert res.data["downloadable"] == "cached"
 
 
+@requires_data
 def test_census_step_pending_when_no_procedures():
     ctx, _ = Context.for_us("2607")
     # A bogus ICAO with no CIFP procedures → PENDING (covered, nothing to parse).
@@ -133,6 +145,7 @@ def test_census_step_pending_when_no_procedures():
     assert res.status == PENDING
 
 
+@requires_data
 def test_run_census_is_deterministic(tmp_path):
     kw = dict(limit=20, force=True, log=lambda *_: None,
               state_dir=tmp_path, out_dir=tmp_path)
@@ -141,6 +154,7 @@ def test_run_census_is_deterministic(tmp_path):
     assert json.dumps(a, sort_keys=True) == json.dumps(b, sort_keys=True)
 
 
+@requires_data
 def test_run_census_resume_keeps_all_rows(tmp_path):
     # First pass: 10 airports. Second pass (no force): 25 airports total.
     # The manifest must contain all 25 — resumed rows are not dropped.
