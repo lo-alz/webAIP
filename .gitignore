@@ -13,6 +13,12 @@ data/waypoints/*.db
 data/ourairports/
 data/airports.json
 
+# Loop outputs: per-cycle census manifests + resumable checkpoints (regenerable)
+data/manifests/*
+data/state/*
+!data/manifests/.gitkeep
+!data/state/.gitkeep
+
 # Committed fixtures are NOT ignored (data/fixtures/** is tracked)
 
 # Python
