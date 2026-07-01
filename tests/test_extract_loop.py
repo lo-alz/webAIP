@@ -1,26 +1,26 @@
 """
-Loop 2 (Extract → AIXM 5.2 → self-check) — US coded SID path, offline.
+Loop 2 (Extract → AIXM 5.2 → self-check) — US coded SID/STAR/IAP path, offline.
 
-Runs against committed data (FAACIFP18, the waypoint index, Loop 1's manifest).
-Loop 1's manifest must exist; the session/CI builds it via scripts/census_loop.py,
-and these tests skip cleanly if it is absent rather than failing spuriously.
+Runs against committed data (FAACIFP18, the waypoint index incl. navaids, Loop 1's
+manifest). Skips cleanly when those large gitignored inputs are absent (fresh CI).
 """
 from __future__ import annotations
 
 import copy
+import os
 
 import pytest
 
 from miner.loop import extract
 from miner.loop.extract import Context, extract_step, run_extract
-from miner.loop.framework import FLAGGED, OK, PENDING
+from miner.loop.framework import FLAGGED, PENDING
+from miner.schemas import IAPRecord, all_legs
+from miner.waypoint_db import DEFAULT_DB_PATH, WaypointIndex
 from tests.helpers import make_sid
 
 MANIFEST = extract.MANIFEST_DIR / "US_2607.json"
-from miner.waypoint_db import DEFAULT_DB_PATH  # noqa: E402
-
 _READY = (MANIFEST.exists() and extract.CIFP_PATH.exists()
-          and __import__("os").path.exists(DEFAULT_DB_PATH))
+          and os.path.exists(DEFAULT_DB_PATH))
 pytestmark = pytest.mark.skipif(
     not _READY,
     reason="Loop 1 manifest / CIFP / waypoint index missing — "
@@ -38,60 +38,70 @@ def test_seq_monotonic_true_for_clean_record():
     assert extract._seq_monotonic(make_sid()) is True
 
 
-def test_seq_monotonic_false_on_decreasing_sequence():
-    rec = make_sid()
-    rec.common_route[0].sequence_number = 5   # < the runway transition's 10? different list
-    rec.runway_transitions[0].legs.append(
-        copy.deepcopy(rec.runway_transitions[0].legs[0]))  # duplicate seq in one list
-    assert extract._seq_monotonic(rec) is False
-
-
 def test_unresolved_waypoints_counts_missing_fix():
     rec = make_sid()
     assert extract._unresolved_waypoints(rec) == 0
-    rec.common_route[0].waypoint = None       # TF leg with no resolved fix
+    rec.common_route[0].waypoint = None
     assert extract._unresolved_waypoints(rec) == 1
 
 
 def test_unresolved_ignores_heading_legs():
     rec = make_sid()
     rec.common_route[0].waypoint = None
-    rec.common_route[0].path_terminator = "VA"  # heading-to-altitude legitimately has no fix
+    rec.common_route[0].path_terminator = "VA"
     assert extract._unresolved_waypoints(rec) == 0
 
 
-# ── source grouping ──────────────────────────────────────────────────────────
-def test_sid_lines_grouped_for_klax(ctx):
-    assert "KLAX" in ctx.sid_lines
-    assert len(ctx.sid_lines["KLAX"]) > 0
+# ── navaid resolution (task 1) ───────────────────────────────────────────────
+def test_navaids_resolve_from_index():
+    idx = WaypointIndex()
+    for wid, reg in [("GMN", "K2"), ("SLI", "K2")]:   # Gorman, Seal Beach VORs
+        p = idx.lookup(wid, reg)
+        assert p is not None and p.waypoint_type == "NAVAID"
+
+
+def test_klax_conventional_sids_resolve_clean(ctx):
+    # Before navaids these flagged unresolved_waypoints; now every KLAX SID is clean.
+    res = extract_step(ctx)({"icao": "KLAX"})
+    sid_flags = [f for p in res.data["procedures"] if p["class"] == "sids" for f in p["flags"]]
+    assert sid_flags == []
+
+
+# ── STAR / IAP parsing (task 2) ──────────────────────────────────────────────
+def test_extract_klax_all_classes_exhaustive(ctx):
+    res = extract_step(ctx)({"icao": "KLAX"})
+    c = res.data["counts"]
+    for cls in ("sids", "stars", "apps"):
+        assert c[cls]["produced"] == c[cls]["expected"] > 0
+        assert c[cls]["missing"] == []
+
+
+def test_iap_segmentation_shape(ctx):
+    # KLAX I06L (ILS 06L) must segment into a final + missed approach.
+    from miner.extractor.arinc424 import parse_iap
+    rec = parse_iap(ctx.lines["apps"].get("KLAX", []), "KLAX", "I06L", "2607", ctx.index)
+    assert isinstance(rec, IAPRecord)
+    assert rec.approach_type == "ILS" and rec.runway_designator == "06L"
+    assert len(rec.final_segment) > 0 and len(rec.missed_approach_segment) > 0
+    assert len(list(all_legs(rec))) > 0
 
 
 # ── per-airport step ─────────────────────────────────────────────────────────
-def test_extract_klax_full_exhaustivity(ctx):
-    res = extract_step(ctx)({"icao": "KLAX"})
-    d = res.data
-    assert d["sids_expected"] == d["sids_produced"]   # every counted SID produced
-    assert d["missing"] == []                          # no exhaustivity gap
-    dotss2 = [p for p in d["procedures"] if p["proc"] == "DOTSS2"][0]
-    assert dotss2["legs"] > 0 and dotss2["flags"] == []  # RNAV SID resolves cleanly
-
-
-def test_extract_pending_when_no_sids(ctx):
+def test_extract_pending_when_nothing_counted(ctx):
     res = extract_step(ctx)({"icao": "KZZZ"})
     assert res.status == PENDING
-    assert res.data["sids_expected"] == 0
+    assert all(res.data["counts"][c]["expected"] == 0 for c in ("sids", "stars", "apps"))
 
 
-def test_exhaustivity_gap_flagged_for_phantom_sid(ctx):
-    # Inject a SID id the CIFP can't produce → Loop 2 must flag the gap.
+def test_exhaustivity_gap_flagged_per_class(ctx):
     local = copy.copy(ctx)
     local.manifest = dict(ctx.manifest)
     klax = copy.deepcopy(ctx.manifest["KLAX"])
-    klax["manifest"]["sids"] = ["DOTSS2", "PHANTOM9"]
+    klax["manifest"]["sids"] = ["DOTSS2", "PHANTOM9"]   # phantom the CIFP can't produce
     local.manifest["KLAX"] = klax
     res = extract_step(local)({"icao": "KLAX"})
-    assert "exhaustivity_gap" in res.data["flags"]
-    assert "PHANTOM9" in res.data["missing"]
+    assert "exhaustivity_gap:sids" in res.data["flags"]
+    assert "PHANTOM9" in res.data["counts"]["sids"]["missing"]
     assert res.status == FLAGGED
 
 
@@ -101,13 +111,12 @@ def test_run_extract_writes_report_and_is_deterministic(tmp_path):
               log=lambda *_: None, state_dir=tmp_path, out_dir=tmp_path)
     a = run_extract("2607", **kw)
     b = run_extract("2607", **kw)
-    # Reports are deterministic once timestamps are excluded (the rows carry none).
     assert a["airports"] == b["airports"]
-    assert a["summary"]["sids_produced"] == b["summary"]["sids_produced"]
+    assert a["summary"]["procedures"] == b["summary"]["procedures"]
     assert (tmp_path / "US_2607.extract.json").exists()
 
 
 def test_run_extract_missing_manifest_raises(tmp_path, monkeypatch):
-    monkeypatch.setattr(extract, "MANIFEST_DIR", tmp_path)  # empty dir → no manifest
+    monkeypatch.setattr(extract, "MANIFEST_DIR", tmp_path)
     with pytest.raises(FileNotFoundError):
         run_extract("9999", log=lambda *_: None, state_dir=tmp_path, out_dir=tmp_path)

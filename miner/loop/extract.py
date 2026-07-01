@@ -1,33 +1,34 @@
 """
-Loop 2 — Extract → AIXM 5.2 → self-check (US SIDs, offline-deterministic).
+Loop 2 — Extract → AIXM 5.2 → self-check (US SID/STAR/IAP, offline-deterministic).
 
 Consumes Loop 1's manifest (``data/manifests/US_<airac>.json``) and, for every
-SID the census counted, produces a typed ``SIDRecord`` from the authoritative
-coded CIFP, serialises it to AIXM 5.2 GML, and runs an engineered self-check
-before storing it. Loop 2 is *graded against Loop 1*: every SID id the census
-enumerated must come back out as a non-empty, schema-valid record
-(``exhaustivity_gap`` otherwise).
+procedure the census counted (SIDs, STARs, approaches), assembles a typed record
+from the authoritative coded CIFP, serialises AIXM 5.2 GML, and runs an
+engineered self-check before storing it. Loop 2 is *graded against Loop 1*: every
+id the census enumerated must come back out as a non-empty, schema-valid record
+(``exhaustivity_gap:<class>`` otherwise).
 
-Scope of this increment: SIDs only — ``arinc424.parse_sid`` is the implemented
-coded parser; STAR/IAP coded parsers are the next sub-increment, so those classes
-are reported ``deferred`` rather than silently dropped. Everything runs against
-committed data — no LLM, no network.
-
-The coded path's coordinates come straight from the CIFP via the waypoint index,
-so accuracy-vs-ground-truth is exact by construction; the self-check therefore
-targets the failure modes that remain: schema/units, XSD conformance, unresolved
-waypoints (index gaps), leg-sequence sanity, and cross-loop exhaustivity.
+All three procedure classes use the coded ARINC 424 parsers
+(``arinc424.parse_sid`` / ``parse_star`` / ``parse_iap``) with coordinates looked
+up from the waypoint index — no LLM, no network. Because the coordinates come
+straight from the CIFP, accuracy-vs-ground-truth is exact by construction; the
+self-check targets the failure modes that remain: schema/units, XSD conformance,
+unresolved waypoints (index gaps), leg-sequence sanity, and cross-loop
+exhaustivity.
 """
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 
-from miner.extractor.arinc424 import is_sid_record, parse_sid
-from miner.extractor.arinc424 import _f as _cifp_field  # verified column map
+from miner.extractor.arinc424 import _f as _cifp_field
+from miner.extractor.arinc424 import (
+    is_iap_record, is_sid_record, is_star_record,
+    parse_iap, parse_sid, parse_star,
+)
 from miner.loop.framework import FLAGGED, OK, PENDING, LoopRunner, StepResult
-from miner.schemas import all_legs
+from miner.schemas import IAPRecord, all_legs
 from miner.schemas.aixm52_gml import record_to_gml
 from miner.waypoint_db import DEFAULT_DB_PATH, WaypointIndex
 from validator.aixm_xsd import validate_gml
@@ -38,14 +39,21 @@ MANIFEST_DIR = ROOT / "data" / "manifests"
 AIXM_DIR = ROOT / "data" / "aixm"
 CIFP_PATH = ROOT / "data" / "nasr" / "FAACIFP18"
 
+# manifest key → (CIFP record predicate, coded parser)
+CLASSES = {
+    "sids": (is_sid_record, parse_sid),
+    "stars": (is_star_record, parse_star),
+    "apps": (is_iap_record, parse_iap),
+}
+
 
 @dataclass
 class Context:
     """Parse-once inputs shared across every airport in a run."""
     airac: str
     index: WaypointIndex
-    sid_lines: dict[str, list[str]]                  # {icao: [SID record lines]}
-    manifest: dict[str, dict]                        # {icao: census row}
+    lines: dict[str, dict[str, list[str]]]   # {class: {icao: [record lines]}}
+    manifest: dict[str, dict]                # {icao: census row}
     write_gml: bool = True
     validate_xsd: bool = True
     aixm_dir: Path = AIXM_DIR
@@ -55,11 +63,10 @@ class Context:
                aixm_dir: Path | None = None) -> tuple["Context", list[dict]]:
         manifest = _load_manifest(airac)
         rows = manifest["airports"]
-        sid_lines = _group_sid_lines(CIFP_PATH)
         ctx = cls(
             airac=airac,
             index=WaypointIndex(DEFAULT_DB_PATH),
-            sid_lines=sid_lines,
+            lines=_group_lines(CIFP_PATH),
             manifest={r["icao"]: r for r in rows},
             write_gml=write_gml,
             validate_xsd=validate_xsd,
@@ -77,30 +84,49 @@ def _load_manifest(airac: str) -> dict:
     return json.loads(path.read_text())
 
 
-def _group_sid_lines(cifp_path: Path) -> dict[str, list[str]]:
-    """One pass over the CIFP → {airport_icao: [SID record lines]}.
+def _group_lines(cifp_path: Path) -> dict[str, dict[str, list[str]]]:
+    """One pass over the CIFP → {class: {airport_icao: [record lines]}}.
 
-    parse_sid re-scans whatever source it's given, so we hand it just one
-    airport's lines instead of the whole 53 MB file per procedure.
+    The coded parsers re-scan whatever source they're given, so we hand each one
+    just its airport's slice instead of the whole 53 MB file per procedure.
     """
-    out: dict[str, list[str]] = {}
+    groups: dict[str, dict[str, list[str]]] = {c: {} for c in CLASSES}
     if not cifp_path.exists():
-        return out
+        return groups
     with open(cifp_path, encoding="latin-1") as fh:
         for ln in fh:
             ln = ln.rstrip("\n")
-            if len(ln) >= 13 and is_sid_record(ln):
-                out.setdefault(_cifp_field(ln, "airport"), []).append(ln)
-    return out
+            if len(ln) < 13:
+                continue
+            for cls, (pred, _) in CLASSES.items():
+                if pred(ln):
+                    groups[cls].setdefault(_cifp_field(ln, "airport"), []).append(ln)
+                    break
+    return groups
 
 
-# ── per-procedure self-check ─────────────────────────────────────────────────
+# ── per-record self-check ────────────────────────────────────────────────────
+_HEADING_TERMINATORS = {"VA", "VI", "VM", "VR", "VD", "CA", "CI", "CR", "CD",
+                        "FA", "FM", "FC", "FD"}
+
+
+def _leg_lists(record) -> list[list]:
+    """Leg lists that should each be a single, strictly increasing sequence.
+
+    For IAPs the initial-approach segment concatenates several transitions (each
+    with its own 010/020… numbering), so it is excluded from the monotonic check;
+    the intermediate/final/missed lists are one coded route and are checked.
+    """
+    if isinstance(record, IAPRecord):
+        return [record.intermediate_segment, record.final_segment,
+                record.missed_approach_segment]
+    return ([t.legs for t in record.runway_transitions]
+            + [record.common_route]
+            + [t.legs for t in record.enroute_transitions])
+
+
 def _seq_monotonic(record) -> bool:
-    """Sequence numbers strictly increase within each leg list (segment)."""
-    lists = ([t.legs for t in record.runway_transitions]
-             + [record.common_route]
-             + [t.legs for t in record.enroute_transitions])
-    for legs in lists:
+    for legs in _leg_lists(record):
         seqs = [lg.sequence_number for lg in legs]
         if any(b <= a for a, b in zip(seqs, seqs[1:])):
             return False
@@ -111,107 +137,96 @@ def _unresolved_waypoints(record) -> int:
     """Legs that name a fix but whose coordinate did not resolve from the index."""
     n = 0
     for leg in all_legs(record):
-        # A heading-terminator leg legitimately has no waypoint; only count legs
-        # that should have one (a fix-terminator without a resolved point).
         if leg.waypoint is None and leg.path_terminator not in _HEADING_TERMINATORS:
             n += 1
     return n
 
 
-_HEADING_TERMINATORS = {"VA", "VI", "VM", "VR", "VD", "CA", "CI", "CR", "CD", "FA", "FM", "FC", "FD"}
-
-
 def _check_record(ctx: Context, record) -> list[str]:
-    """Run the engineered self-check on one assembled SIDRecord."""
     flags: list[str] = []
-    if validate_submission(record):           # hard gate: units, bbox, RF, US source
+    if validate_submission(record):
         flags.append("hard_validation")
     if ctx.validate_xsd:
         ok, _ = validate_gml(record_to_gml(record))
         if not ok:
             flags.append("xsd_invalid")
     if _unresolved_waypoints(record):
-        flags.append("unresolved_waypoints")  # index gap — a fix had no coordinate
+        flags.append("unresolved_waypoints")
     if not _seq_monotonic(record):
         flags.append("seq_nonmonotonic")
     return flags
 
 
 def extract_step(ctx: Context):
-    """Per-airport step: extract every census SID and self-check it."""
+    """Per-airport step: extract + self-check every census procedure, all classes."""
     def step(item: dict) -> StepResult:
         icao = item["icao"]
-        expected = ((ctx.manifest.get(icao, {}).get("manifest") or {}).get("sids")) or []
-        if not expected:
-            # Nothing the census counted to extract here — covered, not an error.
-            return StepResult(key=icao, status=PENDING,
-                              data={"icao": icao, "airac": ctx.airac,
-                                    "sids_expected": 0, "sids_produced": 0,
-                                    "missing": [], "procedures": [], "flags": [],
-                                    "deferred": ["stars", "apps"]})
-
-        lines = ctx.sid_lines.get(icao, [])
+        man = (ctx.manifest.get(icao, {}).get("manifest") or {})
+        counts: dict[str, dict] = {}
         procedures: list[dict] = []
-        produced: list[str] = []
         flags: list[str] = []
+        any_expected = False
 
-        for sid in expected:
-            try:
-                rec = parse_sid(lines, icao, sid, ctx.airac, ctx.index)
-            except Exception as e:
-                flags.append(f"parse_error:{sid}")
-                procedures.append({"proc": sid, "legs": 0, "flags": [f"parse_error:{type(e).__name__}"]})
-                continue
-            n_legs = len(list(all_legs(rec)))
-            if n_legs == 0:
-                flags.append(f"empty:{sid}")
-                procedures.append({"proc": sid, "legs": 0, "flags": ["empty"]})
-                continue
-            pflags = _check_record(ctx, rec)
-            produced.append(sid)
-            if ctx.write_gml:
-                _write_gml(ctx, icao, sid, rec)
-            procedures.append({"proc": sid, "legs": n_legs, "flags": pflags})
-            flags.extend(f"{f}:{sid}" for f in pflags)
+        for cls, (_, parser) in CLASSES.items():
+            expected = man.get(cls) or []
+            if expected:
+                any_expected = True
+            lines = ctx.lines[cls].get(icao, [])
+            produced: list[str] = []
+            for pid in expected:
+                try:
+                    rec = parser(lines, icao, pid, ctx.airac, ctx.index)
+                except Exception as e:
+                    flags.append(f"parse_error:{cls}:{pid}")
+                    procedures.append({"class": cls, "proc": pid, "legs": 0,
+                                       "flags": [f"parse_error:{type(e).__name__}"]})
+                    continue
+                n_legs = len(list(all_legs(rec)))
+                if n_legs == 0:
+                    flags.append(f"empty:{cls}:{pid}")
+                    procedures.append({"class": cls, "proc": pid, "legs": 0, "flags": ["empty"]})
+                    continue
+                pflags = _check_record(ctx, rec)
+                produced.append(pid)
+                if ctx.write_gml:
+                    _write_gml(ctx, icao, cls, pid, rec)
+                procedures.append({"class": cls, "proc": pid, "legs": n_legs, "flags": pflags})
+                flags.extend(f"{f}:{cls}:{pid}" for f in pflags)
 
-        missing = [s for s in expected if s not in produced]
-        if missing:
-            flags.append("exhaustivity_gap")   # graded against Loop 1's manifest
+            missing = [p for p in expected if p not in produced]
+            if missing:
+                flags.append(f"exhaustivity_gap:{cls}")
+            counts[cls] = {"expected": len(expected), "produced": len(produced),
+                           "missing": missing}
 
-        row = {
-            "icao": icao, "airac": ctx.airac,
-            "sids_expected": len(expected), "sids_produced": len(produced),
-            "missing": missing, "procedures": procedures,
-            "deferred": ["stars", "apps"],     # coded STAR/IAP parsers not yet built
-            "flags": flags,
-        }
-        status = FLAGGED if flags else OK
-        return StepResult(key=icao, status=status, data=row, flags=flags)
+        row = {"icao": icao, "airac": ctx.airac, "counts": counts,
+               "procedures": procedures, "flags": flags}
+        if not any_expected:
+            return StepResult(key=icao, status=PENDING, data=row)
+        return StepResult(key=icao, status=FLAGGED if flags else OK, data=row, flags=flags)
 
     return step
 
 
-def _write_gml(ctx: Context, icao: str, sid: str, record) -> None:
-    out = ctx.aixm_dir / f"US_{ctx.airac}" / icao
+def _write_gml(ctx: Context, icao: str, cls: str, pid: str, record) -> None:
+    out = ctx.aixm_dir / f"US_{ctx.airac}" / icao / cls
     out.mkdir(parents=True, exist_ok=True)
-    (out / f"{sid}.gml").write_bytes(record_to_gml(record))
+    (out / f"{pid}.gml").write_bytes(record_to_gml(record))
 
 
 def run_extract(airac: str, *, limit: int | None = None, force: bool = False,
                 write_gml: bool = True, validate_xsd: bool = True, log=print,
                 state_dir: Path | None = None, out_dir: Path | None = None,
                 aixm_dir: Path | None = None) -> dict:
-    """Run Loop 2 over the census manifest and write the per-cycle extract report.
-
-    Returns the report dict; writes ``<out_dir>/US_<airac>.extract.json``.
-    """
+    """Run Loop 2 over the census manifest and write the per-cycle extract report."""
     ctx, rows = Context.for_us(airac, write_gml=write_gml, validate_xsd=validate_xsd,
                                aixm_dir=aixm_dir)
     rows = sorted(rows, key=lambda r: r["icao"])
     if limit:
         rows = rows[:limit]
+    have = {c: len(ctx.lines[c]) for c in CLASSES}
     log(f"Loop 2 · US extract · AIRAC {airac} · {len(rows)} airports "
-        f"· CIFP SID-airports={len(ctx.sid_lines)} · xsd={'on' if validate_xsd else 'off'}")
+        f"· CIFP airports {have} · xsd={'on' if validate_xsd else 'off'}")
 
     runner = LoopRunner("extract_us", airac, log=log, state_dir=state_dir)
     runner.run(rows, extract_step(ctx), key_fn=lambda r: r["icao"], force=force)
@@ -221,14 +236,14 @@ def run_extract(airac: str, *, limit: int | None = None, force: bool = False,
                      key=lambda r: r["icao"])
     by_status: dict[str, int] = {}
     flags: dict[str, int] = {}
-    sids_expected = sids_produced = 0
+    totals = {c: {"expected": 0, "produced": 0} for c in CLASSES}
     for it in items.values():
         by_status[it["status"]] = by_status.get(it["status"], 0) + 1
-        d = it.get("data") or {}
-        sids_expected += d.get("sids_expected", 0)
-        sids_produced += d.get("sids_produced", 0)
+        for c, cc in (it.get("data") or {}).get("counts", {}).items():
+            totals[c]["expected"] += cc["expected"]
+            totals[c]["produced"] += cc["produced"]
         for fl in it.get("flags", []):
-            key = fl.split(":", 1)[0]            # collapse per-proc suffixes in the histogram
+            key = fl.split(":", 1)[0]            # collapse per-proc suffixes
             flags[key] = flags.get(key, 0) + 1
 
     out_dir = out_dir or MANIFEST_DIR
@@ -237,16 +252,15 @@ def run_extract(airac: str, *, limit: int | None = None, force: bool = False,
         "loop": "extract_us",
         "airac": airac,
         "country": "US",
-        "scope": "SID (coded ARINC 424 / FAA CIFP)",
+        "scope": "SID + STAR + IAP (coded ARINC 424 / FAA CIFP)",
         "source": "FAA_CIFP",
         "graded_against": f"US_{airac}.json (Loop 1 manifest)",
         "summary": {"total": len(records), "by_status": by_status,
-                    "sids_expected": sids_expected, "sids_produced": sids_produced,
-                    "flags": flags},
+                    "procedures": totals, "flags": flags},
         "airports": records,
     }
     out_path = out_dir / f"US_{airac}.extract.json"
     out_path.write_text(json.dumps(out, indent=2))
-    log(f"  → {out_path} ({len(records)} rows · "
-        f"{sids_produced}/{sids_expected} SIDs)")
+    prod = " ".join(f"{c}={totals[c]['produced']}/{totals[c]['expected']}" for c in CLASSES)
+    log(f"  → {out_path} ({len(records)} rows · {prod})")
     return out

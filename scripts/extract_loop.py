@@ -51,7 +51,8 @@ def main() -> int:
                       write_gml=not args.no_gml, validate_xsd=not args.no_xsd)
     s = out["summary"]
     print(f"\nExtract complete · {s['total']} airports · {s['by_status']}")
-    print(f"SIDs: {s['sids_produced']}/{s['sids_expected']} produced")
+    for cls, t in s["procedures"].items():
+        print(f"  {cls}: {t['produced']}/{t['expected']} produced")
     if s["flags"]:
         top = sorted(s["flags"].items(), key=lambda kv: -kv[1])[:8]
         print("top flags: " + ", ".join(f"{k}×{v}" for k, v in top))
