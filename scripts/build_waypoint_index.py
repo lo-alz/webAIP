@@ -19,7 +19,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from miner.extractor.arinc424 import parse_navaids  # noqa: E402
+from miner.extractor.arinc424 import parse_navaids, parse_runway_thresholds  # noqa: E402
 from miner.waypoint_db import DEFAULT_DB_PATH, WaypointIndex  # noqa: E402
 from validator.ground_truth.nasr_cifp import parse_waypoints  # noqa: E402
 
@@ -58,6 +58,10 @@ def main() -> int:
             m = index.load(navaids)
             total += m
             print(f"  NASR CIFP {f.name}: {m} navaids (VOR/DME/TACAN/NDB)")
+            runways = parse_runway_thresholds(f, args.airac)
+            k = index.load(runways)
+            total += k
+            print(f"  NASR CIFP {f.name}: {k} runway thresholds (RWxx)")
     else:
         print(f"  (no live CIFP in {nasr_dir}/ — using committed fixtures)")
 

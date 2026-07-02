@@ -127,6 +127,11 @@ def is_navaid(line: str) -> bool:
     return _f(line, "section") == "D"
 
 
+def is_runway_record(line: str) -> bool:
+    """Airport runway record (threshold coordinates) — section 'P' subsection 'G'."""
+    return _f(line, "section") == "P" and line[12:13] == "G"
+
+
 # ── waypoint records → index rows ────────────────────────────────────────────
 def parse_waypoints(source, airac: str, *, source_db: str = "NASR_CIFP") -> list[WaypointRow]:
     """
@@ -218,6 +223,45 @@ def parse_navaids(source, airac: str, *, source_db: str = "NASR_CIFP") -> list[W
     return rows
 
 
+# ── runway threshold records → index rows ────────────────────────────────────
+def parse_runway_thresholds(source, airac: str, *,
+                            source_db: str = "NASR_CIFP") -> list[WaypointRow]:
+    """Parse airport runway records (section 'P' subsection 'G') into index rows.
+
+    Approach missed-approach points reference the runway threshold as ``RWxx``.
+    These idents are only unique *per airport* (every field has an ``RW06L``), so
+    rows are keyed by the airport ICAO in the ``region`` column and resolved via
+    the procedure's airport in ``_leg_from_line``. The threshold identifier and
+    packed coordinates share the same columns as terminal waypoints.
+    """
+    rows: list[WaypointRow] = []
+    for ln in iter_lines(source):
+        if not is_runway_record(ln):
+            continue
+        ident = _f(ln, "wp_id")            # 'RW06L'
+        airport = _f(ln, "airport")        # keyed per-airport, not per-region
+        lat_raw, lon_raw = _f(ln, "wp_lat"), _f(ln, "wp_lon")
+        if not (ident and airport and lat_raw and lon_raw):
+            continue
+        try:
+            lat = cifp_packed_to_decimal(lat_raw)
+            lon = cifp_packed_to_decimal(lon_raw)
+        except (ValueError, Exception):
+            continue
+        rows.append(
+            WaypointRow(
+                waypoint_id=ident,
+                region=airport,
+                lat=canonical(lat),
+                lon=canonical(lon),
+                source=source_db,
+                airac=airac,
+                waypoint_type="RUNWAY",
+            )
+        )
+    return rows
+
+
 # ── procedure records → typed leg ────────────────────────────────────────────
 def _alt_constraint(line: str) -> Optional[AltConstraint]:
     a1 = _f(line, "alt1")
@@ -253,10 +297,15 @@ def _overfly(line: str) -> Optional[str]:
     return "FLY_OVER" if "Y" in desc else "FLY_BY"
 
 
-def _leg_from_line(line: str, index) -> ProcedureLeg:
+def _leg_from_line(line: str, index, airport: str = "") -> ProcedureLeg:
     fix_id = _f(line, "fix_id")
-    region = _f(line, "fix_region")
-    waypoint = index.lookup(fix_id, region or None) if fix_id else None
+    waypoint = None
+    if fix_id:
+        if _f(line, "fix_subsection") == "G" and airport:
+            # Runway threshold (RWxx) — not region-unique, so keyed per-airport.
+            waypoint = index.lookup(fix_id, airport)
+        else:
+            waypoint = index.lookup(fix_id, _f(line, "fix_region") or None)
     return ProcedureLeg(
         sequence_number=int(_f(line, "seq")),
         path_terminator=_f(line, "path_term"),
@@ -297,7 +346,7 @@ def parse_sid(source, airport: str, procedure: str, airac: str, index,
             continue  # continuation record (extra data on a leg), not a leg itself
         category = _route_category(_f(ln, "route_type"))
         trans = _f(ln, "transition_id")
-        leg = _leg_from_line(ln, index)
+        leg = _leg_from_line(ln, index, airport)
         if category == "runway":
             rwy.setdefault(trans, []).append(leg)
         elif category == "enroute":
@@ -361,7 +410,7 @@ def parse_star(source, airport: str, procedure: str, airac: str, index,
             continue  # continuation record, not a leg
         category = _star_category(_f(ln, "route_type"))
         trans = _f(ln, "transition_id")
-        leg = _leg_from_line(ln, index)
+        leg = _leg_from_line(ln, index, airport)
         if category == "runway":
             rwy.setdefault(trans, []).append(leg)
         elif category == "enroute":
@@ -422,7 +471,7 @@ def parse_iap(source, airport: str, procedure: str, airac: str, index,
             continue
         if not _f(ln, "path_term"):
             continue  # continuation record, not a leg
-        leg = _leg_from_line(ln, index)
+        leg = _leg_from_line(ln, index, airport)
         if _f(ln, "route_type") == "A":
             transitions.append(leg)
         else:

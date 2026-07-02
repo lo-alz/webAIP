@@ -67,6 +67,23 @@ def test_klax_conventional_sids_resolve_clean(ctx):
     assert sid_flags == []
 
 
+# ── runway thresholds (CIFP P..G), keyed per-airport ─────────────────────────
+def test_runway_threshold_resolves_per_airport():
+    idx = WaypointIndex()
+    p = idx.lookup("RW06L", "KLAX")          # keyed by airport, not ICAO region
+    assert p is not None and p.waypoint_type == "RUNWAY"
+
+
+def test_klax_approaches_resolve_runway_map(ctx):
+    # The approach MAP is an RWxx runway threshold; after loading P..G records the
+    # KLAX approaches no longer flag unresolved_waypoints.
+    res = extract_step(ctx)({"icao": "KLAX"})
+    app_unresolved = [p["proc"] for p in res.data["procedures"]
+                      if p["class"] == "apps"
+                      and any(f.startswith("unresolved") for f in p["flags"])]
+    assert app_unresolved == []
+
+
 # ── STAR / IAP parsing (task 2) ──────────────────────────────────────────────
 def test_extract_klax_all_classes_exhaustive(ctx):
     res = extract_step(ctx)({"icao": "KLAX"})
