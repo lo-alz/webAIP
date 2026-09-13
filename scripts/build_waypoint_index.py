@@ -23,7 +23,10 @@ from miner.extractor.arinc424 import parse_navaids, parse_runway_thresholds  # n
 from miner.waypoint_db import DEFAULT_DB_PATH, WaypointIndex  # noqa: E402
 from validator.ground_truth.nasr_cifp import parse_waypoints  # noqa: E402
 
-FIXTURE_WAYPOINTS = Path("data/fixtures/klax_cifp_waypoints.dat")
+# Every committed CIFP fixture: the original KLAX waypoint file plus any
+# per-airport slices produced by scripts/fetch_airport_cifp.py.
+FIXTURE_DIR = Path("data/fixtures")
+FIXTURE_GLOB = "*_cifp*.dat"
 
 
 def find_live_cifp(nasr_dir: Path) -> list[Path]:
@@ -65,11 +68,17 @@ def main() -> int:
     else:
         print(f"  (no live CIFP in {nasr_dir}/ — using committed fixtures)")
 
-    if FIXTURE_WAYPOINTS.exists():
-        rows = parse_waypoints(FIXTURE_WAYPOINTS, args.airac)
+    for fx in sorted(FIXTURE_DIR.glob(FIXTURE_GLOB)):
+        rows = parse_waypoints(fx, args.airac)
         n = index.load(rows)
-        total += n
-        print(f"  fixture {FIXTURE_WAYPOINTS.name}: {n} waypoints")
+        # Airport slices also carry navaid + runway records; the KLAX
+        # waypoint-only fixture simply yields zero for these.
+        navaids = parse_navaids(fx, args.airac)
+        m = index.load(navaids)
+        runways = parse_runway_thresholds(fx, args.airac)
+        k = index.load(runways)
+        total += n + m + k
+        print(f"  fixture {fx.name}: {n} waypoints · {m} navaids · {k} runway thresholds")
 
     print("\nWaypoints loaded per source:")
     for src, cnt in index.counts_by_source().items():
