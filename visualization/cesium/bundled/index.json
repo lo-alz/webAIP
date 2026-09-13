@@ -1,0 +1,38 @@
+[
+ {
+  "icao": "KEWR",
+  "record_type": "IAP",
+  "procedure_name": "H04RZ",
+  "file": "kewr_h04rz.geojson"
+ },
+ {
+  "icao": "KJFK",
+  "record_type": "IAP",
+  "procedure_name": "I13L",
+  "file": "kjfk_i13l.geojson"
+ },
+ {
+  "icao": "KJFK",
+  "record_type": "IAP",
+  "procedure_name": "I22L",
+  "file": "kjfk_i22l.geojson"
+ },
+ {
+  "icao": "KJFK",
+  "record_type": "IAP",
+  "procedure_name": "R22LY",
+  "file": "kjfk_r22ly.geojson"
+ },
+ {
+  "icao": "KJFK",
+  "record_type": "SID",
+  "procedure_name": "SKORR6",
+  "file": "kjfk_skorr6.geojson"
+ },
+ {
+  "icao": "KJFK",
+  "record_type": "STAR",
+  "procedure_name": "PUCKY1",
+  "file": "kjfk_pucky1.geojson"
+ }
+]

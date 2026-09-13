@@ -1,0 +1,520 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.69376667,
+     40.72328889,
+     548.64
+    ]
+   },
+   "properties": {
+    "waypoint_id": "ZALPO",
+    "segment": "final_segment",
+    "sequence_number": 20,
+    "path_terminator": "CF",
+    "alt_type": "AT",
+    "alt_lower_ft": 1800
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.75486111,
+     40.64523611,
+     19.812
+    ]
+   },
+   "properties": {
+    "waypoint_id": "RW22L",
+    "segment": "final_segment",
+    "sequence_number": 30,
+    "path_terminator": "CF",
+    "alt_type": "AT",
+    "alt_lower_ft": 65
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.00531389,
+     40.753125,
+     0.0
+    ]
+   },
+   "properties": {
+    "waypoint_id": "CIMBL",
+    "segment": "initial_approach_segments",
+    "sequence_number": 10,
+    "path_terminator": "IF",
+    "alt_type": null,
+    "alt_lower_ft": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.30367778,
+     40.79176667,
+     914.4000000000001
+    ]
+   },
+   "properties": {
+    "waypoint_id": "DPK",
+    "segment": "initial_approach_segments",
+    "sequence_number": 10,
+    "path_terminator": "FC",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 3000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.73543611,
+     40.14298333,
+     0.0
+    ]
+   },
+   "properties": {
+    "waypoint_id": "NRTON",
+    "segment": "initial_approach_segments",
+    "sequence_number": 10,
+    "path_terminator": "IF",
+    "alt_type": null,
+    "alt_lower_ft": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.85913056,
+     40.66793611,
+     4267.2
+    ]
+   },
+   "properties": {
+    "waypoint_id": "HAIRR",
+    "segment": "initial_approach_segments",
+    "sequence_number": 20,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 14000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.63574444,
+     40.79721389,
+     914.4000000000001
+    ]
+   },
+   "properties": {
+    "waypoint_id": "ROSLY",
+    "segment": "initial_approach_segments",
+    "sequence_number": 20,
+    "path_terminator": "CF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 3000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.55003333,
+     40.32737778,
+     3048.0
+    ]
+   },
+   "properties": {
+    "waypoint_id": "SAJUL",
+    "segment": "initial_approach_segments",
+    "sequence_number": 20,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 10000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.59591667,
+     40.53355556,
+     3048.0
+    ]
+   },
+   "properties": {
+    "waypoint_id": "CEEGL",
+    "segment": "initial_approach_segments",
+    "sequence_number": 30,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 10000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.46286111,
+     40.68380556,
+     2133.6
+    ]
+   },
+   "properties": {
+    "waypoint_id": "DETGY",
+    "segment": "initial_approach_segments",
+    "sequence_number": 30,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 7000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.494175,
+     40.64030833,
+     2438.4
+    ]
+   },
+   "properties": {
+    "waypoint_id": "TAPPR",
+    "segment": "initial_approach_segments",
+    "sequence_number": 40,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 8000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.40986944,
+     40.76738889,
+     1828.8000000000002
+    ]
+   },
+   "properties": {
+    "waypoint_id": "HAUPT",
+    "segment": "initial_approach_segments",
+    "sequence_number": 40,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 6000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.46286111,
+     40.68380556,
+     2133.6
+    ]
+   },
+   "properties": {
+    "waypoint_id": "DETGY",
+    "segment": "initial_approach_segments",
+    "sequence_number": 50,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 7000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.53276111,
+     40.82423333,
+     1219.2
+    ]
+   },
+   "properties": {
+    "waypoint_id": "LEFER",
+    "segment": "initial_approach_segments",
+    "sequence_number": 50,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 4000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.40986944,
+     40.76738889,
+     1828.8000000000002
+    ]
+   },
+   "properties": {
+    "waypoint_id": "HAUPT",
+    "segment": "initial_approach_segments",
+    "sequence_number": 60,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 6000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.63574444,
+     40.79721389,
+     914.4000000000001
+    ]
+   },
+   "properties": {
+    "waypoint_id": "ROSLY",
+    "segment": "initial_approach_segments",
+    "sequence_number": 60,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 3000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.53276111,
+     40.82423333,
+     1219.2
+    ]
+   },
+   "properties": {
+    "waypoint_id": "LEFER",
+    "segment": "initial_approach_segments",
+    "sequence_number": 70,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 4000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.63574444,
+     40.79721389,
+     914.4000000000001
+    ]
+   },
+   "properties": {
+    "waypoint_id": "ROSLY",
+    "segment": "initial_approach_segments",
+    "sequence_number": 80,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 3000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.63574444,
+     40.79721389,
+     914.4000000000001
+    ]
+   },
+   "properties": {
+    "waypoint_id": "ROSLY",
+    "segment": "intermediate_segment",
+    "sequence_number": 10,
+    "path_terminator": "IF",
+    "alt_type": "AT",
+    "alt_lower_ft": 3000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.75694167,
+     40.31619167,
+     914.4000000000001
+    ]
+   },
+   "properties": {
+    "waypoint_id": "CHANT",
+    "segment": "missed_approach_segment",
+    "sequence_number": 50,
+    "path_terminator": "CF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 3000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.75694167,
+     40.31619167,
+     914.4000000000001
+    ]
+   },
+   "properties": {
+    "waypoint_id": "CHANT",
+    "segment": "missed_approach_segment",
+    "sequence_number": 60,
+    "path_terminator": "HM",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 3000
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -73.69376667,
+      40.72328889,
+      548.64
+     ],
+     [
+      -73.75486111,
+      40.64523611,
+      19.812
+     ],
+     [
+      -74.00531389,
+      40.753125,
+      0.0
+     ],
+     [
+      -73.30367778,
+      40.79176667,
+      914.4000000000001
+     ],
+     [
+      -73.73543611,
+      40.14298333,
+      0.0
+     ],
+     [
+      -73.85913056,
+      40.66793611,
+      4267.2
+     ],
+     [
+      -73.63574444,
+      40.79721389,
+      914.4000000000001
+     ],
+     [
+      -73.55003333,
+      40.32737778,
+      3048.0
+     ],
+     [
+      -73.59591667,
+      40.53355556,
+      3048.0
+     ],
+     [
+      -73.46286111,
+      40.68380556,
+      2133.6
+     ],
+     [
+      -73.494175,
+      40.64030833,
+      2438.4
+     ],
+     [
+      -73.40986944,
+      40.76738889,
+      1828.8000000000002
+     ],
+     [
+      -73.46286111,
+      40.68380556,
+      2133.6
+     ],
+     [
+      -73.53276111,
+      40.82423333,
+      1219.2
+     ],
+     [
+      -73.40986944,
+      40.76738889,
+      1828.8000000000002
+     ],
+     [
+      -73.63574444,
+      40.79721389,
+      914.4000000000001
+     ],
+     [
+      -73.53276111,
+      40.82423333,
+      1219.2
+     ],
+     [
+      -73.63574444,
+      40.79721389,
+      914.4000000000001
+     ],
+     [
+      -73.63574444,
+      40.79721389,
+      914.4000000000001
+     ],
+     [
+      -73.75694167,
+      40.31619167,
+      914.4000000000001
+     ],
+     [
+      -73.75694167,
+      40.31619167,
+      914.4000000000001
+     ]
+    ]
+   },
+   "properties": {
+    "role": "route"
+   }
+  }
+ ]
+}

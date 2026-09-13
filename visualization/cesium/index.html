@@ -310,6 +310,46 @@
     await populateProcedures(viewer, startIcao, pid);
   }
 
+  // ── bundled mode: committed GeoJSON + manifest, no backend at all ───────────
+  // scripts/export_bundled_geojson.py writes bundled/<icao>_<proc>.geojson and
+  // bundled/index.json; the picker works exactly as in live mode, minus KML
+  // (which only the API can serve).
+  async function loadBundled(viewer, entry) {
+    const geojson = await getJSON(`bundled/${entry.file}`);
+    render(viewer, geojson);
+    kmlLink.setAttribute("aria-disabled", "true");
+    setHud(`<div>${entry.icao} ${entry.procedure_name}</div><div class="hint">▶ flying the procedure — use the timeline to scrub / pause</div>`,
+           "bundled · no backend");
+    await viewer.flyTo(viewer.entities, { duration: 1.5 });
+  }
+
+  async function startBundled(viewer) {
+    const list = await getJSON("bundled/index.json");
+    if (!Array.isArray(list) || !list.length) throw new Error("no bundled procedures");
+    const icaos = [...new Set(list.map(e => e.icao))].sort();
+    airportSel.innerHTML = "";
+    for (const icao of icaos) {
+      const opt = document.createElement("option");
+      opt.value = icao; opt.textContent = icao;
+      airportSel.appendChild(opt);
+    }
+    const fill = (icao) => {
+      procSel.innerHTML = "";
+      for (const e of list.filter(x => x.icao === icao)) {
+        const opt = document.createElement("option");
+        opt.value = e.file; opt.textContent = `${e.record_type} · ${e.procedure_name}`;
+        procSel.appendChild(opt);
+      }
+    };
+    document.querySelector("#picker").style.display = "block";
+    airportSel.value = icaos[0];
+    fill(icaos[0]);
+    const current = () => list.find(e => e.file === procSel.value) || list[0];
+    airportSel.addEventListener("change", () => { fill(airportSel.value); loadBundled(viewer, current()).catch(showError); });
+    procSel.addEventListener("change", () => loadBundled(viewer, current()).catch(showError));
+    await loadBundled(viewer, current());
+  }
+
   async function startSample(viewer) {
     document.querySelector("#picker").style.display = "none";
     const geojson = await getJSON("sample_klax_dotss2.geojson");
@@ -332,8 +372,13 @@
       const airports = await getJSON(`${apiBase}/airports`);
       await startLive(viewer, airports);
     } catch (e) {
-      console.warn("API unreachable — falling back to bundled sample:", e.message);
-      try { await startSample(viewer); } catch (e2) { showError(e2); }
+      console.warn("API unreachable — trying bundled procedures:", e.message);
+      try {
+        await startBundled(viewer);
+      } catch (e2) {
+        console.warn("no bundle — falling back to the KLAX sample:", e2.message);
+        try { await startSample(viewer); } catch (e3) { showError(e3); }
+      }
     }
   })();
   </script>

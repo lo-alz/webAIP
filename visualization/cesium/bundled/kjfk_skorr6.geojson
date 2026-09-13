@@ -1,0 +1,184 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.8894,
+     40.59639167,
+     762.0
+    ]
+   },
+   "properties": {
+    "waypoint_id": "SKORR",
+    "segment": "ENR:RNGRR",
+    "sequence_number": 10,
+    "path_terminator": "IF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 2500
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.93464167,
+     40.5634,
+     762.0
+    ]
+   },
+   "properties": {
+    "waypoint_id": "METSS",
+    "segment": "ENR:RNGRR",
+    "sequence_number": 20,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 2500
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -74.20574722,
+     40.23016389,
+     0.0
+    ]
+   },
+   "properties": {
+    "waypoint_id": "RNGRR",
+    "segment": "ENR:RNGRR",
+    "sequence_number": 30,
+    "path_terminator": "TF",
+    "alt_type": null,
+    "alt_lower_ft": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.8894,
+     40.59639167,
+     762.0
+    ]
+   },
+   "properties": {
+    "waypoint_id": "SKORR",
+    "segment": "ENR:YNKEE",
+    "sequence_number": 10,
+    "path_terminator": "IF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 2500
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.85695556,
+     40.54023333,
+     762.0
+    ]
+   },
+   "properties": {
+    "waypoint_id": "CESID",
+    "segment": "ENR:YNKEE",
+    "sequence_number": 20,
+    "path_terminator": "TF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 2500
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.84921667,
+     40.48358333,
+     0.0
+    ]
+   },
+   "properties": {
+    "waypoint_id": "YNKEE",
+    "segment": "ENR:YNKEE",
+    "sequence_number": 30,
+    "path_terminator": "TF",
+    "alt_type": null,
+    "alt_lower_ft": null
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     -73.8894,
+     40.59639167,
+     762.0
+    ]
+   },
+   "properties": {
+    "waypoint_id": "SKORR",
+    "segment": "RWY:RW31B",
+    "sequence_number": 20,
+    "path_terminator": "DF",
+    "alt_type": "AT_OR_ABOVE",
+    "alt_lower_ft": 2500
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "LineString",
+    "coordinates": [
+     [
+      -73.8894,
+      40.59639167,
+      762.0
+     ],
+     [
+      -73.93464167,
+      40.5634,
+      762.0
+     ],
+     [
+      -74.20574722,
+      40.23016389,
+      0.0
+     ],
+     [
+      -73.8894,
+      40.59639167,
+      762.0
+     ],
+     [
+      -73.85695556,
+      40.54023333,
+      762.0
+     ],
+     [
+      -73.84921667,
+      40.48358333,
+      0.0
+     ],
+     [
+      -73.8894,
+      40.59639167,
+      762.0
+     ]
+    ]
+   },
+   "properties": {
+    "role": "route"
+   }
+  }
+ ]
+}
